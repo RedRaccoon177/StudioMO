@@ -22,8 +22,8 @@ public class TestObject : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnPlayerEnteredRoom(Player player)
-    {
+    //public override void OnPlayerEnteredRoom(Player player)
+    //{
 
-    }
+    //}
 }
