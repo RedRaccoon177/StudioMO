@@ -9,8 +9,8 @@ public abstract class Manager : MonoBehaviour
 {
     //씬 전환을 위한 별도의 컴포넌트가 필요함, 그 클래스가 있다면 그 클래스 객체를 멤버로 가지고 있어야 함(아마 로딩바를 포함한 ui이 패널이 될 듯함)
 
-#if UNITY_EDITOR
     private static Manager _instance = null;
+#if UNITY_EDITOR
 
     protected virtual void OnValidate()
     {
@@ -22,6 +22,7 @@ public abstract class Manager : MonoBehaviour
             }
             if (this == _instance)
             {
+                SetupDefaultConfig();
             }
             UnityEditor.EditorApplication.delayCall += () =>
             {
@@ -34,7 +35,18 @@ public abstract class Manager : MonoBehaviour
     }
 #endif
 
-    //
-    public abstract void Initialize();
+    protected virtual void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = FindObjectOfType<Manager>();
+        }
+        if (this == _instance)
+        {
+            SetupDefaultConfig();
+        }
+    }
 
+    //객체나 규격을 기본값으로 설정해주는 함수
+    protected abstract void SetupDefaultConfig();
 }

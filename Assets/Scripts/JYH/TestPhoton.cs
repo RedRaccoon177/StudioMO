@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
 
-public class TestPhoton : MonoBehaviour
+public class TestPhoton : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape) == true)
+        {
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene("JYH");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize()
     {
-        
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby();
+    }
+
+    public override void OnJoinedLobby()
+    {
+        PhotonNetwork.JoinRandomOrCreateRoom();
+    }
+
+    public override void OnJoinedRoom()
+    {
+        if (PhotonNetwork.IsMasterClient == true)
+        {
+            GameObject gameObject = PhotonNetwork.InstantiateRoomObject("TestObject", Vector3.zero, Quaternion.identity);
+            gameObject.GetComponent<TestObject>().Initialize();
+        }
     }
 }
