@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 [DisallowMultipleComponent]
 public abstract class Manager : MonoBehaviour
 {
-    //씬 전환을 위한 별도의 컴포넌트가 필요함, 그 클래스가 있다면 그 클래스 객체를 멤버로 가지고 있어야 함(아마 로딩바를 포함한 ui이 패널이 될 듯함)
+    //씬 전환 기능을 탑재한 별도의 클래스가 멤버로 필요함(아마 로딩바를 포함한 ui이 패널이 될 듯함)
 
     private static Manager _instance = null;
 #if UNITY_EDITOR
@@ -16,14 +16,7 @@ public abstract class Manager : MonoBehaviour
     {
         if (gameObject.scene == SceneManager.GetActiveScene())
         {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<Manager>();
-            }
-            if (this == _instance)
-            {
-                SetupDefaultConfig();
-            }
+            Initialize();
             UnityEditor.EditorApplication.delayCall += () =>
             {
                 if (this != _instance && this != null)
@@ -37,12 +30,19 @@ public abstract class Manager : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Initialize();
+    }
+
+    //초기화 함수
+    private void Initialize()
+    {
         if (_instance == null)
         {
             _instance = FindObjectOfType<Manager>();
         }
         if (this == _instance)
         {
+            name = GetType().Name;
             SetupDefaultConfig();
         }
     }
