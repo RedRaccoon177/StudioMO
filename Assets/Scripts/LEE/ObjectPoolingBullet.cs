@@ -8,7 +8,8 @@ using UnityEngine.Pool;
 /// </summary>
 public class ObjectPoolingBullet : MonoBehaviour
 {
-    [Header("Pool Settings")]
+    #region 탄막 관련 필드
+    [Header("Bullet 관련 필드")]
     [Tooltip("풀링에 사용할 Bullet 프리팹")]
     public Bullet bulletPrefab;
 
@@ -16,12 +17,13 @@ public class ObjectPoolingBullet : MonoBehaviour
     public Transform poolParent;
 
     [Tooltip("기본 풀 용량")]
-    public int defaultCapacity = 10;
+    int defaultCapacity = 50;
 
     [Tooltip("최대 풀 용량")]
-    public int maxSize = 100;
+    int maxSize = 200;
+    #endregion
 
-    // 유니티 내장 ObjectPool
+    // 유니티 내장 ObjectPool 사용
     IObjectPool<Bullet> _pool;
 
     /// <summary>
@@ -75,6 +77,9 @@ public class ObjectPoolingBullet : MonoBehaviour
     {
         Destroy(bullet.gameObject);
     }
+
+
+    //이거 아래들 해석해야함.
 
     /// <summary>
     /// 외부에서 Bullet 인스턴스를 요청
