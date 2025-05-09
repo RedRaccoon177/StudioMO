@@ -494,6 +494,7 @@ GameObject:
   - component: {fileID: 675268194}
   - component: {fileID: 675268193}
   - component: {fileID: 675268192}
+  - component: {fileID: 675268195}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -587,6 +588,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675268190}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &675268195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675268190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  mapCenter: {fileID: 2134522047}
+  wallCollider: {fileID: 675268192}
+  fireInterval: 1
 --- !u!1 &947426223
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +616,7 @@ GameObject:
   - component: {fileID: 947426227}
   - component: {fileID: 947426226}
   - component: {fileID: 947426225}
+  - component: {fileID: 947426228}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -692,6 +710,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947426223}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &947426228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947426223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  mapCenter: {fileID: 2134522047}
+  wallCollider: {fileID: 947426225}
+  fireInterval: 1
 --- !u!1 &1027287946
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,6 +844,7 @@ GameObject:
   - component: {fileID: 1479783705}
   - component: {fileID: 1479783704}
   - component: {fileID: 1479783703}
+  - component: {fileID: 1479783706}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -903,6 +938,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479783701}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1479783706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479783701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  mapCenter: {fileID: 2134522047}
+  wallCollider: {fileID: 1479783703}
+  fireInterval: 1
 --- !u!1 &1667669780
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,8 +1021,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5159171125090637727, guid: 10cccd224582b4a40be15f81a85c2273,
     type: 3}
   poolParent: {fileID: 1860902484}
-  defaultCapacity: 10
-  maxSize: 100
 --- !u!4 &1860902484
 Transform:
   m_ObjectHideFlags: 0
@@ -999,6 +1048,7 @@ GameObject:
   - component: {fileID: 1873887094}
   - component: {fileID: 1873887093}
   - component: {fileID: 1873887092}
+  - component: {fileID: 1873887095}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1092,6 +1142,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873887090}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1873887095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873887090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  mapCenter: {fileID: 2134522047}
+  wallCollider: {fileID: 1873887092}
+  fireInterval: 1
+--- !u!1 &2134522047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2134522048}
+  m_Layer: 0
+  m_Name: MapCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2134522048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134522047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1102,3 +1199,4 @@ SceneRoots:
   - {fileID: 1667669781}
   - {fileID: 190291035}
   - {fileID: 1860902484}
+  - {fileID: 2134522048}

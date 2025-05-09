@@ -3,35 +3,48 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    //유니티 내부 오브젝트 풀링 사용
     IObjectPool<Bullet> _pool;
+    Vector3 moveDirection;
+    public float speed = 3f;
+
+    // 생성 후 1초간 대기
+
+    // 삭제 시 1초간 대기
 
     public void SetPool(IObjectPool<Bullet> pool)
     {
         _pool = pool;
     }
 
+    /// <summary>
+    /// 이동 방향을 외부에서 지정
+    /// </summary>
+    public void Initialize(Vector3 direction)
+    {
+        moveDirection = direction.normalized;
+    }
+
+    /// <summary>
+    /// 풀에서 꺼내질 때 호출 (초기화 등)
+    /// </summary>
+    public void OnSpawn()
+    {
+        // 필요 시 초기화 (예: 이펙트 재생)
+    }
+
+    void Update()
+    {
+        transform.position += moveDirection * speed * Time.deltaTime;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         string tag = collision.gameObject.tag;
 
-        //플레이어 or 구조물 일경우
         if (tag == "Player" || tag == "Structures")
         {
-            //TODO: 플레이어 일 경우 채집한 광물 -- 진행
-
-            // 충돌 시 자동 반납
+            // TODO: 필요시 추가 로직
             _pool?.Release(this);
         }
-    }
-
-    public void OnSpawn()
-    {
-        //TODO: 꺼내질 때 초기화 처리 등
-    }
-
-    public void BulletMove()
-    {
-        //TODO: 탄막의 이동
     }
 }

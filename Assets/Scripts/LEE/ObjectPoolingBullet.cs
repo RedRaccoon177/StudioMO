@@ -32,7 +32,8 @@ public class ObjectPoolingBullet : MonoBehaviour
     void Awake()
     {
         // ObjectPool »ý¼º
-        _pool = new ObjectPool<Bullet>(
+        _pool = new ObjectPool<Bullet>
+        (
             createFunc: CreateBullet,
             actionOnGet: OnGetFromPool,
             actionOnRelease: OnReleaseToPool,
