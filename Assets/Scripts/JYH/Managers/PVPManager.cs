@@ -8,10 +8,8 @@ public class PVPManager : Manager
     protected override void Awake()
     {
         base.Awake();
-        if (Application.isPlaying == true)
-        {
-            testPhoton?.Initialize();
-        }
+        Debug.Log("두 번 동작은 안 하겠지?");
+        testPhoton?.Initialize();
     }
 
     protected override void SetupDefaultConfig()
