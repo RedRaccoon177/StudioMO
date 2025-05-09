@@ -7,8 +7,6 @@ public class Bullet : MonoBehaviour
     Vector3 moveDirection;
     public float speed = 3f;
 
-    // 생성 후 1초간 대기
-
     // 삭제 시 1초간 대기
 
     public void SetPool(IObjectPool<Bullet> pool)
@@ -30,6 +28,8 @@ public class Bullet : MonoBehaviour
     public void OnSpawn()
     {
         // 필요 시 초기화 (예: 이펙트 재생)
+
+        // 생성 후 1초간 대기
     }
 
     void Update()

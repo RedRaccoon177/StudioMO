@@ -79,9 +79,6 @@ public class ObjectPoolingBullet : MonoBehaviour
         Destroy(bullet.gameObject);
     }
 
-
-    //이거 아래들 해석해야함.
-
     /// <summary>
     /// 외부에서 Bullet 인스턴스를 요청
     /// </summary>
