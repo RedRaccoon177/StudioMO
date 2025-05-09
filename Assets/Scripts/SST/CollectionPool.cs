@@ -29,4 +29,24 @@ public class CollectionPool : MonoBehaviour
             pools.Add(collectionData.collectionName, collectionDataQueue);
         }
     }
+
+    // 풀에서 오브젝트 꺼내는 함수
+    public GameObject GetObject(string collectionName)
+    {
+        // 풀에 받아온 오브젝트와 같은 이름이 있으면서, 해당 오브젝트가 있다면
+        if (pools.ContainsKey(collectionName) && pools[collectionName].Count > 0)
+        {
+            GameObject obj = pools[collectionName].Dequeue();  // 풀에서 해당 오브젝트 빼와서 담고
+            obj.SetActive(true);        // 켜주고
+            return obj;                 // 그 오브젝트 반환
+        }
+        return null;
+    }
+    
+    // 풀에다가 다시 오브젝트를 반환해서 넣어주는 함수
+    public void ReturnObject(string collectionName, GameObject obj)
+    {
+        obj.SetActive(false);
+        pools[collectionName].Enqueue(obj);
+    }
 }
