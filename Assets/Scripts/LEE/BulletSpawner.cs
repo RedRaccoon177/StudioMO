@@ -22,6 +22,7 @@ public class BulletSpawner : MonoBehaviour
     public float fireInterval = 1f;
 
     float fireTimer;
+    Vector3 spawnPos;
 
     void Start()
     {
