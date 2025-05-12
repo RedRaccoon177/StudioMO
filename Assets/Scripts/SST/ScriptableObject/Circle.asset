@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c9c5dedf84541d44ba74f72ec68ce32, type: 3}
-  m_Name: CircleBrown
+  m_Name: Circle
   m_EditorClassIdentifier: 
-  collectionName: Circle
-  score: 1
+  collectionName: 
+  score: 0
   collectionPrefab: {fileID: 7650141460142429460, guid: e39312b77a706ef4dbbef884d554e36c,
     type: 3}
+  collectionType: 0

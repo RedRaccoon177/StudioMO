@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 447231998907094401}
   - component: {fileID: 1283944341859189063}
   - component: {fileID: 2769449245168579003}
-  m_Layer: 0
+  - component: {fileID: 4833442742244991096}
+  - component: {fileID: 2491458655153240613}
+  m_Layer: 7
   m_Name: Cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +86,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4833442742244991096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128199756915647333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &2491458655153240613
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128199756915647333}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.97660375, y: 0.5, z: 0.72198963}
+  m_Center: {x: -0.15326798, y: 0.25, z: 0.0020340234}
 --- !u!1 &138427099973055842
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +130,7 @@ GameObject:
   - component: {fileID: 8183621852538280290}
   - component: {fileID: 561497203247752773}
   - component: {fileID: 6666346577086643231}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6425114588125764499}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +242,7 @@ GameObject:
   - component: {fileID: 7924937466625902722}
   - component: {fileID: 3334737417222662843}
   - component: {fileID: 8163069613987198435}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +343,7 @@ GameObject:
   - component: {fileID: 2120827939902064635}
   - component: {fileID: 1635455881794351010}
   - component: {fileID: 5234478954511791568}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1588722853532629707}
   - component: {fileID: 2109012874137143136}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

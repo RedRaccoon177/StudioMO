@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1734768918420835385}
   - component: {fileID: 1463021285596293001}
   - component: {fileID: 2001363812397150093}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 2188767088397175526}
   - component: {fileID: 4266678992582636792}
   - component: {fileID: 395207365025618098}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3857281732800637593}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 118608438803483265}
   - component: {fileID: 6721236922517548129}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,9 @@ GameObject:
   - component: {fileID: 7275102386352657332}
   - component: {fileID: 8639108256541095328}
   - component: {fileID: 2395429673928087864}
-  m_Layer: 0
+  - component: {fileID: -3745245592332998496}
+  - component: {fileID: 4280317278077020831}
+  m_Layer: 7
   m_Name: Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,6 +388,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-3745245592332998496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510765949005837997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &4280317278077020831
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510765949005837997}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3911011, y: 0.83, z: 0.83000004}
+  m_Center: {x: -0.19979689, y: 0.00036850572, z: 0.0003438145}
 --- !u!1 &8928324120255225924
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +432,7 @@ GameObject:
   - component: {fileID: 4898060559569715930}
   - component: {fileID: 8653902042697815561}
   - component: {fileID: 3474264610642940495}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

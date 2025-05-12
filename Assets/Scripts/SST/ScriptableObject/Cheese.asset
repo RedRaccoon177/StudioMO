@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9c5dedf84541d44ba74f72ec68ce32, type: 3}
   m_Name: Cheese
   m_EditorClassIdentifier: 
-  collectionName: Cheese
-  score: 2
+  collectionName: 
+  score: 0
   collectionPrefab: {fileID: 128199756915647333, guid: 81b983fde2a42ac4d9c7a382b6144176,
     type: 3}
+  collectionType: 1

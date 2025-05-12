@@ -10,12 +10,36 @@ public class CollectionPool : MonoBehaviour
     // ▼ 각 채집물 이름별로 큐를 만들어 오브젝트를 딕셔너리에 저장
     Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
 
-    private void Awake()
+    public void Initialize()
     {
+        // ▼ 이름 중복 카운트용 딕셔너리
+        Dictionary<string, int> nameCount = new Dictionary<string, int>();
+
         Queue<GameObject> collectionDataQueue;
 
         foreach (var collectionData in collectionDatas)
         {
+            string baseName = collectionData.collectionName;
+
+            // 이름 중복 검사 : 이름이 처음 나온거면 값 0으로 등록
+            if (!nameCount.ContainsKey(baseName))
+            {
+                nameCount[baseName] = 0;
+            }
+            else
+            {
+                nameCount[baseName]++;  // 처음 아니라면 숫자 증가
+            }
+
+            string uniqueName = baseName;
+
+            if (nameCount[baseName] > 0)
+            {
+                uniqueName = baseName + "_" + nameCount[baseName];
+            }
+
+            collectionData.collectionName = uniqueName;
+
             collectionDataQueue = new Queue<GameObject>();
 
             for (int i = 0; i < 10; i++)
@@ -26,7 +50,7 @@ public class CollectionPool : MonoBehaviour
                 collectionDataQueue.Enqueue(obj);
             }
 
-            pools.Add(collectionData.collectionName, collectionDataQueue);
+            pools.Add(uniqueName, collectionDataQueue);
         }
     }
 
@@ -48,5 +72,10 @@ public class CollectionPool : MonoBehaviour
     {
         obj.SetActive(false);
         pools[collectionName].Enqueue(obj);
+    }
+
+    public List<CollectionData> GetCollectionDataList()
+    {
+        return collectionDatas;
     }
 }

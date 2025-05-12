@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5516434785298007535}
   - component: {fileID: 8101026260448610992}
   - component: {fileID: 4942544705839805433}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193378407823368564}
   - component: {fileID: 4958020329423038540}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,9 @@ GameObject:
   - component: {fileID: 7016911189388513198}
   - component: {fileID: 6255156946089295883}
   - component: {fileID: 8154399688203220161}
-  m_Layer: 0
+  - component: {fileID: -3620345916526195620}
+  - component: {fileID: 8990291290228029611}
+  m_Layer: 7
   m_Name: CircleBrown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,6 +277,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-3620345916526195620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650141460142429460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &8990291290228029611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650141460142429460}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7, y: 0.20000002, z: 0.7}
+  m_Center: {x: 0, y: 0.099999994, z: 0}
 --- !u!1 &8420696687826770948
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6822448099984592211}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +357,7 @@ GameObject:
   - component: {fileID: 4608213766414670651}
   - component: {fileID: 4739169292807765773}
   - component: {fileID: 8556808682085864966}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +432,7 @@ GameObject:
   - component: {fileID: 5487654615665092687}
   - component: {fileID: 5434748221337098985}
   - component: {fileID: 8383744665279186894}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
