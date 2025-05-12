@@ -33,4 +33,16 @@ public static class ExtensionMethod
             button.onClick.AddListener(action);
         }
     }
+
+    public static void SetText(this Button button, string value)
+    {
+        if (button != null)
+        {
+            TextMeshProUGUI[] tmpTexts = button.GetComponentsInChildren<TextMeshProUGUI>();
+            foreach (TextMeshProUGUI tmpText in tmpTexts)
+            {
+                tmpText.text = value;
+            }
+        }
+    }
 }
