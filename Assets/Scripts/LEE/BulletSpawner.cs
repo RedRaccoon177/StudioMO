@@ -14,6 +14,9 @@ public class BulletSpawner : MonoBehaviour
     [Header("발사할 Bullet 프리팹")]
     public NormalBullet normalBulletPrefab;
 
+    [Header("총알 생성시 부모로 사용할 오브젝트")]
+    public Transform bulletParent;
+
     [Header("맵 중앙 기준점")]
     public GameObject mapCenter;
 
@@ -29,6 +32,10 @@ public class BulletSpawner : MonoBehaviour
     // 발사 주기를 제어하기 위한 내부 타이머
     float fireTimer;
 
+    [Header("탄막의 발사 시 각도 범위 지정")]
+    public float plusAngle = 15f;
+    public float minusAngle = -15f;
+
     /// <summary>
     /// 초기 설정
     /// 발사 방향 계산 및 탄막 풀 생성
@@ -39,7 +46,7 @@ public class BulletSpawner : MonoBehaviour
         fireDirection = (mapCenter.transform.position - transform.position).normalized;
 
         // 총알 풀을 생성하여 준비
-        bulletPooling.CreatePool(normalBulletPrefab);
+        bulletPooling.CreatePool(normalBulletPrefab, bulletParent);
     }
 
     /// <summary>
@@ -94,8 +101,8 @@ public class BulletSpawner : MonoBehaviour
         // 중앙을 향한 기본 방향 계산
         Vector3 fireDir = (mapCenter.transform.position - spawnPos).normalized;
 
-        // 좌우 각도 편차를 랜덤하게 추가하여 퍼뜨린다 (±15도)
-        float angleOffset = Random.Range(-15f, 15f);
+        // 좌우 각도 편차를 랜덤하게 추가하여 퍼뜨린다
+        float angleOffset = Random.Range(minusAngle, plusAngle);
         fireDir = Quaternion.AngleAxis(angleOffset, Vector3.up) * fireDir;
 
         // 총알 이동 방향 초기화

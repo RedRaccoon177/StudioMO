@@ -649,9 +649,12 @@ MonoBehaviour:
   bulletPooling: {fileID: 1860902483}
   normalBulletPrefab: {fileID: 5159171125090637727, guid: 10cccd224582b4a40be15f81a85c2273,
     type: 3}
+  bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 675268192}
   fireInterval: 1
+  plusAngle: 15
+  minusAngle: -15
 --- !u!1 &852018788
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852018789}
   m_Layer: 0
-  m_Name: BaseBullet
+  m_Name: NormalBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -804,9 +807,12 @@ MonoBehaviour:
   bulletPooling: {fileID: 1860902483}
   normalBulletPrefab: {fileID: 5159171125090637727, guid: 10cccd224582b4a40be15f81a85c2273,
     type: 3}
+  bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 947426225}
   fireInterval: 1
+  plusAngle: 15
+  minusAngle: -15
 --- !u!1 &1027287946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,9 +1168,12 @@ MonoBehaviour:
   bulletPooling: {fileID: 1860902483}
   normalBulletPrefab: {fileID: 5159171125090637727, guid: 10cccd224582b4a40be15f81a85c2273,
     type: 3}
+  bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 1479783703}
   fireInterval: 1
+  plusAngle: 15
+  minusAngle: -15
 --- !u!1 &1667669780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,9 +1409,12 @@ MonoBehaviour:
   bulletPooling: {fileID: 1860902483}
   normalBulletPrefab: {fileID: 5159171125090637727, guid: 10cccd224582b4a40be15f81a85c2273,
     type: 3}
+  bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 1873887092}
   fireInterval: 1
+  plusAngle: 15
+  minusAngle: -15
 --- !u!1 &2134522047
 GameObject:
   m_ObjectHideFlags: 0
