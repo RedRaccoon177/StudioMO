@@ -186,6 +186,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Interaction Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 7873184977108000993, guid: 895f6f3c2d334633b5800312285058d2,
+        type: 3}
+      propertyPath: m_CameraYOffset
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873184977108000993, guid: 895f6f3c2d334633b5800312285058d2,
+        type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9014170783809206330, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
       propertyPath: m_ClearFlags
@@ -1298,18 +1308,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deviceSimulator: {fileID: 806325224}
   xrOrigin: {fileID: 1139090860}
-  deviceSimulatorEnabled: 1
-  _language: 0
+  deviceSimulatorEnabled: 0
+  language: 0
   titleText: {fileID: 1087459590}
   descriptionText: {fileID: 1504838132}
   coverPanel: {fileID: 1381015539}
   openingTime: 3
   coverMoveTime: 0.5
-  stageModeButton: {fileID: 0}
-  matchModeButton: {fileID: 0}
-  shopButton: {fileID: 0}
-  optionButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  stageModeButton: {fileID: 799848196}
+  matchModeButton: {fileID: 2029169383}
+  shopButton: {fileID: 623835417}
+  optionButton: {fileID: 61293426}
+  exitButton: {fileID: 374904680}
 --- !u!4 &996664147
 Transform:
   m_ObjectHideFlags: 0

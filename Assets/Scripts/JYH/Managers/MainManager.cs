@@ -48,7 +48,11 @@ public class MainManager : Manager
     protected override void ChangeText(Translation.Language language)
     {
         base.ChangeText(language);
-
+        stageModeButton.SetText(Translation.Get(Translation.Letter.Stage) + " " + Translation.Get(Translation.Letter.Mode));
+        matchModeButton.SetText(Translation.Get(Translation.Letter.Match) + " " + Translation.Get(Translation.Letter.Mode));
+        shopButton.SetText(Translation.Get(Translation.Letter.Shop));
+        optionButton.SetText(Translation.Get(Translation.Letter.Option));
+        exitButton.SetText(Translation.Get(Translation.Letter.Exit));
     }
 
     protected override void Initialize()
