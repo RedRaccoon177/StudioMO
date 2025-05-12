@@ -24,4 +24,5 @@ public partial class PlayerController : MonoBehaviour
         get { return nowState; }
         set { nowState = value; }
     }
+
 }

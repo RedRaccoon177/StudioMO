@@ -34,6 +34,7 @@ public partial class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             activateOn = false;
+            pickaxeHitbox.gameObject.SetActive(false);
         }
     }
 }

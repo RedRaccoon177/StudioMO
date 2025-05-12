@@ -14,6 +14,14 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField]
     private InputActionManager actionManager;
 
+    [Header("플레이어 시점 카메라 위치")]
+    [SerializeField]
+    private Transform headCameraPos;
+
+    [Header("플레이어 모델링 위치")]
+    [SerializeField]
+    private Transform playerModelPos;
+
     private InputActionAsset playerInput;
     private InputActionMap XRIRightHandInteration;
     private InputActionMap XRILeftHandLocomotion;
@@ -59,11 +67,22 @@ public partial class PlayerController : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
-        Debug.Log(nowState);
+        //Debug.Log(nowState);
     }
 
     private void FixedUpdate()
     {
-        currentState.FixedUpdateState(this); 
+        currentState.FixedUpdateState(this);
+
+        if (moveOn == true)
+        {
+            MovePlayerModelPosition();
+        }
+    }
+
+    private void MovePlayerModelPosition()
+    {
+        Vector3 headCamPos = headCameraPos.position;
+        playerModelPos.position = new Vector3(headCamPos.x, playerModelPos.position.y, headCamPos.z);
     }
 }

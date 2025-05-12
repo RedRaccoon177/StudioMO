@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//특수능력(산데비스탄) 상태
-public class SlipstreamState : IPlayerState
+//특수능력 상태
+public class SlowMotionState : IPlayerState
 {
     public void EnterState(PlayerController player)
     {
