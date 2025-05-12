@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SolidState : MonoBehaviour
+public class SolidState : IPlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    public void EnterState(PlayerController player)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FixedUpdateState(PlayerController player)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public void UpdateState(PlayerController player)
+    {
+        throw new System.NotImplementedException();
     }
 }
