@@ -1,0 +1,96 @@
+using Photon.Realtime;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
+
+//플레이어 메인 컨트롤러
+public partial class PlayerController : MonoBehaviour
+{
+    [Header("곡괭이 히트박스")]
+    public Collider pickaxeHitbox;
+
+    [Header("VR 인풋 액션")]
+    [SerializeField]
+    private InputActionManager actionManager;
+
+    [Header("플레이어 시점 카메라 위치")]
+    [SerializeField]
+    private Camera headCameraPos;
+
+    [Header("플레이어 모델링")]
+    [SerializeField]
+    private GameObject playerModel;
+
+    [Header("플레이어 피격 범위")]
+    [SerializeField]
+    private Collider playerHitBox;
+
+    private InputActionAsset playerInput;
+    private InputActionMap XRIRightHandInteration;
+    private InputActionMap XRILeftHandLocomotion;
+    private InputActionMap XRILeftHandInteraction;
+
+    private InputAction rightHandGrip;
+    private InputAction leftHandMove;
+    private InputAction leftHandGrip;
+    private InputAction leftHandTrigger;
+
+    private IPlayerState currentState;
+
+    private PlayerStateName nowState;
+
+    private void Awake()
+    {
+        playerInput = actionManager.actionAssets[0];
+    }
+
+    private void Start()
+    {
+        XRIRightHandInteration = playerInput.FindActionMap("XRI RightHand Interaction");
+        XRILeftHandInteraction = playerInput.FindActionMap("XRI LeftHand Interaction");
+                XRILeftHandLocomotion = playerInput.FindActionMap("XRI LeftHand Locomotion");
+
+        rightHandGrip = XRIRightHandInteration.FindAction("Select");
+        leftHandGrip = XRILeftHandInteraction.FindAction("Select");
+        leftHandMove = XRILeftHandLocomotion.FindAction("Move");
+
+        rightHandGrip.performed += OnSelect;
+        rightHandGrip.canceled += OnSelect;
+
+        leftHandMove.performed += OnMove;
+        leftHandMove.canceled += OnMove;
+
+        ChangeState(new IdleState());  
+    }
+
+    public void ChangeState(IPlayerState newState)
+    {
+        currentState = newState;
+        currentState.EnterState(this);
+        currentState.CheckNowState(this);
+    }
+
+    private void Update()
+    {
+        currentState.UpdateState(this);
+        Debug.Log(nowState);
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdateState(this);
+
+        //xr device simulator용 이동 코드
+
+        //Vector3 camPos = headCameraPos.transform.position;
+        //playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
+        //
+        //Vector3 camEuler = headCameraPos.transform.eulerAngles;
+        //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
+
+    }
+}
