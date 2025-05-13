@@ -16,7 +16,7 @@ public class GuidedBulletSpawner : MonoBehaviour
 
     [Header("플레이어의 위치")]
     //TODO: 임시 플레이어 위치값 필요해서
-    public TestPlayer player;
+    public GameObject player;
 
     [Header("발사할 방향 (플레이어 방향)")]
     Vector3 fireDirection;
