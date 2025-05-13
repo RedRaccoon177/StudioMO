@@ -12,20 +12,23 @@ public class MainManager : Manager
     [SerializeField]
     private TMP_Text descriptionText;
     [SerializeField]
-    private Transform coverPanel;
+    private GameObject canvasBlockObject;
     [SerializeField, Range(0, float.MaxValue)]
     private float openingTime = 3.0f;
     [SerializeField, Range(0, float.MaxValue)]
-    private float coverMoveTime = 0.5f;
+    private float pivotMoveTime = 1;
     private bool startKeyDown = false;
-    private static readonly Vector3 MoveCoverPosition = new Vector3(0.00f, 7.03f, 4.80f);
+    private static readonly float ObjectHideZoneY = -7.025f;
+    private static readonly Vector3 StartPosition = new Vector3(0, 1.36145f, 0);
+    private static readonly Vector3 EndPosition = new Vector3(0, -9.83855f, 0);
+
     [Header("기본 선택창")]
     [SerializeField]
-    private Button stageModeButton;
+    private Button stageButton;
     [SerializeField]
-    private Button matchModeButton;
+    private Button pvpButton;
     [SerializeField]
-    private Button shopButton;
+    private Button storeButton;
     [SerializeField]
     private Button optionButton;
     [SerializeField]
@@ -34,7 +37,7 @@ public class MainManager : Manager
     private Button[] themeSelectButtons = new Button[themeSelectButtonsLength];
     private static readonly int themeSelectButtonsLength = 4;
 
-    private static readonly Vector3 FixedPosition = new Vector3(0, 1.36144f, 0);
+
 
 #if UNITY_EDITOR
     protected override void OnValidate()
@@ -58,28 +61,33 @@ public class MainManager : Manager
         if(startKeyDown == true && Input.anyKeyDown)
         {
             startKeyDown = false;
-            titleText.SetActive(false);
-            descriptionText.SetActive(false);
-            coverPanel.DOMove(MoveCoverPosition, coverMoveTime).SetEase(Ease.InOutSine);
+            Vector3 value = StartPosition;
+            DOTween.To(() => value, x => value = x, EndPosition, pivotMoveTime).SetEase(Ease.Linear).OnUpdate(() =>
+              {
+                  fixedPosition = value;
+                  if(value.y < ObjectHideZoneY && canvasBlockObject != null && canvasBlockObject.activeSelf == true)
+                  {
+                      canvasBlockObject.SetActive(false);
+                  }
+              });
         }
     }
 
     protected override void ChangeText(Translation.Language language)
     {
         base.ChangeText(language);
-        stageModeButton.SetText(Translation.Get(Translation.Letter.Stage) + " " + Translation.Get(Translation.Letter.Mode));
-        matchModeButton.SetText(Translation.Get(Translation.Letter.Match) + " " + Translation.Get(Translation.Letter.Mode));
-        shopButton.SetText(Translation.Get(Translation.Letter.Shop));
+        stageButton.SetText(Translation.Get(Translation.Letter.Stage));
+        pvpButton.SetText(Translation.Get(Translation.Letter.PVP));
+        storeButton.SetText(Translation.Get(Translation.Letter.Store));
         optionButton.SetText(Translation.Get(Translation.Letter.Option));
         exitButton.SetText(Translation.Get(Translation.Letter.Exit));
     }
 
     protected override void Initialize()
     {
-        stageModeButton.SetListener(() =>
+        stageButton.SetListener(() =>
         {
             SetActiveEntryButtons(false);
-
         });
 
         exitButton.SetListener(() =>
@@ -90,7 +98,7 @@ public class MainManager : Manager
             Application.Quit();
 #endif
         });
-        fixedPosition = FixedPosition;
+        fixedPosition = StartPosition;
         descriptionText.DOFade(1f, openingTime);
         DOVirtual.DelayedCall(openingTime, () =>
         {
@@ -100,9 +108,9 @@ public class MainManager : Manager
 
     private void SetActiveEntryButtons(bool value)
     {
-        stageModeButton.SetActive(value);
-        matchModeButton.SetActive(value);
-        shopButton.SetActive(value);
+        stageButton.SetActive(value);
+        pvpButton.SetActive(value);
+        storeButton.SetActive(value);
         optionButton.SetActive(value);
         exitButton.SetActive(value);
     }

@@ -67,9 +67,10 @@ public abstract class Manager : MonoBehaviourPunCallbacks
             if (deviceSimulator != null)
             {
 #if UNITY_EDITOR
-                if (deviceSimulator.deviceSimulatorUI != null)
+                int childCount = deviceSimulator.transform.childCount;
+                for (int i = 0; i < childCount; i++)
                 {
-                    deviceSimulator.deviceSimulatorUI.SetActive(!deviceSimulatorEnabled);
+                    deviceSimulator.transform.GetChild(i).gameObject.SetActive(deviceSimulatorEnabled);
                 }
 #else
                 Destroy(deviceSimulator.gameObject);

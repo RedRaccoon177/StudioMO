@@ -11,22 +11,19 @@ public static class Japanese
                     letters[i] = "しさく";
                     break;
                 case Translation.Letter.Stage:
-                    letters[i] = "스테이지";
+                    letters[i] = "";
                     break;
-                case Translation.Letter.Match:
-                    letters[i] = "대전";
+                case Translation.Letter.PVP:
+                    letters[i] = "";
                     break;
-                case Translation.Letter.Mode:
-                    letters[i] = "모드";
-                    break;
-                case Translation.Letter.Shop:
-                    letters[i] = "상점";
+                case Translation.Letter.Store:
+                    letters[i] = "";
                     break;
                 case Translation.Letter.Option:
-                    letters[i] = "옵션";
+                    letters[i] = "";
                     break;
                 case Translation.Letter.Exit:
-                    letters[i] = "나가기";
+                    letters[i] = "";
                     break;
             }
         }

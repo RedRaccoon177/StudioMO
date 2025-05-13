@@ -117,6 +117,13 @@ Shader "LowPoly/SimpleWater"
                 float4 backgroundColor = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, distortionUV);
 
                 float4 finalColor = lerp(colorWithFoam, backgroundColor, depthLerp);
+
+                    // Directional Light 유무에 따른 밝기 보정
+    Light mainLight = GetMainLight();
+    float hasLight = mainLight.distanceAttenuation; // Directional Light 없으면 0
+    float brightness = lerp(0.3, 1.0, hasLight);     // 없으면 어둡게, 있으면 밝게
+    finalColor.rgb *= brightness;
+
                 finalColor.a = 1;
 
                 return finalColor;

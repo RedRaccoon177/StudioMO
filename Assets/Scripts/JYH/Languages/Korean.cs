@@ -1,5 +1,3 @@
-using UnityEditor.SceneManagement;
-using WebSocketSharp;
 
 public static class Korean
 {
@@ -14,15 +12,12 @@ public static class Korean
                     letters[i] = "시작";
                     break;
                 case Translation.Letter.Stage:
-                    letters[i] = "스테이지";
+                    letters[i] = "스테이지 모드";
                     break;
-                case Translation.Letter.Match:
-                    letters[i] = "대전";
+                case Translation.Letter.PVP:
+                    letters[i] = "대전 모드";
                     break;
-                case Translation.Letter.Mode:
-                    letters[i] = "모드";
-                    break;
-                case Translation.Letter.Shop:
+                case Translation.Letter.Store:
                     letters[i] = "상점";
                     break;
                 case Translation.Letter.Option:
