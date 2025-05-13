@@ -26,8 +26,8 @@ public class MoveState : IPlayerState
 
     public void FixedUpdateState(PlayerController player)
     {
-        MovePlayerModelPosition(player);
-    }
+        //MovePlayerModelPosition(player);
+    } 
 
     private void MovePlayerModelPosition(PlayerController player)
     {

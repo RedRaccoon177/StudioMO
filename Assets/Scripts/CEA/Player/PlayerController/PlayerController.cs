@@ -52,7 +52,7 @@ public partial class PlayerController : MonoBehaviour
     {
         XRIRightHandInteration = playerInput.FindActionMap("XRI RightHand Interaction");
         XRILeftHandInteraction = playerInput.FindActionMap("XRI LeftHand Interaction");
-                XRILeftHandLocomotion = playerInput.FindActionMap("XRI LeftHand Locomotion");
+        XRILeftHandLocomotion = playerInput.FindActionMap("XRI LeftHand Locomotion");
 
         rightHandGrip = XRIRightHandInteration.FindAction("Select");
         leftHandGrip = XRILeftHandInteraction.FindAction("Select");
@@ -86,11 +86,11 @@ public partial class PlayerController : MonoBehaviour
 
         //xr device simulator용 이동 코드
 
-        //Vector3 camPos = headCameraPos.transform.position;
-        //playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
-        //
-        //Vector3 camEuler = headCameraPos.transform.eulerAngles;
-        //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
+        Vector3 camPos = headCameraPos.transform.position;
+        playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
+        
+        Vector3 camEuler = headCameraPos.transform.eulerAngles;
+        playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
 
     }
 }
