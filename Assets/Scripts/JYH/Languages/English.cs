@@ -13,14 +13,11 @@ public static class English
                 case Translation.Letter.Stage:
                     letters[i] = "Stage";
                     break;
-                case Translation.Letter.Match:
-                    letters[i] = "Match";
+                case Translation.Letter.PVP:
+                    letters[i] = "PVP";
                     break;
-                case Translation.Letter.Mode:
-                    letters[i] = "Mode";
-                    break;
-                case Translation.Letter.Shop:
-                    letters[i] = "Shop";
+                case Translation.Letter.Store:
+                    letters[i] = "Store";
                     break;
                 case Translation.Letter.Option:
                     letters[i] = "Option";
