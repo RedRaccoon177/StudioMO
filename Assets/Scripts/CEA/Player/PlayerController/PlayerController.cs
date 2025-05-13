@@ -7,8 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs;
 //플레이어 메인 컨트롤러
 public partial class PlayerController : MonoBehaviour
 {
-    IPlayerState playerState;
-
     [Header("곡괭이 히트박스")]
     public Collider pickaxeHitbox;
 
@@ -19,11 +17,15 @@ public partial class PlayerController : MonoBehaviour
     private InputActionAsset playerInput;
     private InputActionMap XRIRightHandInteration;
     private InputActionMap XRILeftHandLocomotion;
+    private InputActionMap XRILeftHandInteraction;
 
     private InputAction rightHandTrigger;
     private InputAction leftHandMove;
+    private InputAction leftHandTrigger;
 
     private IPlayerState currentState;
+
+    private PlayerStateName nowState;
 
     private void Awake()
     {
@@ -50,16 +52,18 @@ public partial class PlayerController : MonoBehaviour
     public void ChangeState(IPlayerState newState)
     {
         currentState = newState;
-        playerState.EnterState(this);
+        currentState.EnterState(this);
+        currentState.CheckNowState(this);
     }
 
     private void Update()
     {
-        playerState.UpdateState(this);
+        currentState.UpdateState(this);
+        Debug.Log(nowState);
     }
 
     private void FixedUpdate()
     {
-        playerState.FixedUpdateState(this); 
+        currentState.FixedUpdateState(this); 
     }
 }
