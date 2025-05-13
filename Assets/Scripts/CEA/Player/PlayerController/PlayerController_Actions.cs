@@ -24,7 +24,7 @@ public partial class PlayerController : MonoBehaviour
     }
 
     //오른쪽 컨트롤러 트리거 
-    void OnActivate(InputAction.CallbackContext context)
+    void OnSelect(InputAction.CallbackContext context)
     {
         if(context.performed)
         {

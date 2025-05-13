@@ -1,5 +1,8 @@
+using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
@@ -16,19 +19,24 @@ public partial class PlayerController : MonoBehaviour
 
     [Header("플레이어 시점 카메라 위치")]
     [SerializeField]
-    private Transform headCameraPos;
+    private Camera headCameraPos;
 
-    [Header("플레이어 모델링 위치")]
+    [Header("플레이어 모델링")]
     [SerializeField]
-    private Transform playerModelPos;
+    private GameObject playerModel;
+
+    [Header("플레이어 피격 범위")]
+    [SerializeField]
+    private Collider playerHitBox;
 
     private InputActionAsset playerInput;
     private InputActionMap XRIRightHandInteration;
     private InputActionMap XRILeftHandLocomotion;
     private InputActionMap XRILeftHandInteraction;
 
-    private InputAction rightHandTrigger;
+    private InputAction rightHandGrip;
     private InputAction leftHandMove;
+    private InputAction leftHandGrip;
     private InputAction leftHandTrigger;
 
     private IPlayerState currentState;
@@ -43,13 +51,15 @@ public partial class PlayerController : MonoBehaviour
     private void Start()
     {
         XRIRightHandInteration = playerInput.FindActionMap("XRI RightHand Interaction");
-        XRILeftHandLocomotion = playerInput.FindActionMap("XRI LeftHand Locomotion");
+        XRILeftHandInteraction = playerInput.FindActionMap("XRI LeftHand Interaction");
+                XRILeftHandLocomotion = playerInput.FindActionMap("XRI LeftHand Locomotion");
 
-        rightHandTrigger = XRIRightHandInteration.FindAction("Activate");
+        rightHandGrip = XRIRightHandInteration.FindAction("Select");
+        leftHandGrip = XRILeftHandInteraction.FindAction("Select");
         leftHandMove = XRILeftHandLocomotion.FindAction("Move");
 
-        rightHandTrigger.performed += OnActivate;
-        rightHandTrigger.canceled += OnActivate;
+        rightHandGrip.performed += OnSelect;
+        rightHandGrip.canceled += OnSelect;
 
         leftHandMove.performed += OnMove;
         leftHandMove.canceled += OnMove;
@@ -67,22 +77,20 @@ public partial class PlayerController : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
-        //Debug.Log(nowState);
+        Debug.Log(nowState);
     }
 
     private void FixedUpdate()
     {
         currentState.FixedUpdateState(this);
 
-        if (moveOn == true)
-        {
-            MovePlayerModelPosition();
-        }
-    }
+        //xr device simulator용 이동 코드
 
-    private void MovePlayerModelPosition()
-    {
-        Vector3 headCamPos = headCameraPos.position;
-        playerModelPos.position = new Vector3(headCamPos.x, playerModelPos.position.y, headCamPos.z);
+        //Vector3 camPos = headCameraPos.transform.position;
+        //playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
+        //
+        //Vector3 camEuler = headCameraPos.transform.eulerAngles;
+        //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
+
     }
 }
