@@ -33,24 +33,23 @@ public class MainManager : Manager
     private Button optionButton;
     [SerializeField]
     private Button exitButton;
+
+    [Header("스테이지 모드")]
     [SerializeField]
-    private Button[] themeSelectButtons = new Button[themeSelectButtonsLength];
-    private static readonly int themeSelectButtonsLength = 4;
-
-
+    private Button[] stageSelectButtons = new Button[StageSelectButtonsLength];
+    private static readonly int StageSelectButtonsLength = 4;
+    [SerializeField]
+    private Button stageLeftArrowButton;
+    [SerializeField]
+    private Button stageRightArrowButton;
 
 #if UNITY_EDITOR
     protected override void OnValidate()
     {
         base.OnValidate();
-        if(this == instance && themeSelectButtons.Length != themeSelectButtonsLength)
+        if(this == instance)
         {
-            Button[] buttons = new Button[themeSelectButtonsLength];
-            for (int i = 0; i < Mathf.Clamp(themeSelectButtons.Length, 0, themeSelectButtonsLength); i++)
-            {
-                buttons[i] = themeSelectButtons[i];
-            }
-            themeSelectButtons = buttons;
+            ExtensionMethod.Sort(ref stageSelectButtons, StageSelectButtonsLength);
         }
     }
 #endif
@@ -88,8 +87,22 @@ public class MainManager : Manager
         stageButton.SetListener(() =>
         {
             SetActiveEntryButtons(false);
+            stageSelectButtons.SetActive(true);
+            stageLeftArrowButton.SetActive(true);
+            stageRightArrowButton.SetActive(true);
         });
+        pvpButton.SetListener(() =>
+        {
+            SetActiveEntryButtons(false);
+        });
+        storeButton.SetListener(() =>
+        {
+            SetActiveEntryButtons(false);
+        });
+        optionButton.SetListener(() =>
+        {
 
+        });
         exitButton.SetListener(() =>
         {
 #if UNITY_EDITOR
@@ -100,10 +113,7 @@ public class MainManager : Manager
         });
         fixedPosition = StartPosition;
         descriptionText.DOFade(1f, openingTime);
-        DOVirtual.DelayedCall(openingTime, () =>
-        {
-            startKeyDown = true;
-        });
+        DOVirtual.DelayedCall(openingTime, () => { startKeyDown = true; });
     }
 
     private void SetActiveEntryButtons(bool value)

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using System.Collections.Generic;
 
 public static class ExtensionMethod
 {
@@ -52,5 +53,56 @@ public static class ExtensionMethod
         {
             button.gameObject.SetActive(value);
         }
+    }
+
+    public static void SetActive(this Button[] buttons, bool value)
+    {
+        int length = buttons != null ? buttons.Length: 0;
+        for (int i = 0; i < length; i++)
+        {
+            buttons[i].SetActive(value);
+        }
+    }
+
+    public static void Sort<T>(ref T[] array) where T : Object
+    {
+        List<T> list = new List<T>();
+        int empty = 0;
+        int length = array != null ? array.Length : 0;
+        for (int i = 0; i < length; i++)
+        {
+            T value = array[i];
+            if (value != null)
+            {
+                if (list.Contains(value) == false)
+                {
+                    list.Add(value);
+                }
+                else
+                {
+                    empty++;
+                }
+            }
+            else
+            {
+                empty++;
+            }
+        }
+        for (int i = 0; i < empty; i++)
+        {
+            list.Add(null);
+        }
+        array = list.ToArray();
+    }
+
+    public static void Sort<T>(ref T[] array, int length) where T : Object
+    {
+        Sort(ref array);
+        T[] templates = new T[length];
+        for (int i = 0; i < Mathf.Clamp(array.Length, 0, length); i++)
+        {
+            templates[i] = array[i];
+        }
+        array = templates;
     }
 }
