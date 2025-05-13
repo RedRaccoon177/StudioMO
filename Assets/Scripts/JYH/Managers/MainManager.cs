@@ -30,8 +30,27 @@ public class MainManager : Manager
     private Button optionButton;
     [SerializeField]
     private Button exitButton;
+    [SerializeField]
+    private Button[] themeSelectButtons = new Button[themeSelectButtonsLength];
+    private static readonly int themeSelectButtonsLength = 4;
 
     private static readonly Vector3 FixedPosition = new Vector3(0, 1.36144f, 0);
+
+#if UNITY_EDITOR
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+        if(this == instance && themeSelectButtons.Length != themeSelectButtonsLength)
+        {
+            Button[] buttons = new Button[themeSelectButtonsLength];
+            for (int i = 0; i < Mathf.Clamp(themeSelectButtons.Length, 0, themeSelectButtonsLength); i++)
+            {
+                buttons[i] = themeSelectButtons[i];
+            }
+            themeSelectButtons = buttons;
+        }
+    }
+#endif
 
     protected override void Update()
     {
@@ -57,11 +76,34 @@ public class MainManager : Manager
 
     protected override void Initialize()
     {
+        stageModeButton.SetListener(() =>
+        {
+            SetActiveEntryButtons(false);
+
+        });
+
+        exitButton.SetListener(() =>
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        });
         fixedPosition = FixedPosition;
         descriptionText.DOFade(1f, openingTime);
         DOVirtual.DelayedCall(openingTime, () =>
         {
             startKeyDown = true;
         });
+    }
+
+    private void SetActiveEntryButtons(bool value)
+    {
+        stageModeButton.SetActive(value);
+        matchModeButton.SetActive(value);
+        shopButton.SetActive(value);
+        optionButton.SetActive(value);
+        exitButton.SetActive(value);
     }
 }

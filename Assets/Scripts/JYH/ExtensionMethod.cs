@@ -45,4 +45,12 @@ public static class ExtensionMethod
             }
         }
     }
+
+    public static void SetActive(this Button button, bool value)
+    {
+        if (button != null)
+        {
+            button.gameObject.SetActive(value);
+        }
+    }
 }

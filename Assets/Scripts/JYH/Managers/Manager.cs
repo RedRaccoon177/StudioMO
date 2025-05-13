@@ -17,9 +17,7 @@ public abstract class Manager : MonoBehaviourPunCallbacks
     private XROrigin xrOrigin;                      //XR 오리진을 사용하기 위한 변수
     protected Vector3? fixedPosition;               //위치 고정을 하기 위한 변수
 
-    //씬 전환 기능을 탑재한 별도의 클래스가 멤버로 필요함(아마 로딩바를 포함한 ui이 패널이 될 듯함)
-
-    private static Manager _instance = null;        //각 씬 안에 단독으로 존재하기 위한 싱글톤 변수
+    protected static Manager instance = null;      //각 씬 안에 단독으로 존재하기 위한 싱글톤 변수
 
     private static readonly string LanguageTag = "Language";
 
@@ -35,18 +33,18 @@ public abstract class Manager : MonoBehaviourPunCallbacks
     {
         if (gameObject.scene == SceneManager.GetActiveScene())
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = FindObjectOfType<Manager>();
+                instance = FindObjectOfType<Manager>();
             }
-            if (this == _instance)
+            if (this == instance)
             {
                 name = GetType().Name;
                 ChangeText(language);
             }
             UnityEditor.EditorApplication.delayCall += () =>
             {
-                if (this != _instance && this != null)
+                if (this != instance && this != null)
                 {
                     UnityEditor.Undo.DestroyObjectImmediate(gameObject);
                 }
@@ -58,11 +56,11 @@ public abstract class Manager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (_instance == null)
+        if (instance == null)
         {
-            _instance = FindObjectOfType<Manager>();
+            instance = FindObjectOfType<Manager>();
         }
-        if (this == _instance)
+        if (this == instance)
         {
             ChangeText((Translation.Language)PlayerPrefs.GetInt(LanguageTag));
             Initialize();

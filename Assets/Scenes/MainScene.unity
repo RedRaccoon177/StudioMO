@@ -1320,6 +1320,11 @@ MonoBehaviour:
   shopButton: {fileID: 623835417}
   optionButton: {fileID: 61293426}
   exitButton: {fileID: 374904680}
+  themeSelectButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &996664147
 Transform:
   m_ObjectHideFlags: 0
