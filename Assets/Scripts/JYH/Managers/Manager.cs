@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,9 +19,11 @@ public abstract class Manager : MonoBehaviourPunCallbacks
     private XROrigin xrOrigin;                      //XR 오리진을 사용하기 위한 변수
     protected Vector3? fixedPosition;               //위치 고정을 하기 위한 변수
 
-    protected static Manager instance = null;      //각 씬 안에 단독으로 존재하기 위한 싱글톤 변수
+    protected static Manager instance = null;       //각 씬 안에 단독으로 존재하기 위한 싱글톤 변수
 
     private static readonly string LanguageTag = "Language";
+
+    private Stack<Action> actionStack = new Stack<Action>();
 
 #if UNITY_EDITOR
 
@@ -87,6 +91,24 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         }
     }
 
+    protected virtual void ChangeText(Translation.Language language)
+    {
+        Translation.Set(language);
+    }
+
+    protected void PlayAction(Action action)
+    {
+        if (action != null)
+        {
+            actionStack.Push(action);
+            action.Invoke();
+        }
+        else if (actionStack.Count > 0)
+        {
+            actionStack.Pop().Invoke();
+        }
+    }
+
     public void SetLanguage(int index)
     {
         if (index >= byte.MinValue && index <= byte.MaxValue)
@@ -94,11 +116,6 @@ public abstract class Manager : MonoBehaviourPunCallbacks
             PlayerPrefs.SetInt(LanguageTag, index);
             ChangeText((Translation.Language)index);
         }
-    }
-
-    protected virtual void ChangeText(Translation.Language language)
-    {
-        Translation.Set(language);
     }
 
     //각 씬에 맞는 초기화 함수

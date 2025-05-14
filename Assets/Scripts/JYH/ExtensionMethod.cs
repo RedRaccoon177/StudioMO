@@ -1,31 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
-using System.Collections.Generic;
 
 public static class ExtensionMethod
 {
-    public static void SetActive(this TMP_Text tmpText, bool value)
-    {
-        if (tmpText != null)
-        {
-            tmpText.gameObject.SetActive(value);
-        }
-    }
-
-    public static void SetActive(this TMP_Text tmpText, bool value, float alpha)
-    {
-        if (tmpText != null)
-        {
-            Color color = tmpText.color;
-            color.a = alpha;
-            tmpText.color = color;
-            tmpText.gameObject.SetActive(value);
-        }
-    }
-
-
     public static void SetListener(this Button button, UnityAction action)
     {
         if (button != null)
