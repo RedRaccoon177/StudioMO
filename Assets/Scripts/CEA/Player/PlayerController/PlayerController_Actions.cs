@@ -15,6 +15,7 @@ public partial class PlayerController : MonoBehaviour
         if(context.performed)
         {
             moveOn = true;
+            moveInput = context.ReadValue<Vector2>();
         }
         
         else if(context.canceled)
@@ -24,7 +25,7 @@ public partial class PlayerController : MonoBehaviour
     }
 
     //오른쪽 컨트롤러 트리거 
-    void OnSelect(InputAction.CallbackContext context)
+    void OnRightSelect(InputAction.CallbackContext context)
     {
         if(context.performed)
         {

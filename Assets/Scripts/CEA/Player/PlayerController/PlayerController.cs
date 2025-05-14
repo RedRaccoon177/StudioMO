@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 //플레이어 메인 컨트롤러
 public partial class PlayerController : MonoBehaviour
@@ -39,6 +40,12 @@ public partial class PlayerController : MonoBehaviour
     private InputAction leftHandGrip;
     private InputAction leftHandTrigger;
 
+    public DynamicMoveProvider moveProvider;
+
+    public float moveSpeed;
+
+    private Vector2 moveInput;
+
     private IPlayerState currentState;
 
     private PlayerStateName nowState;
@@ -58,11 +65,13 @@ public partial class PlayerController : MonoBehaviour
         leftHandGrip = XRILeftHandInteraction.FindAction("Select");
         leftHandMove = XRILeftHandLocomotion.FindAction("Move");
 
-        rightHandGrip.performed += OnSelect;
-        rightHandGrip.canceled += OnSelect;
+        rightHandGrip.performed += OnRightSelect;
+        rightHandGrip.canceled += OnRightSelect;
 
         leftHandMove.performed += OnMove;
         leftHandMove.canceled += OnMove;
+
+        moveSpeed = moveProvider.moveSpeed;
 
         ChangeState(new IdleState());  
     }
@@ -84,13 +93,17 @@ public partial class PlayerController : MonoBehaviour
     {
         currentState.FixedUpdateState(this);
 
+        Vector3 camEuler = headCameraPos.transform.eulerAngles;
+        Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
+        playerModel.transform.rotation = targetRotation;
+
         //xr device simulator용 이동 코드
 
-        Vector3 camPos = headCameraPos.transform.position;
-        playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
-        
-        Vector3 camEuler = headCameraPos.transform.eulerAngles;
-        playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
+        //Vector3 camPos = headCameraPos.transform.position;
+        //playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
+        //
+        //Vector3 camEuler = headCameraPos.transform.eulerAngles;
+        //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
 
     }
 }
