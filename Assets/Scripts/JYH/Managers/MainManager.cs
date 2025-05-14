@@ -156,7 +156,7 @@ public class MainManager : Manager
             }
             else
             {
-                stageThemeButtons[i].SetImage(null);    
+                stageThemeButtons[i].SetImage(null, false);
             }
         }
     }

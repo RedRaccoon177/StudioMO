@@ -346,6 +346,78 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &214170941
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      propertyPath: m_Name
+      value: Shookshook_spawn
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4421483ed146a24459830a8388e43c87,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1858903188}
+  m_SourcePrefab: {fileID: 100100000, guid: 4421483ed146a24459830a8388e43c87, type: 3}
 --- !u!1 &392669627
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4823828c583406c4287add3c5311d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deviceSimulator: {fileID: 0}
+  xrOrigin: {fileID: 0}
+  deviceSimulatorEnabled: 1
+  language: 0
   testPhoton: {fileID: 392669630}
 --- !u!4 &392669629
 Transform:
@@ -624,6 +700,33 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &1858903185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4421483ed146a24459830a8388e43c87,
+    type: 3}
+  m_PrefabInstance: {fileID: 214170941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1858903188
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858903185}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: acec8defc26147245baad3126c2729b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1920944745
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,3 +842,4 @@ SceneRoots:
   - {fileID: 1354394225}
   - {fileID: 1920944749}
   - {fileID: 74914746}
+  - {fileID: 214170941}
