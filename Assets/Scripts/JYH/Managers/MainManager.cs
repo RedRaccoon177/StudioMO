@@ -152,14 +152,7 @@ public class MainManager : Manager
         fixedPosition = StartPosition;
         descriptionText.DOFade(1f, openingTime);
         DOVirtual.DelayedCall(openingTime, () => { startKeyDown = true; });
-        primaryAction += () =>
-        {
-            Debug.Log("Primary Action");
-        };
-        secondaryAction += () =>
-        {
-            Debug.Log("Secondary Action");
-        };
+        primaryAction += () => ShowEntry();
     }
 
     //초기화면 진입
