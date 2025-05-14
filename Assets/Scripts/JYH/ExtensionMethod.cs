@@ -47,6 +47,26 @@ public static class ExtensionMethod
         }
     }
 
+    public static void SetImage(this Button button, Sprite sprite)
+    {
+        if (button != null && button.image != null)
+        {
+            button.image.sprite = sprite;
+        }
+    }
+
+    public static void SetImage(this Button button, Sprite sprite, bool interactable)
+    {
+        if (button != null)
+        {
+            if (button.image != null)
+            {
+                button.image.sprite = sprite;
+            }
+            button.interactable = interactable;
+        }
+    }
+
     public static void SetActive(this Button button, bool value)
     {
         if (button != null)

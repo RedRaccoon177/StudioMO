@@ -35,13 +35,16 @@ public class MainManager : Manager
     private Button exitButton;
 
     [Header("스테이지 모드")]
+    private static readonly int StageSelectLength = 4;
     [SerializeField]
-    private Button[] stageSelectButtons = new Button[StageSelectButtonsLength];
-    private static readonly int StageSelectButtonsLength = 4;
+    private Button[] stageThemeButtons = new Button[StageSelectLength];
+    [SerializeField]
+    private Sprite[] stageThemeSprites = new Sprite[0];
     [SerializeField]
     private Button stageLeftArrowButton;
     [SerializeField]
     private Button stageRightArrowButton;
+    private byte stageCurrentFloor = 0;
 
 #if UNITY_EDITOR
     protected override void OnValidate()
@@ -49,7 +52,9 @@ public class MainManager : Manager
         base.OnValidate();
         if(this == instance)
         {
-            ExtensionMethod.Sort(ref stageSelectButtons, StageSelectButtonsLength);
+            ExtensionMethod.Sort(ref stageThemeButtons, StageSelectLength);
+            ExtensionMethod.Sort(ref stageThemeSprites);
+            SetThemeImage();
         }
     }
 #endif
@@ -87,7 +92,7 @@ public class MainManager : Manager
         stageButton.SetListener(() =>
         {
             SetActiveEntryButtons(false);
-            stageSelectButtons.SetActive(true);
+            stageThemeButtons.SetActive(true);
             stageLeftArrowButton.SetActive(true);
             stageRightArrowButton.SetActive(true);
         });
@@ -111,6 +116,22 @@ public class MainManager : Manager
             Application.Quit();
 #endif
         });
+        stageLeftArrowButton.SetListener(() =>
+        {
+            if(stageCurrentFloor > 0)
+            {
+                stageCurrentFloor--;
+                SetThemeImage();
+            }
+        });
+        stageRightArrowButton.SetListener(() =>
+        {
+            if (stageCurrentFloor < stageThemeSprites.Length - StageSelectLength)
+            {
+                stageCurrentFloor++;
+                SetThemeImage();
+            }
+        });
         fixedPosition = StartPosition;
         descriptionText.DOFade(1f, openingTime);
         DOVirtual.DelayedCall(openingTime, () => { startKeyDown = true; });
@@ -123,5 +144,20 @@ public class MainManager : Manager
         storeButton.SetActive(value);
         optionButton.SetActive(value);
         exitButton.SetActive(value);
+    }
+
+    private void SetThemeImage()
+    {
+        for (int i = 0; i < stageThemeButtons.Length; i++)
+        {
+            if (stageThemeSprites.Length > i + stageCurrentFloor)
+            {
+                stageThemeButtons[i].SetImage(stageThemeSprites[i + stageCurrentFloor], false);
+            }
+            else
+            {
+                stageThemeButtons[i].SetImage(null);    
+            }
+        }
     }
 }
