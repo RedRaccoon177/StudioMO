@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 using TMPro;
 using DG.Tweening;
 
@@ -62,7 +60,6 @@ public class MainManager : Manager
         {
             ExtensionMethod.Sort(ref stageThemeButtons, StageSelectLength);
             ExtensionMethod.Sort(ref stageThemeSprites);
-
         }
     }
 #endif
@@ -83,7 +80,6 @@ public class MainManager : Manager
                   }
               });
         }
-
     }
 
     protected override void ChangeText(Translation.Language language)
@@ -156,6 +152,14 @@ public class MainManager : Manager
         fixedPosition = StartPosition;
         descriptionText.DOFade(1f, openingTime);
         DOVirtual.DelayedCall(openingTime, () => { startKeyDown = true; });
+        primaryAction += () =>
+        {
+            Debug.Log("Primary Action");
+        };
+        secondaryAction += () =>
+        {
+            Debug.Log("Secondary Action");
+        };
     }
 
     //초기화면 진입

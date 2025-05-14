@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Simulation;
 using Photon.Pun;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// 각각의 씬 안에 유일한 객체로 존재하며 씬 안에 포함되는 모든 객체들을 하향식으로 통제함
@@ -24,6 +25,13 @@ public abstract class Manager : MonoBehaviourPunCallbacks
     private static readonly string LanguageTag = "Language";
 
     private Stack<Action> actionStack = new Stack<Action>();
+
+    [SerializeField]
+    private InputActionReference primaryInputAction;    //XR 디바이스 시뮬레이터의 Primary Input을 사용하기 위한 변수
+    protected event Action primaryAction;               //Primary Input이 눌렸을 때 발생하는 이벤트
+    [SerializeField]
+    private InputActionReference secondaryInputAction;  //XR 디바이스 시뮬레이터의 Secondary Input을 사용하기 위한 변수
+    protected event Action secondaryAction;             //Secondary Input이 눌렸을 때 발생하는 이벤트
 
 #if UNITY_EDITOR
 
@@ -83,6 +91,16 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void OnPrimaryInputPressed(InputAction.CallbackContext callbackContext)
+    {
+        primaryAction?.Invoke();
+    }
+
+    private void OnSecondaryInputPressed(InputAction.CallbackContext callbackContext)
+    {
+        secondaryAction?.Invoke();
+    }
+
     protected virtual void Update()
     {
         if (fixedPosition != null)
@@ -94,6 +112,20 @@ public abstract class Manager : MonoBehaviourPunCallbacks
     protected virtual void ChangeText(Translation.Language language)
     {
         Translation.Set(language);
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        primaryInputAction.Set(true, OnPrimaryInputPressed);
+        secondaryInputAction.Set(true, OnSecondaryInputPressed);
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        primaryInputAction.Set(false, OnPrimaryInputPressed);
+        secondaryInputAction.Set(false, OnSecondaryInputPressed);
     }
 
     protected void PlayAction(Action action)
