@@ -41,10 +41,10 @@ public partial class PlayerController : MonoBehaviour
         set { moveInput = value; }
     }
 
-    public bool ActivateOn
+    public bool RightSelectOn
     {
-        get { return activateOn; }
-        set { activateOn = value; }
+        get { return rightSelectOn; }
+        set { rightSelectOn = value; }
     }
 
     public PlayerStateName NowState

@@ -18,7 +18,7 @@ public class IdleState : IPlayerState
             return;
         }
 
-        if(player.ActivateOn == true)
+        if(player.RightSelectOn == true)
         {
             player.ChangeState(new InteractState());
             return;

@@ -36,13 +36,15 @@ public partial class PlayerController : MonoBehaviour
     private InputActionMap XRILeftHandInteraction;
 
     private InputAction rightHandGrip;
+
     private InputAction leftHandMove;
     private InputAction leftHandGrip;
     private InputAction leftHandTrigger;
 
-    public DynamicMoveProvider moveProvider;
+    [SerializeField]
+    private DynamicMoveProvider moveProvider;
 
-    public float moveSpeed;
+    private float moveSpeed;
 
     private Vector2 moveInput;
 
@@ -67,6 +69,9 @@ public partial class PlayerController : MonoBehaviour
 
         rightHandGrip.performed += OnRightSelect;
         rightHandGrip.canceled += OnRightSelect;
+
+        leftHandGrip.performed += OnLeftSelect;
+        leftHandGrip.canceled += OnLeftSelect;
 
         leftHandMove.performed += OnMove;
         leftHandMove.canceled += OnMove;
@@ -93,6 +98,21 @@ public partial class PlayerController : MonoBehaviour
     {
         currentState.FixedUpdateState(this);
 
+        if(moveOn == true)
+        {
+            Vector3 camForward = headCameraPos.transform.forward;
+            Vector3 camRight = headCameraPos.transform.right;
+
+            camForward.y = 0;
+            camRight.y = 0;
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 moveDirection = camForward * moveInput.y + camRight * moveInput.x;
+
+            playerModel.transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+        }
+
         Vector3 camEuler = headCameraPos.transform.eulerAngles;
         Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
         playerModel.transform.rotation = targetRotation;
@@ -104,6 +124,5 @@ public partial class PlayerController : MonoBehaviour
         //
         //Vector3 camEuler = headCameraPos.transform.eulerAngles;
         //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
-
     }
 }

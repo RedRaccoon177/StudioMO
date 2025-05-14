@@ -1685,7 +1685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &910078604
 Transform:
   m_ObjectHideFlags: 0
@@ -1801,7 +1801,7 @@ PrefabInstance:
     - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -1995,7 +1995,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+        type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+        type: 3}
+      propertyPath: m_Center.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6397299583031462443, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
@@ -3290,7 +3305,6 @@ MonoBehaviour:
   playerModel: {fileID: 1791537648}
   playerHitBox: {fileID: 1845109217}
   moveProvider: {fileID: 817629222}
-  moveSpeed: 0
 --- !u!1001 &1603376879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4053,10 +4067,15 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5423118007937933544, guid: 63e343acf5b93f443b7e8251a661ddad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5533813161564931879, guid: 63e343acf5b93f443b7e8251a661ddad,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6787088138242723756, guid: 63e343acf5b93f443b7e8251a661ddad,
         type: 3}
@@ -4097,8 +4116,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.66
+  m_Height: 2.15
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1935985107 stripped
@@ -4179,7 +4198,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
