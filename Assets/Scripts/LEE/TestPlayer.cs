@@ -15,8 +15,8 @@ public class TestPlayer : MonoBehaviour
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal"); // A(-1) / D(+1)
-        float v = Input.GetAxisRaw("Vertical");   // W(+1) / S(-1)
+        float h = Input.GetAxisRaw("Horizontal"); //À§ ¾Æ·¡
+        float v = Input.GetAxisRaw("Vertical");   //ÁÂ ¿ì
 
         inputDirection = new Vector3(h, 0f, v).normalized;
     }
