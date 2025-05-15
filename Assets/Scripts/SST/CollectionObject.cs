@@ -11,6 +11,13 @@ public class CollectionObject : MonoBehaviour
     [SerializeField] private Canvas sliderCanvas;
     [SerializeField] private Slider slider;
 
+    public Slider _Slider
+    {
+        get { return slider; }
+        set { slider = value; }
+    }
+
+
     private float collectTime = 2.5f;                      // 채집 완료까지 걸리는 시간
     private float currentTime;                      // 
     private bool isCollecting = false;              // 채집 중인지 아닌지 체크
