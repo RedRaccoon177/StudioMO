@@ -1,31 +1,13 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using TMPro;
-using System.Collections.Generic;
 
 public static class ExtensionMethod
 {
-    public static void SetActive(this TMP_Text tmpText, bool value)
-    {
-        if (tmpText != null)
-        {
-            tmpText.gameObject.SetActive(value);
-        }
-    }
-
-    public static void SetActive(this TMP_Text tmpText, bool value, float alpha)
-    {
-        if (tmpText != null)
-        {
-            Color color = tmpText.color;
-            color.a = alpha;
-            tmpText.color = color;
-            tmpText.gameObject.SetActive(value);
-        }
-    }
-
-
     public static void SetListener(this Button button, UnityAction action)
     {
         if (button != null)
@@ -84,7 +66,7 @@ public static class ExtensionMethod
         }
     }
 
-    public static void Sort<T>(ref T[] array) where T : Object
+    public static void Sort<T>(ref T[] array) where T : UnityEngine.Object
     {
         List<T> list = new List<T>();
         int empty = 0;
@@ -115,7 +97,7 @@ public static class ExtensionMethod
         array = list.ToArray();
     }
 
-    public static void Sort<T>(ref T[] array, int length) where T : Object
+    public static void Sort<T>(ref T[] array, int length) where T : UnityEngine.Object
     {
         Sort(ref array);
         T[] templates = new T[length];
@@ -124,5 +106,22 @@ public static class ExtensionMethod
             templates[i] = array[i];
         }
         array = templates;
+    }
+
+    public static void Set(this InputActionReference inputActionReference, bool value, Action<InputAction.CallbackContext> action)
+    {
+        if (inputActionReference != null && inputActionReference.action != null)
+        {
+            if (value == true)
+            {
+                inputActionReference.action.performed += action;
+                inputActionReference.action.Enable();
+            }
+            else
+            {
+                inputActionReference.action.performed -= action;
+                inputActionReference.action.Disable();
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 /// </summary>
 public class NormalBullet : MonoBehaviour, IBullet
 {
-    #region 탄막(비인식)
+    #region 탄막(비인식) 필드
     // 이 탄막을 관리하는 오브젝트 풀
     IObjectPool<NormalBullet> _normalBulletPool;
 
