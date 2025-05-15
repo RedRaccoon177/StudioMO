@@ -1,3 +1,4 @@
+using Photon.Pun.Demo.PunBasics;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,11 +15,17 @@ public class CollectionSpawner : MonoBehaviour
     [SerializeField] private float overlapRadius = 0.6f;        // 생성 겹침 감지 범위
     [SerializeField] private int maxSpawnAttempts = 20;         // 겹치지 않게 생성하는 시도 횟수
 
+    // ▼ 현재 맵에 존재중인 채집물 리스트 ( 채집물 갯수 확인 위함 )
+    private List<GameObject> activeCollections = new List<GameObject>();
+
+    private float spawnInterval = 10f;          // 채집물 자동 생성 주기
+    private int maxCountCollection = 20;        // 채집물 최대 생성 수
+
     private void Start()
     {
-        //spawnArea.enabled = false;
-        poolManager.Initialize();           // 오브젝트 풀 초기화
-        SpawnCollectionInitialize();        // 처음 1회, 채집물 생성
+        poolManager.Initialize();               // 오브젝트 풀 초기화
+        SpawnCollectionInitialize();            // 처음 1회, 채집물 생성
+        StartCoroutine(AutoSpawnRoutine());     // 일정 주기마다 채집물 랜덤 생성 
     }
 
     // 처음에 채집물들을 각 종류별로 지정된 갯수만큼 생성
@@ -113,5 +120,85 @@ public class CollectionSpawner : MonoBehaviour
 
     }
 
+    // 일정주기마다 랜덤으로 채집물을 생성하는 코루틴
+    IEnumerator AutoSpawnRoutine()
+    {
+        yield return new WaitForSeconds(spawnInterval);
+
+        // 만약 활성화 되어있는 채집물 수가 최대 제한 수 보다 적다면
+        if(activeCollections.Count < maxCountCollection)
+        {
+            // 랜덤으로 채집물 종류를 골라서, 랜덤 위치에 생성한다.
+            SpawnOneRandomColleciton();            
+        }
+    }
     
+    //  랜덤으로 채집물 종류 중 하나 골라서, 랜덤 위치에 생성하는 함수
+    public void SpawnOneRandomColleciton()
+    {
+        var dataList = poolManager.GetCollectionDataList();
+
+        if(dataList.Count == 0)
+        {
+            return;
+        }
+
+        var data = dataList[Random.Range(0, dataList.Count)];
+
+        Vector3 pos = Vector3.zero;
+        bool placed = false;
+
+        for (int i = 0; i < maxSpawnAttempts; i++)
+        {
+            pos = GetRandomPositionInBox();
+
+            if(data.collectionType == CollectionType.Special)
+            {
+                pos.y += 0.3f;
+            }
+
+            // OverlapSphere로 채집물끼리 겹치는지를 체크한다.
+            Collider[] hits = Physics.OverlapSphere(pos, overlapRadius, LayerMask.GetMask("Collection"));
+            
+            // 겹치는게 없을 때 for문 빠져나와서 생성
+            if(hits.Length == 0)
+            {
+                placed = true;
+                break;
+            }            
+        }
+
+        if (!placed)
+        {
+            Debug.LogError("채집물끼리 겹치지 않는 공간을 찾지 못했습니다.");
+            return;
+        }
+
+        GameObject obj = poolManager.GetObject(data.collectionName);
+
+        if(obj == null)
+        {
+            obj = Instantiate(data.collectionPrefab);
+            obj.SetActive(false);
+            poolManager.ReturnObject(data.collectionName, obj);
+            obj = poolManager.GetObject(data.collectionName);            
+        }
+
+        obj.transform.position = pos;       // 위치 설정
+        obj.transform.SetParent(poolManager.transform, true);       // 부모 설정
+
+        var co = obj.GetComponent<CollectionObject>();
+        co.InitializeCollectionObject(data, poolManager);
+
+        activeCollections.Add(obj);
+    }
+
+    // 채집 완료시 리스트에서 제거
+    public void RemoveFromActiveList(GameObject obj)
+    {
+        if (activeCollections.Contains(obj))
+        {
+            activeCollections.Remove(obj);
+        }
+    }
 }

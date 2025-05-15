@@ -71,6 +71,9 @@ public class CollectionObject : MonoBehaviour
         // 점수 증가 등 처리 필요
         Debug.Log($"{collectionData.collectionName} 채집 완료!");
 
-        pools.ReturnObject(collectionData.collectionName, this.gameObject);
+        // ▼ 풀에 반환
+        pools.ReturnObject(collectionData.collectionName, this.gameObject); 
+        // ▼ 활성화된 채집 리스트에서 제거
+        FindObjectOfType<CollectionSpawner>().RemoveFromActiveList(this.gameObject);
     }
 }
