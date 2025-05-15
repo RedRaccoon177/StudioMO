@@ -3400,7 +3400,7 @@ MonoBehaviour:
   actionManager: {fileID: 1787216099}
   headCameraPos: {fileID: 856352355}
   playerModel: {fileID: 1791537648}
-  playerHitBox: {fileID: 0}
+  playerHitBox: {fileID: 1586410888}
   playerPickaxe: {fileID: 910078606}
   moveProvider: {fileID: 817629222}
   groggyStateTime: 30
