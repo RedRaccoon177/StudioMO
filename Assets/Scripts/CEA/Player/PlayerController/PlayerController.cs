@@ -141,7 +141,7 @@ public partial class PlayerController : MonoBehaviour
         //xr device simulator용 이동 코드
 
         //Vector3 camPos = headCameraPos.transform.position;
-        //playerModel.transform.position = new Vector3(camPos.x, camPos.y - 0.5f, camPos.z);
+        //playerModel.transform.position = new Vector3(camPos.x, camPos.y, camPos.z);
         //
         //Vector3 camEuler = headCameraPos.transform.eulerAngles;
         //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);

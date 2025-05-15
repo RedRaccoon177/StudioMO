@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2769449245168579003}
   - component: {fileID: 4833442742244991096}
   - component: {fileID: 2491458655153240613}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 8183621852538280290}
   - component: {fileID: 561497203247752773}
   - component: {fileID: 6666346577086643231}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6425114588125764499}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 7924937466625902722}
   - component: {fileID: 3334737417222662843}
   - component: {fileID: 8163069613987198435}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 2120827939902064635}
   - component: {fileID: 1635455881794351010}
   - component: {fileID: 5234478954511791568}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1588722853532629707}
   - component: {fileID: 2109012874137143136}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
