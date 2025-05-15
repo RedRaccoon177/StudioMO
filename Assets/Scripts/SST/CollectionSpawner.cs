@@ -112,4 +112,6 @@ public class CollectionSpawner : MonoBehaviour
         return new Vector3(x, center.y, z); // 공중 위치로 fallback
 
     }
+
+    
 }
