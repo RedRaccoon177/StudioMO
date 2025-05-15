@@ -38,9 +38,13 @@ public class NormalBullet : MonoBehaviour, IBullet
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            player.HitBullet();
-            _normalBulletPool?.Release(this);
+            PlayerController player = other.GetComponentInParent<PlayerController>();
+
+            if (player.isGroggyAndinvincibleState == false)
+            {
+                player.HitBullet();
+                _normalBulletPool?.Release(this);
+            }
         }
         else if (other.CompareTag("Structures"))
         {
