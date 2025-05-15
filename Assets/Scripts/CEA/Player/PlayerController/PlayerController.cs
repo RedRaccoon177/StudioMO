@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 //플레이어 메인 컨트롤러
 public partial class PlayerController : MonoBehaviour
@@ -29,15 +30,27 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField]
     private Collider playerHitBox;
 
+    [Space (10)][SerializeField]
+    private PickaxeController playerPickaxe;
+
+    [Space(10)][SerializeField]
+    private DynamicMoveProvider moveProvider;
+
     private InputActionAsset playerInput;
     private InputActionMap XRIRightHandInteration;
     private InputActionMap XRILeftHandLocomotion;
     private InputActionMap XRILeftHandInteraction;
 
     private InputAction rightHandGrip;
+
     private InputAction leftHandMove;
     private InputAction leftHandGrip;
     private InputAction leftHandTrigger;
+
+
+    private float moveSpeed;
+
+    private Vector2 moveInput;
 
     private IPlayerState currentState;
 
@@ -72,11 +85,17 @@ public partial class PlayerController : MonoBehaviour
         leftHandGrip = XRILeftHandInteraction.FindAction("Select");
         leftHandMove = XRILeftHandLocomotion.FindAction("Move");
 
-        rightHandGrip.performed += OnSelect;
-        rightHandGrip.canceled += OnSelect;
+        rightHandGrip.performed += OnRightSelect;
+        rightHandGrip.canceled += OnRightSelect;
+
+        leftHandGrip.performed += OnLeftSelect;
+        leftHandGrip.canceled += OnLeftSelect;
 
         leftHandMove.performed += OnMove;
         leftHandMove.canceled += OnMove;
+
+        moveSpeed = moveProvider.moveSpeed;
+
 
         //TODO: new IdleState()같이 new들 GC생각해서 추후 다 재사용으로 전환하기
         ChangeState(new IdleState());  
@@ -105,6 +124,25 @@ public partial class PlayerController : MonoBehaviour
     {
         currentState.FixedUpdateState(this);
 
+        if(moveOn == true)
+        {
+            Vector3 camForward = headCameraPos.transform.forward;
+            Vector3 camRight = headCameraPos.transform.right;
+
+            camForward.y = 0;
+            camRight.y = 0;
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 moveDirection = camForward * moveInput.y + camRight * moveInput.x;
+
+            playerModel.transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+        }
+
+        Vector3 camEuler = headCameraPos.transform.eulerAngles;
+        Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
+        playerModel.transform.rotation = targetRotation;
+
         //xr device simulator용 이동 코드
 
         //Vector3 camPos = headCameraPos.transform.position;
@@ -112,7 +150,6 @@ public partial class PlayerController : MonoBehaviour
         //
         //Vector3 camEuler = headCameraPos.transform.eulerAngles;
         //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
-
     }
 
     /// <summary>

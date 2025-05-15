@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public partial class PlayerController : MonoBehaviour
 {
     private bool moveOn;
-    private bool activateOn;
+    private bool rightSelectOn;
+    private bool leftSelectOn;
 
     //왼쪽 컨트롤러 조이스틱 (이동)
     void OnMove(InputAction.CallbackContext context)
@@ -15,6 +16,7 @@ public partial class PlayerController : MonoBehaviour
         if(context.performed)
         {
             moveOn = true;
+            moveInput = context.ReadValue<Vector2>();
         }
         
         else if(context.canceled)
@@ -23,18 +25,32 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
-    //오른쪽 컨트롤러 트리거 
-    void OnSelect(InputAction.CallbackContext context)
+    //오른쪽 컨트롤러 그립 버튼 (select) 
+    void OnRightSelect(InputAction.CallbackContext context)
     {
         if(context.performed)
         {
-            activateOn = true;
+            rightSelectOn = true;
         }
 
         else if (context.canceled)
         {
-            activateOn = false;
+            rightSelectOn = false;
             pickaxeHitbox.gameObject.SetActive(false);
+        }
+    }
+
+    //왼쪽 컨트롤러 그립 버튼 (select)
+    void OnLeftSelect(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            leftSelectOn = true;
+        }
+
+        else if (context.canceled)
+        {
+            leftSelectOn= false;
         }
     }
 }

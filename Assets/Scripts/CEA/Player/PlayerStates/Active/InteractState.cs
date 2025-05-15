@@ -12,7 +12,7 @@ public class InteractState : IPlayerState
 
     public void UpdateState(PlayerController player)
     {
-        if(player.ActivateOn == false)
+        if(player.RightSelectOn == false)
         {
             player.ChangeState(new IdleState());
         }

@@ -4,15 +4,78 @@ using UnityEngine;
 
 public class CollectionPool : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // ▼ 스크립터블 오브젝트 담을 리스트
+    [SerializeField] List<CollectionData> collectionDatas;
+
+    // ▼ 각 채집물 이름별로 큐를 만들어 오브젝트를 딕셔너리에 저장
+    Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
+
+    public void Initialize()
     {
-        
+        // ▼ 이름 중복 카운트용 딕셔너리
+        Dictionary<string, int> nameCount = new Dictionary<string, int>();
+
+        Queue<GameObject> collectionDataQueue;
+
+        foreach (var collectionData in collectionDatas)
+        {
+            string baseName = collectionData.collectionName;
+
+            // 이름 중복 검사 : 이름이 처음 나온거면 값 0으로 등록
+            if (!nameCount.ContainsKey(baseName))
+            {
+                nameCount[baseName] = 0;
+            }
+            else
+            {
+                nameCount[baseName]++;  // 처음 아니라면 숫자 증가
+            }
+
+            string uniqueName = baseName;
+
+            if (nameCount[baseName] > 0)
+            {
+                uniqueName = baseName + "_" + nameCount[baseName];
+            }
+
+            collectionData.collectionName = uniqueName;
+
+            collectionDataQueue = new Queue<GameObject>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var obj = Instantiate(collectionData.collectionPrefab);
+                obj.SetActive(false);
+                obj.transform.parent = this.transform;
+                collectionDataQueue.Enqueue(obj);
+            }
+
+            pools.Add(uniqueName, collectionDataQueue);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    // 풀에서 오브젝트 꺼내는 함수
+    public GameObject GetObject(string collectionName)
     {
-        
+        // 풀에 받아온 오브젝트와 같은 이름이 있으면서, 해당 오브젝트가 있다면
+        if (pools.ContainsKey(collectionName) && pools[collectionName].Count > 0)
+        {
+            GameObject obj = pools[collectionName].Dequeue();  // 풀에서 해당 오브젝트 빼와서 담고
+            obj.SetActive(true);        // 켜주고
+            return obj;                 // 그 오브젝트 반환
+        }
+        return null;
+    }
+    
+    // 풀에다가 다시 오브젝트를 반환해서 넣어주는 함수
+    public void ReturnObject(string collectionName, GameObject obj)
+    {
+        obj.SetActive(false);
+        pools[collectionName].Enqueue(obj);
+    }
+
+    public List<CollectionData> GetCollectionDataList()
+    {
+        return collectionDatas;
     }
 }

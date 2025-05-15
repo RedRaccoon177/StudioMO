@@ -12,9 +12,8 @@ public static class Translation
     {
         Start,
         Stage,
-        Match,
-        Mode,
-        Shop,
+        PVP,
+        Store,
         Option,
         Exit,
         End

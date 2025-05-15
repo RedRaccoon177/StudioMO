@@ -35,10 +35,16 @@ public partial class PlayerController : MonoBehaviour
         set { moveOn = value; }
     }
 
-    public bool ActivateOn
+    public Vector2 MoveInput
     {
-        get { return activateOn; }
-        set { activateOn = value; }
+        get { return moveInput; }
+        set { moveInput = value; }
+    }
+
+    public bool RightSelectOn
+    {
+        get { return rightSelectOn; }
+        set { rightSelectOn = value; }
     }
 
     public PlayerStateName NowState
