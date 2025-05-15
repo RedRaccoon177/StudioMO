@@ -3919,11 +3919,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickaxeHitbox: {fileID: 1807488839}
   actionManager: {fileID: 2022762074}
-  headCameraPos: {fileID: 1302046767}
+  headCameraPos: {fileID: 1302046771}
   playerModel: {fileID: 331209521}
   playerHitBox: {fileID: 331209523}
+  playerPickaxe: {fileID: 1807488840}
+  moveProvider: {fileID: 388098312}
   groggyStateTime: 30
   invincibleStateTime: 3
+  knockbackStateTime: 1
+  solidStateTime: 1
 --- !u!4 &1704165017
 Transform:
   m_ObjectHideFlags: 0
@@ -4073,6 +4077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807488838}
   - component: {fileID: 1807488839}
+  - component: {fileID: 1807488840}
   m_Layer: 0
   m_Name: Piackaxe Hitbox
   m_TagString: Untagged
@@ -4116,6 +4121,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.36293936, y: 0.46458364, z: 0.8441656}
   m_Center: {x: -0.030000001, y: 0.4014635, z: 0.02240634}
+--- !u!114 &1807488840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807488837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db61bc63d58409f48b75fcd26caf4960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860902482
 GameObject:
   m_ObjectHideFlags: 0
