@@ -72,6 +72,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        //TODO: 추후 네트워크 접목 시킬 때 수정해야함.
         playerInput = actionManager.actionAssets[0];
     }
 
@@ -112,12 +113,6 @@ public partial class PlayerController : MonoBehaviour
     {
         currentState.UpdateState(this);
         Debug.Log(nowState);
-
-        //TODO: 테스트용 상태 전환
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            HitBullet();
-        }
     }
 
     private void FixedUpdate()
@@ -155,7 +150,7 @@ public partial class PlayerController : MonoBehaviour
     /// <summary>
     /// 탄막 접촉 시 플레이어 행동불능 상태 함수
     /// </summary>
-    void HitBullet()
+    public void HitBullet()
     {
         ChangeState(new GroggyState());
     }

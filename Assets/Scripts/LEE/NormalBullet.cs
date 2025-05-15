@@ -36,7 +36,13 @@ public class NormalBullet : MonoBehaviour, IBullet
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Structures"))
+        if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponentInParent<PlayerController>();
+            player.HitBullet();
+            _normalBulletPool?.Release(this);
+        }
+        else if (other.CompareTag("Structures"))
         {
             _normalBulletPool?.Release(this);
         }

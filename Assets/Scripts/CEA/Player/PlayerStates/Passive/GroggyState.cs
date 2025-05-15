@@ -10,6 +10,8 @@ public class GroggyState : IPlayerState
 
     public void EnterState(PlayerController player)
     {
+        Debug.Log("그로기 실행됨");
+
         _player = player;
 
         //TODO
