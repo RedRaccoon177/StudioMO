@@ -52,13 +52,14 @@ public partial class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
 
-    private IPlayerState currentState;
+    public IPlayerState currentState;
 
     private PlayerStateName nowState;
 
     #region 플레이어에게 필요한 필드들
     [Header("행동불능 상태 시간")]
     public float groggyStateTime = 30f;
+    public bool isGroggyAndinvincibleState = false;
 
     [Header("무적 상태 시간")]
     public float invincibleStateTime = 3f;

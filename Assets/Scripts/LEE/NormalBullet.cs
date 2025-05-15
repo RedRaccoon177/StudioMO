@@ -38,7 +38,7 @@ public class NormalBullet : MonoBehaviour, IBullet
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
+            PlayerController player = other.GetComponent<PlayerController>();
             player.HitBullet();
             _normalBulletPool?.Release(this);
         }
