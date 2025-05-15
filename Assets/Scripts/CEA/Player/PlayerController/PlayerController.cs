@@ -30,6 +30,12 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField]
     private Collider playerHitBox;
 
+    [Space (10)][SerializeField]
+    private PickaxeController playerPickaxe;
+
+    [Space(10)][SerializeField]
+    private DynamicMoveProvider moveProvider;
+
     private InputActionAsset playerInput;
     private InputActionMap XRIRightHandInteration;
     private InputActionMap XRILeftHandLocomotion;
@@ -41,8 +47,6 @@ public partial class PlayerController : MonoBehaviour
     private InputAction leftHandGrip;
     private InputAction leftHandTrigger;
 
-    [SerializeField]
-    private DynamicMoveProvider moveProvider;
 
     private float moveSpeed;
 

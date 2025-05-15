@@ -26,11 +26,12 @@ public class MoveState : IPlayerState
 
     public void FixedUpdateState(PlayerController player)
     {
-        MovePlayerModelPosition(player);
+        //MovePlayerModelPosition(player);
     } 
 
     private void MovePlayerModelPosition(PlayerController player)
     {
+        #region move
         //Vector3 camForward = player.HeadCameraPos.transform.forward;
         //Vector3 camRight = player.HeadCameraPos.transform.right;
 
@@ -46,6 +47,7 @@ public class MoveState : IPlayerState
         //Vector3 camEuler = player.HeadCameraPos.transform.eulerAngles;
         //Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
         //player.PlayerModel.transform.rotation = targetRotation; 
+        #endregion
     }
 
     public void CheckNowState(PlayerController player)

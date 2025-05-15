@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 275927199}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -615,8 +615,8 @@ Transform:
   m_GameObject: {fileID: 275927198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 0.5, z: 3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.33, y: 0.79, z: 5.86}
+  m_LocalScale: {x: 1.4508, y: 1.4508, z: 1.4508}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1679,13 +1679,14 @@ GameObject:
   m_Component:
   - component: {fileID: 910078604}
   - component: {fileID: 910078605}
+  - component: {fileID: 910078606}
   m_Layer: 0
   m_Name: Piackaxe Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &910078604
 Transform:
   m_ObjectHideFlags: 0
@@ -1716,12 +1717,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.36293936, y: 0.46458364, z: 0.8441656}
   m_Center: {x: -0.030000001, y: 0.4014635, z: 0.02240634}
+--- !u!114 &910078606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910078603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db61bc63d58409f48b75fcd26caf4960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1132540533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1814,7 @@ PrefabInstance:
     - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_UseGravity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -3265,7 +3278,7 @@ GameObject:
   - component: {fileID: 1586410887}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3301,9 +3314,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickaxeHitbox: {fileID: 910078605}
   actionManager: {fileID: 1787216099}
-  headCameraPos: {fileID: 856352351}
+  headCameraPos: {fileID: 856352355}
   playerModel: {fileID: 1791537648}
   playerHitBox: {fileID: 1845109217}
+  playerPickaxe: {fileID: 910078606}
   moveProvider: {fileID: 817629222}
 --- !u!1001 &1603376879
 PrefabInstance:
@@ -4082,13 +4096,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Model
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6787088138242723756, guid: 63e343acf5b93f443b7e8251a661ddad,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5533813161564931879, guid: 63e343acf5b93f443b7e8251a661ddad, type: 3}
+    - {fileID: 4114029851146133447, guid: 63e343acf5b93f443b7e8251a661ddad, type: 3}
+    - {fileID: 5423118007937933544, guid: 63e343acf5b93f443b7e8251a661ddad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6787088138242723756, guid: 63e343acf5b93f443b7e8251a661ddad,
         type: 3}
-      insertIndex: 4
+      insertIndex: -1
       addedObject: {fileID: 1845109217}
   m_SourcePrefab: {fileID: 100100000, guid: 63e343acf5b93f443b7e8251a661ddad, type: 3}
 --- !u!4 &1845109212 stripped
