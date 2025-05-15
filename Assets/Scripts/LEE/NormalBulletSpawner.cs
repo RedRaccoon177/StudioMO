@@ -6,8 +6,9 @@ using UnityEngine.UIElements;
 /// 발사 간격, 방향, 스폰 위치 등을 관리하며,
 /// ObjectPoolingBullet 매니저를 통해 총알을 꺼내서 발사한다.
 /// </summary>
-public class BulletSpawner : MonoBehaviour
+public class NormalBulletSpawner : MonoBehaviour
 {
+    #region 탄막(비인식) 생성의 필드
     [Header("Bullet 풀 매니저")]
     public ObjectPoolingBullet bulletPooling;
 
@@ -35,7 +36,9 @@ public class BulletSpawner : MonoBehaviour
     [Header("탄막의 발사 시 각도 범위 지정")]
     public float plusAngle = 15f;
     public float minusAngle = -15f;
+    #endregion
 
+    #region Start, Update
     /// <summary>
     /// 초기 설정
     /// 발사 방향 계산 및 탄막 풀 생성
@@ -56,7 +59,9 @@ public class BulletSpawner : MonoBehaviour
     {
         CheckFireTimer();
     }
+    #endregion
 
+    #region 발사 관련 함수들
     /// <summary>
     /// 발사 간격(fireInterval)을 기반으로 탄막을 주기적으로 발사한다.
     /// GameManager 등 외부에서 수동 호출도 가능하게 public으로 설정
@@ -108,4 +113,5 @@ public class BulletSpawner : MonoBehaviour
         // 총알 이동 방향 초기화
         bullet.Initialize(fireDir.normalized);
     }
+    #endregion
 }

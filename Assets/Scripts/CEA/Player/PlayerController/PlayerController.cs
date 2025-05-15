@@ -50,6 +50,20 @@ public partial class PlayerController : MonoBehaviour
 
     private PlayerStateName nowState;
 
+    #region 플레이어에게 필요한 필드들
+    [Header("행동불능 상태 시간")]
+    public float groggyStateTime = 30f;
+
+    [Header("무적 상태 시간")]
+    public float invincibleStateTime = 3f;
+
+    [Header("넉백 상태 시간")]
+    public float knockbackStateTime = 1f;
+
+    [Header("넉백 면역 상태 시간")]
+    public float solidStateTime = 1f;
+    #endregion
+
     private void Awake()
     {
         playerInput = actionManager.actionAssets[0];
@@ -73,6 +87,8 @@ public partial class PlayerController : MonoBehaviour
 
         moveSpeed = moveProvider.moveSpeed;
 
+
+        //TODO: new IdleState()같이 new들 GC생각해서 추후 다 재사용으로 전환하기
         ChangeState(new IdleState());  
     }
 
@@ -87,6 +103,11 @@ public partial class PlayerController : MonoBehaviour
     {
         currentState.UpdateState(this);
         Debug.Log(nowState);
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            HitBullet();
+        }
     }
 
     private void FixedUpdate()
@@ -105,5 +126,13 @@ public partial class PlayerController : MonoBehaviour
         //Vector3 camEuler = headCameraPos.transform.eulerAngles;
         //playerModel.transform.rotation = Quaternion.Euler(0, camEuler.y, 0);
 
+    }
+
+    /// <summary>
+    /// 탄막 접촉 시 플레이어 행동불능 상태 함수
+    /// </summary>
+    void HitBullet()
+    {
+        ChangeState(new GroggyState());
     }
 }
