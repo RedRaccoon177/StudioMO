@@ -94,6 +94,7 @@ public partial class PlayerController : MonoBehaviour
         currentState.UpdateState(this);
         Debug.Log(nowState);
 
+        //TODO: 테스트용 상태 전환
         if (Input.GetKeyDown(KeyCode.Q))
         {
             HitBullet();
