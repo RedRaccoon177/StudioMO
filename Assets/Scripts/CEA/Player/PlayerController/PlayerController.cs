@@ -50,7 +50,11 @@ public partial class PlayerController : MonoBehaviour
     [Header("무적 상태 시간")]
     public float invincibleStateTime = 3f;
 
+    [Header("넉백 상태 시간")]
+    public float knockbackStateTime = 1f;
 
+    [Header("넉백 면역 상태 시간")]
+    public float solidStateTime = 1f;
     #endregion
 
     private void Awake()
