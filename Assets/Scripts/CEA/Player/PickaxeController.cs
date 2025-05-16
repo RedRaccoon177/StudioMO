@@ -29,6 +29,7 @@ public class PickaxeController : MonoBehaviour
                 if (item._Slider.value >= 100)
                 {
                     Debug.Log("채집 완료");
+                    item.CollectCompleted();    
                 }
             }
         }

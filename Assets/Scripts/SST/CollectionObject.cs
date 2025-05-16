@@ -11,6 +11,11 @@ public class CollectionObject : MonoBehaviour
     [SerializeField] private Canvas sliderCanvas;
     [SerializeField] private Slider slider;
 
+    public CollectionData testCollectionData; //테스트용 콜렉션데이터
+    public CollectionPool testPools; //테스트용 풀
+
+    public bool isTest = false; //테스트 모드 온오프
+
     public Slider _Slider
     {
         get { return slider; }
@@ -22,6 +27,16 @@ public class CollectionObject : MonoBehaviour
     private float currentTime;                      // 
     private bool isCollecting = false;              // 채집 중인지 아닌지 체크
     private Transform playerTransform;              // 플레이어와 거리 계산 위함
+
+
+    private void Awake() //테스트용 코드
+    {
+        if (isTest == true)
+        { 
+            InitializeCollectionObject(testCollectionData, testPools);
+        }
+    }
+
 
     // 채집물 데이터, 풀 값 받아오는 함수
     public void InitializeCollectionObject(CollectionData data, CollectionPool pool)
@@ -75,9 +90,30 @@ public class CollectionObject : MonoBehaviour
     {
         StopCollecting();
 
+        if (collectionData == null)
+        {
+            Debug.LogError("[CollectCompleted] collectionData가 null입니다!");
+            return;
+        }
+
+        if (pools == null)
+        {
+            Debug.Log("[CollectCompleted] pools가 null입니다!");
+        }
+
         // 점수 증가 등 처리 필요
         Debug.Log($"{collectionData.collectionName} 채집 완료!");
 
-        pools.ReturnObject(collectionData.collectionName, this.gameObject);
+        if(isTest == true)
+        {
+            Debug.Log($"Test : "+ collectionData.collectionName + " 채집 완료!");
+        }
+
+        else
+        {
+            Debug.Log($"{collectionData.collectionName} 채집 완료!");
+            pools.ReturnObject(collectionData.collectionName, this.gameObject);
+        }
+        
     }
 }

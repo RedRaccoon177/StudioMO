@@ -134,13 +134,12 @@ public partial class PlayerController : MonoBehaviour
             camRight.Normalize();
 
             Vector3 moveDirection = camForward * moveInput.y + camRight * moveInput.x;
-
-            playerModel.transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+            transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
         }
 
         Vector3 camEuler = headCameraPos.transform.eulerAngles;
-        Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
-        playerModel.transform.rotation = targetRotation;
+         Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
+         playerModel.transform.rotation = targetRotation;
 
         //xr device simulator용 이동 코드
 
