@@ -23,6 +23,8 @@ public class IdleState : IPlayerState
             player.ChangeState(new InteractState());
             return;
         }
+
+        
     }
 
     public void FixedUpdateState(PlayerController player)

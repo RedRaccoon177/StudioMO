@@ -20,8 +20,13 @@ public class SlowMotionState : IPlayerState
 
     }
 
-    public void CheckNowState(PlayerController player)
+    private void SlowMotion()
     {
 
+    }
+
+    public void CheckNowState(PlayerController player)
+    {
+        player.NowState = PlayerStateName.SlowMotion;
     }
 }
