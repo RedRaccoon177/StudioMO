@@ -1,4 +1,4 @@
-public static class Japanese
+﻿public static class Japanese
 {
     public static void Set(ref string[] letters)
     {
@@ -8,7 +8,7 @@ public static class Japanese
             switch ((Translation.Letter)i)
             {
                 case Translation.Letter.Start:
-                    letters[i] = "������";
+                    letters[i] = "しさく";
                     break;
                 case Translation.Letter.Stage:
                     letters[i] = "";
@@ -23,6 +23,18 @@ public static class Japanese
                     letters[i] = "";
                     break;
                 case Translation.Letter.Exit:
+                    letters[i] = "";
+                    break;
+                case Translation.Letter.Music:
+                    letters[i] = "";
+                    break;
+                case Translation.Letter.Story:
+                    letters[i] = "";
+                    break;
+                case Translation.Letter.DoYouWantToQuit:
+                    letters[i] = "ゲームを終わらせるんですか?";
+                    break;
+                case Translation.Letter.Select:
                     letters[i] = "";
                     break;
             }

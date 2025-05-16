@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 
 public class MainManager : Manager
 {
+    public static readonly string SceneName = "MainScene";
+
     [Header(nameof(MainManager))]
     [Header("오프닝")]
     [SerializeField]
@@ -34,13 +37,15 @@ public class MainManager : Manager
     private Button optionButton;
     [SerializeField]
     private Button exitButton;
+    [SerializeField]
+    private Image backgroundImage;
 
     [Header("이전 버튼"), SerializeField]
     private Button backButton;
 
     [Header("스테이지 모드")]
     [SerializeField]
-    private Button[] stageThemeButtons = new Button[StageSelectLength];
+    private Button[] stageThemeButtons = new Button[StageThemeLength];
     [SerializeField]
     private Sprite[] stageThemeSprites = new Sprite[0];
     [SerializeField]
@@ -48,9 +53,26 @@ public class MainManager : Manager
     [SerializeField]
     private Button stageRightArrowButton;
     private byte stageCurrentFloor = 0;
-    private static readonly int StageSelectLength = 4;
+    private static readonly int StageThemeLength = 4;
     private static readonly int StageMaxCount = 10;
     private static readonly string StageTag = "Stage";
+
+    [SerializeField]
+    private StageData[] stageDatas = new StageData[0];
+    [SerializeField]
+    private StageSelector[] stageSelectors = new StageSelector[StageMaxCount];
+    [SerializeField]
+    private TMP_Text stageStarCountText;
+    [SerializeField]
+    private StageSelectPanel stageSelectPanel;
+
+    [Header("옵션")]
+    [SerializeField]
+    private SettingPanel settingPanel;
+
+    [Header("나가기")]
+    [SerializeField]
+    private ExitPanel exitPanel;
 
 #if UNITY_EDITOR
     protected override void OnValidate()
@@ -58,8 +80,9 @@ public class MainManager : Manager
         base.OnValidate();
         if(this == instance)
         {
-            ExtensionMethod.Sort(ref stageThemeButtons, StageSelectLength);
+            ExtensionMethod.Sort(ref stageThemeButtons, StageThemeLength);
             ExtensionMethod.Sort(ref stageThemeSprites);
+            ExtensionMethod.Sort(ref stageSelectors, StageMaxCount);
         }
     }
 #endif
@@ -82,23 +105,14 @@ public class MainManager : Manager
         }
     }
 
-    protected override void ChangeText(Translation.Language language)
-    {
-        base.ChangeText(language);
-        stageButton.SetText(Translation.Get(Translation.Letter.Stage));
-        pvpButton.SetText(Translation.Get(Translation.Letter.PVP));
-        storeButton.SetText(Translation.Get(Translation.Letter.Store));
-        optionButton.SetText(Translation.Get(Translation.Letter.Option));
-        exitButton.SetText(Translation.Get(Translation.Letter.Exit));
-    }
-
     protected override void Initialize()
     {
         backButton.SetListener(ShowEntry);
         stageButton.SetListener(() =>
         {
-            backButton.SetActive(true); //이걸 SetActiveEntryButtons가 false가 될 때 한번에 바꿀 것인지 좀 더 생각할 필요가 있다.
+            backButton.SetActive(true);
             SetActiveEntryButtons(false);
+            SetStageThemeButtonsImage();
             SetActiveStageThemeButtons(true);
         });
         pvpButton.SetListener(() =>
@@ -113,23 +127,40 @@ public class MainManager : Manager
         });
         optionButton.SetListener(() =>
         {
-            //여기서 상세 옵션창과 일반 옵션창 분기가 있어서 
+            settingPanel?.Open();
         });
-        exitButton.SetListener(() =>
+        exitButton.SetListener(() => { exitPanel?.Open(); });
+        for(int i = 0; i < stageThemeButtons.Length; i++)
         {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        });
-        for(byte i = 0; i < stageThemeButtons.Length; i++)
-        {
-            byte index = i;
+            int index = i;
             stageThemeButtons[i].SetListener(() =>
             {
                 SetActiveStageThemeButtons(false);
-                SelectStageTheme((byte)(index + stageCurrentFloor));
+                Sprite sprite = stageThemeButtons[index] != null && stageThemeButtons[index].image != null ? stageThemeButtons[index].image.sprite : null;
+                backgroundImage.Set(sprite);
+                stageSelectPanel?.SetThemeImage(sprite);
+                int stageMinIndex = (index + stageCurrentFloor) * StageMaxCount;
+                int stageClearCount = PlayerPrefs.GetInt(StageTag);
+                int starCount = 0;
+                for (int i = 0; i < stageSelectors.Length; i++)
+                {
+                    StageData stageData = stageDatas.Length > stageMinIndex + i ? stageDatas[stageMinIndex + i]: null;
+                    if (stageMinIndex + i < stageClearCount)
+                    {
+                        starCount += 2;
+                        stageSelectors[i]?.Show(true, stageData);
+                    }
+                    else if (stageMinIndex + i == stageClearCount)
+                    {
+                        starCount++;
+                        stageSelectors[i]?.Show(false, stageData);
+                    }
+                    else
+                    {
+                        stageSelectors[i]?.Show(null, stageData);
+                    }
+                }
+                stageStarCountText.Set("= " + starCount.ToString(), true);
             });
         }
         stageLeftArrowButton.SetListener(() =>
@@ -142,12 +173,18 @@ public class MainManager : Manager
         });
         stageRightArrowButton.SetListener(() =>
         {
-            if (stageCurrentFloor < stageThemeSprites.Length - StageSelectLength)
+            if (stageCurrentFloor < stageThemeSprites.Length - StageThemeLength)
             {
                 stageCurrentFloor++;
                 SetStageThemeButtonsImage();
             }
         });
+        for (int i = 0; i < stageSelectors.Length; i++)
+        {
+            stageSelectors[i]?.Initialize((stageData, clear) => { stageSelectPanel?.Open(stageData, clear); });
+        }
+        stageSelectPanel?.Initialize(() => { SceneManager.LoadScene(StageManager.SceneName); });
+        settingPanel?.Initialize(SetLanguage);
         ShowEntry();
         fixedPosition = StartPosition;
         descriptionText.DOFade(1f, openingTime);
@@ -155,12 +192,30 @@ public class MainManager : Manager
         primaryAction += () => ShowEntry();
     }
 
+    protected override void ChangeText()
+    {
+        stageButton.SetText(Translation.Get(Translation.Letter.Stage), tmpFontAsset);
+        pvpButton.SetText(Translation.Get(Translation.Letter.PVP), tmpFontAsset);
+        storeButton.SetText(Translation.Get(Translation.Letter.Store), tmpFontAsset);
+        optionButton.SetText(Translation.Get(Translation.Letter.Option), tmpFontAsset);
+        exitButton.SetText(Translation.Get(Translation.Letter.Exit), tmpFontAsset);
+        stageSelectPanel?.ChangeText();
+        exitPanel?.ChangeText();
+    }
+
     //초기화면 진입
     private void ShowEntry()
     {
-        SetActiveStageThemeButtons(false);
-        SetActiveEntryButtons(true);
         backButton.SetActive(false);
+        SetActiveStageThemeButtons(false);
+        stageStarCountText.SetActive(false);
+        for (int i = 0; i < stageSelectors.Length; i++)
+        {
+            stageSelectors[i]?.Hide();
+        }
+        stageSelectPanel?.Close();
+        backgroundImage.Set(null);
+        SetActiveEntryButtons(true);
     }
 
     //초기 진입창 버튼들 활성화 여부
@@ -184,7 +239,7 @@ public class MainManager : Manager
     //스테이지 테마 버튼 이미지 설정
     private void SetStageThemeButtonsImage()
     {
-        int stageClearCount = PlayerPrefs.GetInt(StageTag, 0);
+        int stageClearCount = PlayerPrefs.GetInt(StageTag);
         for (int i = 0; i < stageThemeButtons.Length; i++)
         {
             if (stageThemeSprites.Length > i + stageCurrentFloor)
@@ -196,12 +251,5 @@ public class MainManager : Manager
                 stageThemeButtons[i].SetImage(null, false);
             }
         }
-    }
-
-    //특정 스테이지 테마 선택
-    private void SelectStageTheme(byte value)
-    {
-        Debug.Log(value);
-        int stageClearCount = PlayerPrefs.GetInt(StageTag, 0);
     }
 }

@@ -26,6 +26,18 @@ public static class Korean
                 case Translation.Letter.Exit:
                     letters[i] = "나가기";
                     break;
+                case Translation.Letter.Music:
+                    letters[i] = "음악명";
+                    break;
+                case Translation.Letter.Story:
+                    letters[i] = "스토리";
+                    break;
+                case Translation.Letter.DoYouWantToQuit:
+                    letters[i] = "게임을 \n종료 하시겠습니까?";
+                    break;
+                case Translation.Letter.Select:
+                    letters[i] = "선택";
+                    break;
             }
         }
     }
