@@ -115,10 +115,11 @@ public class CollectionObject : MonoBehaviour
             pools.ReturnObject(collectionData.collectionName, this.gameObject);
         }
         
-    }
         // ▼ 풀에 반환
         pools.ReturnObject(collectionData.collectionName, this.gameObject); 
         // ▼ 활성화된 채집 리스트에서 제거
         FindObjectOfType<CollectionSpawner>().RemoveFromActiveList(this.gameObject);
     }
-}
+  }
+
+
