@@ -24,13 +24,7 @@ public class PickaxeController : MonoBehaviour
 
             if(item != null)
             {
-                item._Slider.value += collectGage;
-
-                if (item._Slider.value >= 100)
-                {
-                    Debug.Log("채집 완료");
-                    item.CollectCompleted();    
-                }
+                item.AddCollectGauge(collectGage);
             }
         }
     }
