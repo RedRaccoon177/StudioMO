@@ -31,6 +31,9 @@ public class SettingPanel : Panel
     private Slider effectSoundSlider;
     [SerializeField]
     private TMP_Text languageText;
+    [SerializeField]
+    private TMP_Text detailOptionText;
+
 
     private Action<int> languageAction = null;
 
