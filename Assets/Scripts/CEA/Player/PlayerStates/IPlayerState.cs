@@ -12,6 +12,6 @@ public interface IPlayerState
 
 public enum PlayerStateName
 {
-    Idle, Interact, Move, Slipstream,
+    Idle, Interact, Move, SlowMotion,
     Groggy, Invincible, Knockback, Solid
 }

@@ -23,6 +23,13 @@ public class IdleState : IPlayerState
             player.ChangeState(new InteractState());
             return;
         }
+
+        if (player.LeftSelectOn == true)
+        {
+            player.ChangeState(new SlowMotionState());
+            return;
+        }
+        
     }
 
     public void FixedUpdateState(PlayerController player)
