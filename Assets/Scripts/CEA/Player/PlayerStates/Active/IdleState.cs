@@ -24,6 +24,11 @@ public class IdleState : IPlayerState
             return;
         }
 
+        if (player.LeftSelectOn == true)
+        {
+            player.ChangeState(new SlowMotionState());
+            return;
+        }
         
     }
 

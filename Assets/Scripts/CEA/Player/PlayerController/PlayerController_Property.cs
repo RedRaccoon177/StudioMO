@@ -28,6 +28,11 @@ public partial class PlayerController : MonoBehaviour
         set { playerHitBox = value; }   
     }
 
+    public Vector2 MoveInput
+    {
+        get { return moveInput; }
+        set { moveInput = value; }
+    }
 
     public bool MoveOn
     {
@@ -35,16 +40,17 @@ public partial class PlayerController : MonoBehaviour
         set { moveOn = value; }
     }
 
-    public Vector2 MoveInput
-    {
-        get { return moveInput; }
-        set { moveInput = value; }
-    }
 
     public bool RightSelectOn
     {
         get { return rightSelectOn; }
         set { rightSelectOn = value; }
+    }
+
+    public bool LeftSelectOn
+    {
+        get { return leftSelectOn; }
+        set { leftSelectOn = value; }
     }
 
     public PlayerStateName NowState
