@@ -487,6 +487,8 @@ GameObject:
   - component: {fileID: 675268193}
   - component: {fileID: 675268192}
   - component: {fileID: 675268195}
+  - component: {fileID: 675268197}
+  - component: {fileID: 675268196}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -587,7 +589,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675268190}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
   m_Name: 
@@ -598,9 +600,88 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 675268192}
-  fireInterval: 1
   plusAngle: 15
   minusAngle: -15
+  useAutoFire: 1
+--- !u!114 &675268196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675268190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e4e833c45c5d1499c96fce9820104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: 6
+--- !u!114 &675268197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675268190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1281bfcaddc90074aa92f6be6f1637da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  guidedBulletPrefab: {fileID: -967074308268718392, guid: de0d300732da2f2458d3c4d5da917cc8,
+    type: 3}
+  bulletParent: {fileID: 1712241461}
+  player: {fileID: 424144118}
+  wallCollider: {fileID: 675268192}
+  useAutoFire: 1
+--- !u!1 &690611446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 690611448}
+  - component: {fileID: 690611447}
+  m_Layer: 0
+  m_Name: BulletPatternExecutor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &690611447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690611446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d6ed54e4c3fcb47970728f8f12e3e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loader: {fileID: 1850332162}
+  spawnerManager: {fileID: 1230582099}
+  bpm: 110
+--- !u!4 &690611448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690611446}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &852018788
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +727,7 @@ GameObject:
   - component: {fileID: 947426225}
   - component: {fileID: 947426228}
   - component: {fileID: 947426229}
+  - component: {fileID: 947426230}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -746,7 +828,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947426223}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
   m_Name: 
@@ -757,9 +839,9 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 947426225}
-  fireInterval: 1
   plusAngle: 15
   minusAngle: -15
+  useAutoFire: 1
 --- !u!114 &947426229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,14 +855,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPooling: {fileID: 1860902483}
-  GuidedBulletPrefab: {fileID: -967074308268718392, guid: de0d300732da2f2458d3c4d5da917cc8,
+  guidedBulletPrefab: {fileID: -967074308268718392, guid: de0d300732da2f2458d3c4d5da917cc8,
     type: 3}
   bulletParent: {fileID: 1712241461}
   player: {fileID: 424144118}
   wallCollider: {fileID: 947426225}
-  fireInterval: 1
-  plusAngle: 0
-  minusAngle: 0
+  useAutoFire: 1
+--- !u!114 &947426230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947426223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e4e833c45c5d1499c96fce9820104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: 2
+--- !u!1 &976182402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976182404}
+  - component: {fileID: 976182403}
+  m_Layer: 0
+  m_Name: SpawnerInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &976182403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976182402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbf7e722a9c86b4a9567867bce6f5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 1230582099}
+  normalSpawners:
+  - {fileID: 947426228}
+  - {fileID: 1873887095}
+  - {fileID: 1479783706}
+  - {fileID: 675268195}
+  guidedSpawners:
+  - {fileID: 947426229}
+  - {fileID: 1873887097}
+  - {fileID: 1479783708}
+  - {fileID: 675268197}
+--- !u!4 &976182404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976182402}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1027287946
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +1035,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1230582098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1230582100}
+  - component: {fileID: 1230582099}
+  m_Layer: 0
+  m_Name: BulletSpawnerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1230582099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230582098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19fccb44daf7f8842922a095e8be7397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1230582100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230582098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1479783701
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +1092,8 @@ GameObject:
   - component: {fileID: 1479783704}
   - component: {fileID: 1479783703}
   - component: {fileID: 1479783706}
+  - component: {fileID: 1479783708}
+  - component: {fileID: 1479783707}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -1000,7 +1194,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479783701}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
   m_Name: 
@@ -1011,9 +1205,41 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 1479783703}
-  fireInterval: 1
   plusAngle: 15
   minusAngle: -15
+  useAutoFire: 1
+--- !u!114 &1479783707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479783701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e4e833c45c5d1499c96fce9820104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: 4
+--- !u!114 &1479783708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479783701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1281bfcaddc90074aa92f6be6f1637da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  guidedBulletPrefab: {fileID: -967074308268718392, guid: de0d300732da2f2458d3c4d5da917cc8,
+    type: 3}
+  bulletParent: {fileID: 1712241461}
+  player: {fileID: 424144118}
+  wallCollider: {fileID: 1479783703}
+  useAutoFire: 1
 --- !u!1 &1667669780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1306,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1860902484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1850332161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1850332163}
+  - component: {fileID: 1850332162}
+  m_Layer: 0
+  m_Name: BulletPatternLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1850332162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850332161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf84d9baff230fc4bbf3382a064d3b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFile: {fileID: 4900000, guid: 8a122193ad3278346b28239e6c348d37, type: 3}
+  patternData: []
+--- !u!4 &1850332163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850332161}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1860902482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1413,8 @@ GameObject:
   - component: {fileID: 1873887093}
   - component: {fileID: 1873887092}
   - component: {fileID: 1873887095}
+  - component: {fileID: 1873887097}
+  - component: {fileID: 1873887096}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1241,7 +1515,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873887090}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3d98ffe7853f245a0c5b9b0ced3517, type: 3}
   m_Name: 
@@ -1252,9 +1526,41 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 1873887092}
-  fireInterval: 1
   plusAngle: 15
   minusAngle: -15
+  useAutoFire: 1
+--- !u!114 &1873887096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873887090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e4e833c45c5d1499c96fce9820104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: 8
+--- !u!114 &1873887097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873887090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1281bfcaddc90074aa92f6be6f1637da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPooling: {fileID: 1860902483}
+  guidedBulletPrefab: {fileID: -967074308268718392, guid: de0d300732da2f2458d3c4d5da917cc8,
+    type: 3}
+  bulletParent: {fileID: 1712241461}
+  player: {fileID: 424144118}
+  wallCollider: {fileID: 1873887092}
+  useAutoFire: 1
 --- !u!1001 &2022762073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1411,3 +1717,7 @@ SceneRoots:
   - {fileID: 534112429}
   - {fileID: 2022762073}
   - {fileID: 86516379}
+  - {fileID: 1850332163}
+  - {fileID: 690611448}
+  - {fileID: 976182404}
+  - {fileID: 1230582100}

@@ -71,4 +71,5 @@ public class NormalBullet : MonoBehaviour, IBullet
         moveDirection = direction.normalized;
     }
     #endregion
+
 }

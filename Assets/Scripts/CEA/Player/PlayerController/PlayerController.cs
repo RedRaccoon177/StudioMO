@@ -113,7 +113,6 @@ public partial class PlayerController : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
-        Debug.Log(nowState);
     }
 
     private void FixedUpdate()

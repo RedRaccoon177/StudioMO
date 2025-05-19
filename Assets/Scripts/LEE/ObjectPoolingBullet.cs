@@ -3,93 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-/// <summary>
-/// Bullet 종류가 공통으로 가져야 할 기능을 정의하는 인터페이스
-/// </summary>
+// 총알 종류가 공통으로 가져야 하는 기능 정의 (인터페이스)
 public interface IBullet
 {
-    /// <summary>
-    /// 풀 매니저로부터 자신을 관리할 풀을 할당받는 함수
-    /// </summary>
-    /// <typeparam name="T">컴포넌트 타입</typeparam>
-    /// <param name="pool">자신을 관리할 ObjectPool 참조</param>
+    // 오브젝트 풀에서 꺼낼 때 자기 풀이 뭔지 받아놓는 함수
     void SetPool<T>(IObjectPool<T> pool) where T : Component;
 
-    /// <summary>
-    /// 풀에서 꺼내졌을 때 호출되는 초기화 함수
-    /// </summary>
+    // 풀에서 꺼내졌을 때 초기화용 함수 (속도나 상태 초기화 같은 거)
     void OnSpawn();
 }
 
-/// <summary>
-/// 다양한 종류의 탄막을 통합 관리하는 오브젝트 풀 매니저 클래스
-/// </summary>
+
+
 public class ObjectPoolingBullet : MonoBehaviour
 {
-    #region 오브젝트 풀링 탄막 필드
-    [Header("풀링 설정값")]
-    [Tooltip("초기 풀에 미리 생성할 오브젝트 수")]
+    #region 설정값 (풀링 옵션들)
+    [Header("풀 세팅")]
+    [Tooltip("처음에 미리 만들어둘 탄 수")]
     [SerializeField] int defaultCapacity = 50;
 
-    [Tooltip("풀에 저장할 수 있는 최대 오브젝트 수")]
+    [Tooltip("최대로 저장할 수 있는 탄 수")]
     [SerializeField] int maxSize = 200;
 
-    /// <summary>
-    /// 탄막 타입별 풀을 저장하는 딕셔너리
-    /// 타입을 키로 하여 각 탄막 풀을 관리한다
-    /// </summary>
+    // 탄 종류마다 풀 따로 관리하기 위한 딕셔너리
     private Dictionary<Type, object> _pools = new Dictionary<Type, object>();
     #endregion
 
     /// <summary>
-    /// 특정 타입의 탄막 풀을 생성하여 등록하고 풀에 존재하지 않으면 새로 Instantiate
+    /// 특정 탄 종류(T)에 대해 풀 하나 만들어주는 함수
     /// </summary>
-    /// <typeparam name="T">탄막의 컴포넌트 타입</typeparam>
-    /// <param name="prefab">풀링할 탄막 프리팹</param>
-    /// <param name="parent">생성된 탄막 오브젝트의 부모 트랜스폼(선택)</param>
     public void CreatePool<T>(T prefab, Transform parent = null) where T : Component, IBullet
     {
-        ObjectPool<T> pool = null;
+        Debug.Log($"[CreatePool] 풀 생성됨: {typeof(T)} / Parent: {parent?.name}");
 
-        pool = new ObjectPool<T>
-            (
-                createFunc: () =>
-                {
-                    // 탄막 인스턴스를 새로 생성
-                    T bullet = Instantiate(prefab, parent);
-                    return bullet;
-                },
-                actionOnGet: (bullet) =>
-                {
-                    // 풀에서 오브젝트를 꺼낼 때 호출 + 꺼낼 때 풀 정보를 주입하여 초기화 작업 진행
-                    bullet.SetPool(pool);
-                    bullet.gameObject.SetActive(true);
-                    bullet.OnSpawn();
-                },
-                actionOnRelease: (bullet) =>
-                {
-                    // 풀에 오브젝트를 반납할 때 호출 + 오브젝트 비활성화
-                    bullet.gameObject.SetActive(false);
-                },
-                actionOnDestroy: (bullet) =>
-                {
-                    Destroy(bullet.gameObject);
-                },
-                collectionCheck: false, // 중복 반납 검사 비활성화 (성능 우선)
-                defaultCapacity: defaultCapacity, // 초기 생성 개수
-                maxSize: maxSize // 최대 풀 보유 개수
-            );
+        ObjectPool<T> localPool = null; // 클로저 문제 방지용
 
-        // 타입별 풀 딕셔너리에 등록
-        _pools[typeof(T)] = pool;
+        localPool = new ObjectPool<T>(
+            createFunc: () => Instantiate(prefab, parent), // 실제로 탄을 만들 때
+            actionOnGet: (bullet) =>
+            {
+                bullet.SetPool(localPool);              // 풀 정보 넘겨주고
+                bullet.gameObject.SetActive(true);      // 꺼내니까 활성화시키고
+                bullet.OnSpawn();                       // 초기화 로직 실행
+            },
+            actionOnRelease: (bullet) => bullet.gameObject.SetActive(false),    // 반납될 땐 비활성화
+            actionOnDestroy: (bullet) => Destroy(bullet.gameObject),            // 아예 제거될 때
+            collectionCheck: false,                                             // 중복 반납 검사 끔 (성능 위주)
+            defaultCapacity: defaultCapacity,
+            maxSize: maxSize
+        );
+
+        _pools[typeof(T)] = localPool;      // 이 타입은 이 풀이다~ 라고 등록
     }
 
-    #region 오브젝트 풀링 풀 in, out
+    #region 풀 입출력 관련 함수
     /// <summary>
-    /// 특정 타입의 탄막 오브젝트를 풀에서 꺼낸다 + 풀에 없으면 에러 로그
+    /// 등록된 풀에서 탄 하나 꺼내오는 함수
     /// </summary>
-    /// <typeparam name="T">탄막의 컴포넌트 타입</typeparam>
-    /// <returns>풀에서 꺼낸 탄막 인스턴스</returns>
     public T GetBullet<T>() where T : Component, IBullet
     {
         if (_pools.TryGetValue(typeof(T), out var pool))
@@ -98,16 +68,14 @@ public class ObjectPoolingBullet : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"[ObjectPoolingBullet] 풀을 찾을 수 없다: {typeof(T)}");
+            Debug.LogError($"[ObjectPoolingBullet] 풀이 없음! {typeof(T)} 등록 안 돼있음");
             return null;
         }
     }
 
     /// <summary>
-    /// 특정 타입의 탄막 오브젝트를 풀로 반납 + 풀에 없으면 에러 로그
+    /// 탄을 다시 풀로 반납하는 함수
     /// </summary>
-    /// <typeparam name="T">탄막의 컴포넌트 타입</typeparam>
-    /// <param name="bullet">반납할 탄막 인스턴스</param>
     public void ReleaseBullet<T>(T bullet) where T : Component, IBullet
     {
         if (_pools.TryGetValue(typeof(T), out var pool))
@@ -116,7 +84,7 @@ public class ObjectPoolingBullet : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"[ObjectPoolingBullet] 풀을 찾을 수 없다.: {typeof(T)}");
+            Debug.LogError($"[ObjectPoolingBullet] 반납하려는데 해당 풀이 없음: {typeof(T)}");
         }
     }
     #endregion
