@@ -18,19 +18,22 @@ public class StageManager : Manager
     protected override void Update()
     {
         base.Update();
-        if(Camera.main != null)
+        if (player != null)
         {
-
+            if (Camera.main != null)
+            {
+                player.UpdateMove(Camera.main.transform.position, Camera.main.transform.rotation);
+            }
+            if (leftHandTransform != null)
+            {
+                player.UpdateLeftHand(leftHandTransform.position, leftHandTransform.rotation);
+            }
+            if (rightHandTransform != null)
+            {
+                player.UpdateRightHand(rightHandTransform.position, rightHandTransform.rotation);
+            }
         }
-        if(leftHandTransform != null)
-        {
-            player?.UpdateLeftHand(leftHandTransform.position, leftHandTransform.rotation);
-        }
-        if(rightHandTransform != null)
-        {
-            player?.UpdateRightHand(rightHandTransform.position, rightHandTransform.rotation);
-        }
-        if(remainingTime > 0)
+        if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
         }
