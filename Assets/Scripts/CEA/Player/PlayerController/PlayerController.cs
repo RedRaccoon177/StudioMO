@@ -53,7 +53,7 @@ public partial class PlayerController : MonoBehaviour
 
     private InputAction leftHandMove;
     private InputAction leftHandGrip;
-    private InputAction leftHandTrigger;
+    private InputAction leftHandTrigger; //아직 안씀
 
 
     private float moveSpeed;
@@ -65,6 +65,7 @@ public partial class PlayerController : MonoBehaviour
     private PlayerStateName nowState;
 
     #region 플레이어에게 필요한 필드들
+
     [Header("행동불능 상태 시간")]
     public float groggyStateTime = 30f;
 
@@ -76,6 +77,7 @@ public partial class PlayerController : MonoBehaviour
 
     [Header("넉백 면역 상태 시간")]
     public float solidStateTime = 1f;
+
     #endregion
 
     private void Awake()
@@ -121,6 +123,9 @@ public partial class PlayerController : MonoBehaviour
         currentState.UpdateState(this);
         Debug.Log(nowState);
 
+        pickaxe.transform.position = rightController.transform.position;
+        pickaxe.transform.rotation = rightController.transform.rotation;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             HitBullet();
@@ -149,8 +154,7 @@ public partial class PlayerController : MonoBehaviour
          Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
          playerModel.transform.rotation = targetRotation;
 
-        pickaxe.transform.position = rightController.transform.position;
-        pickaxe.transform.rotation = rightController.transform.rotation;
+       
 
         //xr device simulator용 이동 코드
 
