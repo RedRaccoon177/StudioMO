@@ -18,8 +18,6 @@ public abstract class Manager : MonoBehaviourPunCallbacks
 
     [Header(nameof(Manager))]
     [SerializeField]
-    private XRDeviceSimulator deviceSimulator;      //XR 디바이스 시뮬레이터를 사용하기 위한 변수
-    [SerializeField]
     private XROrigin xrOrigin;                      //XR 오리진을 사용하기 위한 변수
     protected Vector3? fixedPosition;               //위치 고정을 하기 위한 변수
 
@@ -42,6 +40,9 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         get;
         private set;
     }
+
+    [SerializeField]
+    private XRDeviceSimulator deviceSimulator;      //XR 디바이스 시뮬레이터를 사용하기 위한 변수
 
 #if UNITY_EDITOR
 
