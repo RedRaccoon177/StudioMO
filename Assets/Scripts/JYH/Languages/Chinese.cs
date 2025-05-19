@@ -25,6 +25,18 @@
                 case Translation.Letter.Exit:
                     letters[i] = "";
                     break;
+                case Translation.Letter.Music:
+                    letters[i] = "";
+                    break;
+                case Translation.Letter.Story:
+                    letters[i] = "";
+                    break;
+                case Translation.Letter.DoYouWantToQuit:
+                    letters[i] = "要结束游戏吗?";
+                    break;
+                case Translation.Letter.Select:
+                    letters[i] = "";
+                    break;
             }
         }
     }

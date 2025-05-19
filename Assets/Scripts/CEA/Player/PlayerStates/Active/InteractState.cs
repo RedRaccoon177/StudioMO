@@ -5,6 +5,8 @@ using UnityEngine;
 //상호작용 상태
 public class InteractState : IPlayerState
 {
+
+
     public void EnterState(PlayerController player)
     {
         player.pickaxeHitbox.gameObject.SetActive(true);

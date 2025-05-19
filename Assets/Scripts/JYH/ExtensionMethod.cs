@@ -8,6 +8,48 @@ using TMPro;
 
 public static class ExtensionMethod
 {
+    public static void Set(this Image image, Sprite sprite)
+    {
+        if(image != null)
+        {
+            image.sprite = sprite;
+        }
+    }
+
+    public static void SetActive(this TMP_Text tmpText, bool value)
+    {
+        if (tmpText != null)
+        {
+            tmpText.gameObject.SetActive(value);
+        }
+    }
+
+    public static void Set(this TMP_Text tmpText, string value)
+    {
+        if (tmpText != null)
+        {
+            tmpText.text = value;
+        }
+    }
+
+    public static void Set(this TMP_Text tmpText, string value, TMP_FontAsset tmpFontAsset)
+    {
+        if (tmpText != null)
+        {
+            tmpText.font = tmpFontAsset;
+            tmpText.text = value;
+        }
+    }
+
+    public static void Set(this TMP_Text tmpText, string value, bool active)
+    {
+        if(tmpText != null)
+        {
+            tmpText.text = value;
+            tmpText.gameObject.SetActive(active);
+        }
+    }
+
     public static void SetListener(this Button button, UnityAction action)
     {
         if (button != null)
@@ -24,6 +66,19 @@ public static class ExtensionMethod
             TextMeshProUGUI[] tmpTexts = button.GetComponentsInChildren<TextMeshProUGUI>();
             foreach (TextMeshProUGUI tmpText in tmpTexts)
             {
+                tmpText.text = value;
+            }
+        }
+    }
+
+    public static void SetText(this Button button, string value, TMP_FontAsset tmpFontAsset)
+    {
+        if (button != null)
+        {
+            TextMeshProUGUI[] tmpTexts = button.GetComponentsInChildren<TextMeshProUGUI>();
+            foreach (TextMeshProUGUI tmpText in tmpTexts)
+            {
+                tmpText.font = tmpFontAsset;
                 tmpText.text = value;
             }
         }

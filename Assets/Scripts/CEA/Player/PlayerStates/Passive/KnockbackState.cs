@@ -11,6 +11,7 @@ public class KnockBackState : IPlayerState
     public void EnterState(PlayerController player)
     {
         _player = player;
+        _mono = player;
 
         //TODO
         //- 애니메이션 실행

@@ -50,7 +50,7 @@ public partial class PlayerController : MonoBehaviour
 
         else if (context.canceled)
         {
-            leftSelectOn= false;
+            leftSelectOn = false;
         }
     }
 }

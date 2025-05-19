@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = nameof(StageData), menuName = "Scriptable Object/" + nameof(StageData), order = 0)]
 public class StageData : ScriptableObject
 {
+    public static StageData current = null;
+
     [Serializable]
     private struct Text
     {
@@ -12,9 +14,9 @@ public class StageData : ScriptableObject
         [SerializeField]
         private string english;
         [SerializeField]
-        private string chinese;
-        [SerializeField]
         private string japanese;
+        [SerializeField]
+        private string chinese;
 
         public string Get(Translation.Language language)
         {
@@ -24,10 +26,10 @@ public class StageData : ScriptableObject
                     return korean;
                 case Translation.Language.English:
                     return english;
-                case Translation.Language.Chinese:
-                    return chinese;
                 case Translation.Language.Japanese:
                     return japanese;
+                case Translation.Language.Chinese:
+                    return chinese;
                 default:
                     return null;
             }
@@ -40,10 +42,10 @@ public class StageData : ScriptableObject
     [Header("Ω∫≈‰∏Æ"), SerializeField]
     private Text storyText;
 
-    [SerializeField]
+    [Header("πË∞Ê¿Ωæ«"), SerializeField]
     private AudioClip audioClip;
 
-    [SerializeField]
+    [Header("∏ "), SerializeField]
     private GameObject map;
 
     public string GetMusicText(Translation.Language language)
