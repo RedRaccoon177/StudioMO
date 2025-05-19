@@ -14,6 +14,10 @@ public partial class PlayerController : MonoBehaviour
     [Header("곡괭이 히트박스")]
     public Collider pickaxeHitbox;
 
+    [Header("플레이어 곡괭이")]
+    [SerializeField]
+    private GameObject pickaxe;
+
     [Header("VR 인풋 액션")]
     [SerializeField]
     private InputActionManager actionManager;
@@ -25,6 +29,10 @@ public partial class PlayerController : MonoBehaviour
     [Header("플레이어 모델링")]
     [SerializeField]
     private GameObject playerModel;
+
+    [Header("플레이어 오른쪽 컨트롤러")]
+    [SerializeField]
+    private GameObject rightController;
 
     [Header("플레이어 피격 범위")]
     [SerializeField]
@@ -140,6 +148,9 @@ public partial class PlayerController : MonoBehaviour
         Vector3 camEuler = headCameraPos.transform.eulerAngles;
          Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
          playerModel.transform.rotation = targetRotation;
+
+        pickaxe.transform.position = rightController.transform.position;
+        pickaxe.transform.rotation = rightController.transform.rotation;
 
         //xr device simulator용 이동 코드
 
