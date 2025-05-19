@@ -14,7 +14,6 @@ public class StageManager : Manager
         if(remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
-
         }
     }
 
