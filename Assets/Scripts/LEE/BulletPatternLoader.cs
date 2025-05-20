@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
-/// BulletPatternLoader는 CSV 파일에서 탄막 패턴 데이터를 읽어와
-/// BulletPatternExecutor에서 사용할 수 있도록 List<BulletSpawnData>로 파싱하는 역할을 한다.
+/// BulletPatternLoader는 CSV 파일에서 탄막 패턴 데이터를 읽어와서
+/// BulletPatternExecutor에서 사용할 수 있도록 List<BulletSpawnData>로 파싱하는 역할을 함.
 /// </summary>
 public class BulletPatternLoader : MonoBehaviour
 {
@@ -24,43 +24,48 @@ public class BulletPatternLoader : MonoBehaviour
         patternData = ParseCSV(csvFile.text);
     }
 
-    /// <summary>
-    /// CSV 텍스트를 파싱하여 BulletSpawnData 리스트로 변환한다.
-    /// </summary>
-    /// <param name="csv">CSV 텍스트 원문</param>
-    /// <returns>BulletSpawnData 리스트</returns>
     List<BulletSpawnData> ParseCSV(string csv)
     {
-        var lines = csv.Split('\n'); // 줄 단위로 분리
+        var lines = csv.Split('\n');
         var dataList = new List<BulletSpawnData>();
 
         for (int i = 1; i < lines.Length; i++) // 0번째 줄은 헤더이므로 스킵
         {
-            var line = lines[i];
-            if (string.IsNullOrWhiteSpace(line)) continue; // 빈 줄은 건너뛴다
+            var line = lines[i].Trim();
+            if (string.IsNullOrWhiteSpace(line)) continue;
 
-            var cols = line.Split(','); // 쉼표로 열 구분
-            if (cols.Length < 8) continue; // 열 개수가 부족하면 건너뜀 (데이터 손상 방지)
+            var cols = line.Replace("\"", "").Split(','); // 따옴표 제거
+            if (cols.Length < 7) continue; // 7열 이상은 돼야 안전
 
-
+            // 0: beatIndex
             if (!int.TryParse(cols[0].Trim(), out int beatIndex)) continue;
-            if (!bool.TryParse(cols[1].Trim(), out bool generateA)) continue;
-            if (!bool.TryParse(cols[4].Trim(), out bool generateB)) continue;
 
-            BulletSpawnData data = new BulletSpawnData
+            // 1: generate_A_type
+            bool generateA = cols[1].Trim().ToLower() == "true";
+            string aSide = generateA ? cols[2].Trim() : "";
+            int aAmount = generateA && int.TryParse(cols[3].Trim(), out int aAmt) ? aAmt : 0;
+
+            // 4: generate_B_type
+            bool generateB = cols[4].Trim().ToLower() == "true";
+            string bSide = generateB ? cols[5].Trim() : "";
+            int bAmount = generateB && int.TryParse(cols[6].Trim(), out int bAmt) ? bAmt : 0;
+
+            var data = new BulletSpawnData
             {
                 beatIndex = beatIndex,
                 generateA = generateA,
-                aGenerateSide = cols[2].Trim(),
-                aGenerateAmount = int.TryParse(cols[3], out var aAmt) ? aAmt : 0,
+                aGenerateSide = aSide,
+                aGenerateAmount = aAmount,
                 generateB = generateB,
-                bGenerateSide = cols[5].Trim(),
-                bGenerateAmount = int.TryParse(cols[6], out var bAmt) ? bAmt : 0
+                bGenerateSide = bSide,
+                bGenerateAmount = bAmount
             };
 
-            dataList.Add(data); // 최종 리스트에 추가
+            dataList.Add(data);
         }
 
+        Debug.Log($"[CSV] 파싱 완료: {dataList.Count}줄");
         return dataList;
     }
+
 }

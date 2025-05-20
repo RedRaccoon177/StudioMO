@@ -6,11 +6,12 @@ public class BulletPatternExecutor : MonoBehaviour
 {
     public BulletPatternLoader loader;                // CSV에서 불러온 데이터
     public BulletSpawnerManager spawnerManager;       // 탄막 매니저
-    public float bpm = 110f;                          // beat per minute
+    
+    [Header("분당 BPM")]public float bpm = 110f;
 
     private float beatInterval;                       // 한 beat 당 시간
     private float timer;
-    private int currentBeatIndex = 0;
+    private int currentBeatIndex = 1;
 
     void Start()
     {

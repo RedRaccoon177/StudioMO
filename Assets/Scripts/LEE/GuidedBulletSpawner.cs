@@ -27,15 +27,15 @@ public class GuidedBulletSpawner : MonoBehaviour
 
     void Update()
     {
-        if (useAutoFire)
-        {
-            fireTimer += Time.deltaTime;
-            if (fireTimer >= 1f)
-            {
-                fireTimer = 0f;
-                FireBullet();
-            }
-        }
+        //if (useAutoFire)
+        //{
+        //    fireTimer += Time.deltaTime;
+        //    if (fireTimer >= 1f)
+        //    {
+        //        fireTimer = 0f;
+        //        FireBullet();
+        //    }
+        //}
     }
 
     public void FireBullet()

@@ -8,8 +8,6 @@ public class SpawnerInitializer : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("[SpawnerInitializer] Awake 호출됨");
-
         foreach (var spawner in normalSpawners)
         {
             var tag = spawner.GetComponent<SideTag>();
@@ -20,7 +18,6 @@ public class SpawnerInitializer : MonoBehaviour
             }
 
             manager.normalSpawners[tag.side] = spawner;
-            Debug.Log($"[Init] Normal 스포너 등록 완료: side = {tag.side}");
 
             spawner.useAutoFire = false;
             // 수동 풀 생성 보장
