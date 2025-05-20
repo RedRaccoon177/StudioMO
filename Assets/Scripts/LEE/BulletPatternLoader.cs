@@ -11,49 +11,61 @@ public class BulletPatternLoader : MonoBehaviour
 {
     [Header("탄막 패턴 CSV 파일")]
     [Tooltip("Resources 폴더 내에 있는 CSV 파일 (TextAsset 형식)")]
-    public TextAsset csvFile;
+    public TextAsset csvFile; // 유니티 인스펙터에서 연결할 수 있는 CSV 텍스트 파일
+
 
     [Header("파싱된 탄막 패턴 데이터 리스트")]
     [Tooltip("BulletSpawnData 구조로 파싱된 탄막 타이밍 정보")]
-    public List<BulletSpawnData> patternData = new();
+    public List<BulletSpawnData> patternData = new List<BulletSpawnData>();   // 최종적으로 게임에 사용할 데이터 리스트
 
-    /// <summary>
-    /// 게임이 시작되면 CSV 파일을 파싱하여 patternData 리스트를 초기화한다.
-    /// </summary>
     void Awake()
     {
+        // 게임 시작 시 CSV를 파싱하여 patternData에 담음
         patternData = ParseCSV(csvFile.text);
     }
 
+    /// <summary>
+    /// CSV 텍스트를 파싱하여 BulletSpawnData 리스트로 변환함
+    /// </summary>
     List<BulletSpawnData> ParseCSV(string csv)
     {
-        var lines = csv.Split('\n');
-        var dataList = new List<BulletSpawnData>();
+        var lines = csv.Split('\n'); // 줄 단위로 잘라서 각 라인을 배열로 만듦
+        var dataList = new List<BulletSpawnData>(); // 결과로 담을 리스트 생성
 
-        for (int i = 1; i < lines.Length; i++)
+        // CSV 첫 줄을 기준으로 열 개수 자동 판단
+        var headerLine = lines[0].Trim();
+        var expectedColumnCount = headerLine.Replace("\"", "").Split(',').Length;
+
+        for (int i = 1; i < lines.Length; i++) // 헤더는 스킵하고 1번째 줄부터 시작
         {
-            var line = lines[i].Trim();
-            if (string.IsNullOrWhiteSpace(line)) continue;
+            #region 방어코드 및 "제거 + ,분리 + csv 공백 시 빈칸 채움
+            var line = lines[i].Trim(); // 앞뒤 공백 제거
+            if (string.IsNullOrWhiteSpace(line)) continue; // 공백이면 무시
+            
+            var cols = line.Replace("\"", "").Split(','); // 따옴표 제거하고 쉼표 기준으로 분리
 
-            var cols = line.Replace("\"", "").Split(',');
-
-            // 7열이 안 되면 비워서 패딩 추가
-            while (cols.Length < 7)
+            // 열이 expectedColumnCount개보다 적으면 부족한 만큼 빈 칸 채워줌
+            while (cols.Length < expectedColumnCount)
             {
                 Array.Resize(ref cols, cols.Length + 1);
                 cols[cols.Length - 1] = "";
             }
 
+            // beat_timing 값이 정수로 안되면 이 줄은 버림
             if (!int.TryParse(cols[0].Trim(), out int beatIndex)) continue;
+            #endregion
 
-            bool generateA = cols[1].Trim().ToLower() == "true";
-            string aSide = generateA ? cols[2].Trim() : "";
-            int aAmount = generateA && int.TryParse(cols[3].Trim(), out int aAmt) ? aAmt : 0;
+            // A탄 관련 데이터 추출
+            bool generateA = cols[1].Trim().ToLower() == "true";    // true/false 판별
+            string aSide = generateA ? cols[2].Trim() : "";         // A탄 위치
+            int aAmount = generateA && int.TryParse(cols[3].Trim(), out int aAmt) ? aAmt : 0; // A탄 개수
 
-            bool generateB = cols[4].Trim().ToLower() == "true";
-            string bSide = generateB ? cols[5].Trim() : "";
-            int bAmount = generateB && int.TryParse(cols[6].Trim(), out int bAmt) ? bAmt : 0;
+            // B탄 관련 데이터 추출
+            bool generateB = cols[4].Trim().ToLower() == "true";    // true/false 판별
+            string bSide = generateB ? cols[5].Trim() : "";         // B탄 위치
+            int bAmount = generateB && int.TryParse(cols[6].Trim(), out int bAmt) ? bAmt : 0; // B탄 개수
 
+            // 최종 데이터 객체 생성
             BulletSpawnData data = new BulletSpawnData
             {
                 beatIndex = beatIndex,
@@ -65,12 +77,10 @@ public class BulletPatternLoader : MonoBehaviour
                 bGenerateAmount = bAmount
             };
 
-            dataList.Add(data);
+            dataList.Add(data); // 리스트에 추가
         }
 
-        Debug.Log($"[CSV] 파싱 완료: {dataList.Count}줄");
+        Debug.Log($"[CSV] 파싱 완료: {dataList.Count}줄"); // 파싱 완료 후 개수 출력
         return dataList;
     }
-
-
 }

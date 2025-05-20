@@ -67,6 +67,7 @@ public class BulletPatternExecutor : MonoBehaviour
 
         List<int> result = new();
 
+
         if (raw.Contains("1")) result.Add(1);  // 아래
         if (raw.Contains("2")) result.Add(2);  // 왼쪽
         if (raw.Contains("3")) result.Add(3);  // 오른쪽

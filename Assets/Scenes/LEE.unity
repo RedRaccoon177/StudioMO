@@ -600,8 +600,8 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 675268192}
-  plusAngle: 15
-  minusAngle: -15
+  plusAngle: 90
+  minusAngle: -90
   useAutoFire: 1
 --- !u!114 &675268196
 MonoBehaviour:
@@ -839,8 +839,8 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 947426225}
-  plusAngle: 15
-  minusAngle: -15
+  plusAngle: 90
+  minusAngle: -90
   useAutoFire: 1
 --- !u!114 &947426229
 MonoBehaviour:
@@ -1205,8 +1205,8 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 1479783703}
-  plusAngle: 15
-  minusAngle: -15
+  plusAngle: 90
+  minusAngle: -90
   useAutoFire: 1
 --- !u!114 &1479783707
 MonoBehaviour:
@@ -1526,8 +1526,8 @@ MonoBehaviour:
   bulletParent: {fileID: 852018789}
   mapCenter: {fileID: 2134522047}
   wallCollider: {fileID: 1873887092}
-  plusAngle: 15
-  minusAngle: -15
+  plusAngle: 90
+  minusAngle: -90
   useAutoFire: 1
 --- !u!114 &1873887096
 MonoBehaviour:
