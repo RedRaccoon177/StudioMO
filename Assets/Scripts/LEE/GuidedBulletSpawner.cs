@@ -22,7 +22,7 @@ public class GuidedBulletSpawner : MonoBehaviour
     public bool useAutoFire = true;
     #endregion
 
-    public void FireBullet()
+    public void FireGuidedBullet()
     {
         Bounds bounds = wallCollider.bounds;
         Vector3 spawnPos = transform.position;

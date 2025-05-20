@@ -19,15 +19,15 @@ public class NormalBulletSpawner : MonoBehaviour
     public BoxCollider wallCollider;
 
     [Header("발사 시 각도 범위 지정")]
-    public float plusAngle = 15f;
-    public float minusAngle = -15f;
+    public float plusAngle = 90f;
+    public float minusAngle = -90f;
 
     [Header("BPM 기반 여부 (false 시 CSV로만 발사됨)")]
     public bool useAutoFire = true;
     #endregion
 
 
-    public void FireBullet()
+    public void FireNormalBullet()
     {
         Bounds bounds = wallCollider.bounds;
         Vector3 spawnPos = transform.position;
