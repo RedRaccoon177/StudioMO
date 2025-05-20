@@ -41,11 +41,6 @@ public class StageManager : Manager
 
     protected override void Initialize()
     {
-        Camera camera = Camera.main;
-        if(camera != null)
-        {
-            Debug.Log(camera.cullingMask);
-        }
     }
 
     protected override void ChangeText()
