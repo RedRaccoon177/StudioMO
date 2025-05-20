@@ -38,6 +38,9 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField]
     private Collider playerHitBox;
 
+    [Header("플레이어 자원 보유랑")]
+    [Range(0,100)] public float resourcesAmount;
+
     [Space (10)][SerializeField]
     private PickaxeController playerPickaxe;
 
