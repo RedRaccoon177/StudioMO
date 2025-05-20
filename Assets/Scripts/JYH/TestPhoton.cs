@@ -32,8 +32,7 @@ public class TestPhoton : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient == true)
         {
-            GameObject gameObject = PhotonNetwork.InstantiateRoomObject("TestObject", Vector3.zero, Quaternion.identity);
-            gameObject.GetComponent<TestObject>().Initialize();
+           
         }
     }
 }

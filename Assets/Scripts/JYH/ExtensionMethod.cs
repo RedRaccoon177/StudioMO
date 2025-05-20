@@ -8,6 +8,15 @@ using TMPro;
 
 public static class ExtensionMethod
 {
+    public static void Set(this Transform transform, Vector3 position, Quaternion rotation)
+    {
+        if (transform != null)
+        {
+            transform.position = position;
+            transform.rotation = rotation;
+        }
+    }
+
     public static void Set(this Image image, Sprite sprite)
     {
         if(image != null)
