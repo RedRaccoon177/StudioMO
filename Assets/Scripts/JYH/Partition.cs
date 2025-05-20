@@ -2,30 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Canvas))]
 [RequireComponent(typeof(CanvasScaler))]
 [RequireComponent(typeof(GraphicRaycaster))]
 public class Partition : MonoBehaviour
 {
-    private bool _hasRectTransform = false;
-
-    private RectTransform _rectTransform = null;
-
-    protected RectTransform getRectTransform
-    {
-        get
-        {
-            if (_hasRectTransform == false)
-            {
-                _rectTransform = GetComponent<RectTransform>();
-                _hasRectTransform = true;
-            }
-            return _rectTransform;
-        }
-    }
-
     [Serializable]
     private struct Frame
     {
@@ -139,7 +122,7 @@ public class Partition : MonoBehaviour
     }
 #endif
 
-    private void LateUpdate()
+    private void Update()
     {
         int width = Screen.width;
         int height = Screen.height;
@@ -148,7 +131,7 @@ public class Partition : MonoBehaviour
             screenSize.x = width;
             screenSize.y = height;
         }
-        Vector2 sizeDelta = getRectTransform.sizeDelta;
+        Vector2 sizeDelta = ((RectTransform)transform).sizeDelta;
         if (_sizeDelta != sizeDelta)
         {
             _sizeDelta = sizeDelta;
