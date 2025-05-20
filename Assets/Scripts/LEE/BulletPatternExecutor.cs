@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Linq;
+using System.Collections.Generic;
 
 public class BulletPatternExecutor : MonoBehaviour
 {
@@ -62,18 +63,16 @@ public class BulletPatternExecutor : MonoBehaviour
 
     int[] ParseSides(string raw)
     {
-        if (string.IsNullOrWhiteSpace(raw) || raw.Trim().ToLower() == "null")
-            return new int[0];
+        if (string.IsNullOrWhiteSpace(raw)) return new int[0];
 
-        return raw.Replace("\"", "") // 쌍따옴표 제거
-                  .Split(',')
-                  .Select(s => {
-                      if (int.TryParse(s.Trim(), out int val)) return val;
-                      Debug.LogWarning($"[ParseSides] 유효하지 않은 숫자 값: '{s}'");
-                      return -1;
-                  })
-                  .Where(val => val >= 0)
-                  .ToArray();
+        List<int> result = new();
+
+        if (raw.Contains("1")) result.Add(1);  // 아래
+        if (raw.Contains("2")) result.Add(2);  // 왼쪽
+        if (raw.Contains("3")) result.Add(3);  // 오른쪽
+        if (raw.Contains("4")) result.Add(4);  // 위쪽
+
+        return result.ToArray();
     }
 
 }

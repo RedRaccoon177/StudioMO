@@ -40,5 +40,4 @@ public class SpawnerInitializer : MonoBehaviour
             spawner.bulletPooling.CreatePool(spawner.guidedBulletPrefab, spawner.bulletParent);
         }
     }
-
 }
