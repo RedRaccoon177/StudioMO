@@ -26,20 +26,6 @@ public class NormalBulletSpawner : MonoBehaviour
     public bool useAutoFire = true;
     #endregion
 
-    private float fireTimer;
-
-    void Update()
-    {
-        //if (useAutoFire)
-        //{
-        //    fireTimer += Time.deltaTime;
-        //    if (fireTimer >= 1f) // BPM 기반이면 무시됨
-        //    {
-        //        fireTimer = 0f;
-        //        FireBullet();
-        //    }
-        //}
-    }
 
     public void FireBullet()
     {

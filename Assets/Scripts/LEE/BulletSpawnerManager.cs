@@ -8,14 +8,7 @@ public class BulletSpawnerManager : MonoBehaviour
 
     public void SpawnNormal(int side, int amount)
     {
-        if (!normalSpawners.ContainsKey(side))
-        {
-            Debug.LogWarning($"[SpawnNormal] side {side} 스포너 없음 - 발사 실패");
-            return;
-        }
-
-        Debug.Log($"[SpawnNormal] side {side}, amount {amount}");
-
+        if (!normalSpawners.ContainsKey(side)) return;
         var spawner = normalSpawners[side];
         for (int i = 0; i < amount; i++)
         {

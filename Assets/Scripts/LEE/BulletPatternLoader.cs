@@ -29,14 +29,18 @@ public class BulletPatternLoader : MonoBehaviour
     /// </summary>
     List<BulletSpawnData> ParseCSV(string csv)
     {
-        var lines = csv.Split('\n'); // 줄 단위로 잘라서 각 라인을 배열로 만듦
-        var dataList = new List<BulletSpawnData>(); // 결과로 담을 리스트 생성
+        // 줄 단위로 잘라서 각 라인을 배열로 만듦
+        var lines = csv.Split('\n');
+
+        // 결과로 담을 리스트 생성
+        var dataList = new List<BulletSpawnData>();
 
         // CSV 첫 줄을 기준으로 열 개수 자동 판단
         var headerLine = lines[0].Trim();
         var expectedColumnCount = headerLine.Replace("\"", "").Split(',').Length;
 
-        for (int i = 1; i < lines.Length; i++) // 헤더는 스킵하고 1번째 줄부터 시작
+        // 헤더는 스킵하고 1번째 줄부터 시작
+        for (int i = 1; i < lines.Length; i++)
         {
             #region 방어코드 및 "제거 + ,분리 + csv 공백 시 빈칸 채움
             var line = lines[i].Trim(); // 앞뒤 공백 제거
@@ -80,7 +84,6 @@ public class BulletPatternLoader : MonoBehaviour
             dataList.Add(data); // 리스트에 추가
         }
 
-        Debug.Log($"[CSV] 파싱 완료: {dataList.Count}줄"); // 파싱 완료 후 개수 출력
         return dataList;
     }
 }

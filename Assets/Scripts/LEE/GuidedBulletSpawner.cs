@@ -22,22 +22,6 @@ public class GuidedBulletSpawner : MonoBehaviour
     public bool useAutoFire = true;
     #endregion
 
-    private float fireTimer;
-
-
-    void Update()
-    {
-        //if (useAutoFire)
-        //{
-        //    fireTimer += Time.deltaTime;
-        //    if (fireTimer >= 1f)
-        //    {
-        //        fireTimer = 0f;
-        //        FireBullet();
-        //    }
-        //}
-    }
-
     public void FireBullet()
     {
         Bounds bounds = wallCollider.bounds;

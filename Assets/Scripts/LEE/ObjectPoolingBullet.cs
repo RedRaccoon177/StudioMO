@@ -13,8 +13,6 @@ public interface IBullet
     void OnSpawn();
 }
 
-
-
 public class ObjectPoolingBullet : MonoBehaviour
 {
     #region 설정값 (풀링 옵션들)
@@ -34,8 +32,6 @@ public class ObjectPoolingBullet : MonoBehaviour
     /// </summary>
     public void CreatePool<T>(T prefab, Transform parent = null) where T : Component, IBullet
     {
-        Debug.Log($"[CreatePool] 풀 생성됨: {typeof(T)} / Parent: {parent?.name}");
-
         ObjectPool<T> localPool = null; // 클로저 문제 방지용
 
         localPool = new ObjectPool<T>(
