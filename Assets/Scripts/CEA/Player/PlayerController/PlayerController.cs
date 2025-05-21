@@ -12,9 +12,9 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public partial class PlayerController : MonoBehaviour
 {
     [Header("곡괭이 히트박스")]
-    public Collider pickaxeHitbox;
+    public GameObject pickaxeHitbox;
 
-    [Header("플레이어 곡괭이")]
+    [Header("플레이어 곡괭이 모델")]
     [SerializeField]
     private GameObject pickaxe;
 
@@ -37,6 +37,9 @@ public partial class PlayerController : MonoBehaviour
     [Header("플레이어 피격 범위")]
     [SerializeField]
     private Collider playerHitBox;
+
+    [Header("플레이어 자원 보유랑")]
+    [Range(0,100)] public float resourcesAmount;
 
     [Space (10)][SerializeField]
     private PickaxeController playerPickaxe;
