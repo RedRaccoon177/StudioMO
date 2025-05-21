@@ -3,6 +3,7 @@ using Photon.Pun;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 using Unity.XR.CoreUtils;
 
+//caution : _Test(언더바 테스트) 라고 붙은 스크립트는 플레이어 시험용입니다. 추후 리팩토링 예정입니다.
 //TODO: 나중에 구현 다 끝나면 클래스명 Player_Test -> Player로 바꿔야함
 [DisallowMultipleComponent]
 [RequireComponent(typeof(PhotonView))]
