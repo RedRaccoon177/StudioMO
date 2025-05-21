@@ -48,7 +48,7 @@ public class CollectionSpawner : MonoBehaviour
                     {
                         obj.transform.position = pos;       // 위치 지정
                         obj.transform.SetParent(poolManager.transform, true);   // 부모 설정
-                        obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager);
+                        obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager, this);
                         activeCollections.Add(obj);         // 활성화 리스트에 등록
                         count++;
                     }                    
@@ -106,7 +106,7 @@ public class CollectionSpawner : MonoBehaviour
 
             obj.transform.position = pos;                               // 위치 지정
             obj.transform.SetParent(poolManager.transform, true);       // 부모 설정
-            obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager); //초기화
+            obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager, this); //초기화
             activeCollections.Add(obj);     // 활성화 리스트에 등록
         }
     }
