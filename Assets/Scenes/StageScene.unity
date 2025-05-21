@@ -269,6 +269,7 @@ Transform:
   m_Children:
   - {fileID: 1062850407}
   - {fileID: 1629694355}
+  - {fileID: 1476645419}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &83129655
@@ -305,7 +306,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -1152}
+  m_SizeDelta: {x: 0, y: -864}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &115973210
 GameObject:
@@ -662,7 +663,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2048, y: -1344}
+  m_SizeDelta: {x: -1536, y: -1008}
   m_Pivot: {x: 1, y: 0.95}
 --- !u!1 &832575517
 GameObject:
@@ -1251,10 +1252,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickaxeHitbox: {fileID: 0}
+  pickaxe: {fileID: 0}
   actionManager: {fileID: 1668815854}
   headCameraPos: {fileID: 0}
   playerModel: {fileID: 35275791}
+  rightController: {fileID: 0}
   playerHitBox: {fileID: 1318664107}
+  resourcesAmount: 0
   playerPickaxe: {fileID: 0}
   moveProvider: {fileID: 0}
   groggyStateTime: 30
@@ -1277,6 +1281,76 @@ Transform:
   - {fileID: 35275794}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1476645418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1476645419}
+  - component: {fileID: 1476645420}
+  - component: {fileID: 1476645421}
+  m_Layer: 0
+  m_Name: Player Contorller Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1476645419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476645418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 76013260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1476645420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476645418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038ef03953a2b5345ae3d2b7713474cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainXROrigin: {fileID: 1062850409}
+  player: {fileID: 0}
+  actionManager: {fileID: 0}
+--- !u!114 &1476645421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476645418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1629694354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1785,7 +1859,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1536, y: -1340.6897}
+  m_SizeDelta: {x: -1152, y: -1005.5172}
   m_Pivot: {x: 0.5, y: 0.95}
 --- !u!1 &5513472569802189665
 GameObject:
