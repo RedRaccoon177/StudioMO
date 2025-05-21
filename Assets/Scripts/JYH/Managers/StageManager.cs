@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StageManager : Manager
 {
@@ -7,18 +8,24 @@ public class StageManager : Manager
 
     [Header(nameof(StageManager))]
     [SerializeField]
-    private Transform leftHandTransform;
+    private TMP_Text timeText;
     [SerializeField]
-    private Transform rightHandTransform;
+    private Image timeImage;
+    private float timeCurrentValue = 0.0f;
+    [SerializeField, Range(0, int.MaxValue)]
+    private float timeMaxValue = 0.0f;
 
     [SerializeField]
+    private TMP_Text gatheringText;
+    [SerializeField]
+    private Image gatheringImage;
+
+    [SerializeField]
+    private TMP_Text goalText;
+    [SerializeField, Range(0, int.MaxValue)]
+    private uint goalMinValue = 50;
+
     private ObjectPoolingBullet objectPoolingBullet;
-
-    [Header("배경음악")]
-    [SerializeField]
-    private Image timeLimitImage;
-    private float timeLimitCurrentValue = 0.0f;
-    private float timeLimitMaxValue = 0.0f;
 
     [SerializeField]
     private Player player;
@@ -26,21 +33,15 @@ public class StageManager : Manager
     protected override void Update()
     {
         base.Update();
-        if (player != null)
+        if (timeCurrentValue > 0)
         {
-            if (leftHandTransform != null)
+            timeCurrentValue -= Time.deltaTime;
+            if (timeCurrentValue < 0)
             {
-                player.UpdateLeftHand(leftHandTransform.position, leftHandTransform.rotation);
-            }
-            if (rightHandTransform != null)
-            {
-                player.UpdateRightHand(rightHandTransform.position, rightHandTransform.rotation);
+                timeCurrentValue = 0;   //게임 종료
             }
         }
-        if (timeLimitMaxValue > 0)
-        {
-            timeLimitMaxValue -= Time.deltaTime;
-        }
+        timeImage.Fill(timeMaxValue > 0 ? timeCurrentValue/timeMaxValue : 1);
     }
 
     protected override void Initialize()
@@ -54,9 +55,17 @@ public class StageManager : Manager
                 Instantiate(gameObject, Vector3.zero, Quaternion.identity);
             }
         }
+        timeCurrentValue = timeMaxValue;
+        SetCurrentGathering(0);
     }
 
     protected override void ChangeText()
     {
+
+    }
+
+    private void SetCurrentGathering(uint value)
+    {
+        gatheringImage.Fill(goalMinValue > 0 ? value / goalMinValue : 1);
     }
 }
