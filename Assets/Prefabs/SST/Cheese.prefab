@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4833442742244991096}
   - component: {fileID: 2491458655153240613}
   - component: {fileID: 4078377407257876907}
+  - component: {fileID: 7628425157925019013}
   m_Layer: 7
   m_Name: Cheese
   m_TagString: Untagged
@@ -99,8 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderCanvas: {fileID: 7924937466625902722}
-  slider: {fileID: 2109012874137143136}
+  ui: {fileID: 7628425157925019013}
+  testCollectionData: {fileID: 0}
+  testPools: {fileID: 0}
+  isTest: 0
 --- !u!65 &2491458655153240613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -149,6 +152,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7628425157925019013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128199756915647333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3114740875ad54bb91e64691de7412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectionSliderCanvas: {fileID: 7924937466625902722}
+  collectionSlider: {fileID: 2109012874137143136}
 --- !u!1 &138427099973055842
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +449,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -522,7 +539,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

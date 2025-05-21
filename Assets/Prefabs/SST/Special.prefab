@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: -3745245592332998496}
   - component: {fileID: 4280317278077020831}
   - component: {fileID: 4272988208027168957}
+  - component: {fileID: 1112730054389950918}
   m_Layer: 7
   m_Name: Special
   m_TagString: Untagged
@@ -401,8 +402,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderCanvas: {fileID: 1734768918420835385}
-  slider: {fileID: 6721236922517548129}
+  ui: {fileID: 1112730054389950918}
+  testCollectionData: {fileID: 0}
+  testPools: {fileID: 0}
+  isTest: 0
 --- !u!65 &4280317278077020831
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -451,6 +454,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1112730054389950918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510765949005837997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3114740875ad54bb91e64691de7412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectionSliderCanvas: {fileID: 1734768918420835385}
+  collectionSlider: {fileID: 6721236922517548129}
 --- !u!1 &8928324120255225924
 GameObject:
   m_ObjectHideFlags: 0

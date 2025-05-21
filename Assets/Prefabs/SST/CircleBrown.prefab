@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: -3620345916526195620}
   - component: {fileID: 8990291290228029611}
   - component: {fileID: -8970443324953053324}
+  - component: {fileID: 6279257356405680755}
   m_Layer: 7
   m_Name: CircleBrown
   m_TagString: Untagged
@@ -290,8 +291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderCanvas: {fileID: 5516434785298007535}
-  slider: {fileID: 4958020329423038540}
+  ui: {fileID: 6279257356405680755}
+  testCollectionData: {fileID: 0}
+  testPools: {fileID: 0}
+  isTest: 0
 --- !u!65 &8990291290228029611
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -340,6 +343,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6279257356405680755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650141460142429460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3114740875ad54bb91e64691de7412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectionSliderCanvas: {fileID: 5516434785298007535}
+  collectionSlider: {fileID: 4958020329423038540}
 --- !u!1 &8420696687826770948
 GameObject:
   m_ObjectHideFlags: 0

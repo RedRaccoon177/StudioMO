@@ -12,7 +12,11 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public partial class PlayerController : MonoBehaviour
 {
     [Header("곡괭이 히트박스")]
-    public Collider pickaxeHitbox;
+    public GameObject pickaxeHitbox;
+
+    [Header("플레이어 곡괭이 모델")]
+    [SerializeField]
+    private GameObject pickaxe;
 
     [Header("VR 인풋 액션")]
     [SerializeField]
@@ -26,9 +30,16 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject playerModel;
 
+    [Header("플레이어 오른쪽 컨트롤러")]
+    [SerializeField]
+    private GameObject rightController;
+
     [Header("플레이어 피격 범위")]
     [SerializeField]
     private Collider playerHitBox;
+
+    [Header("플레이어 자원 보유랑")]
+    [Range(0,100)] public float resourcesAmount;
 
     [Space (10)][SerializeField]
     private PickaxeController playerPickaxe;
@@ -45,21 +56,21 @@ public partial class PlayerController : MonoBehaviour
 
     private InputAction leftHandMove;
     private InputAction leftHandGrip;
-    private InputAction leftHandTrigger;
+    private InputAction leftHandTrigger; //아직 안씀
 
 
     private float moveSpeed;
 
     private Vector2 moveInput;
 
-    public IPlayerState currentState;
+    private IPlayerState currentState;
 
     private PlayerStateName nowState;
 
     #region 플레이어에게 필요한 필드들
+
     [Header("행동불능 상태 시간")]
     public float groggyStateTime = 30f;
-    public bool isGroggyAndinvincibleState = false;
 
     [Header("무적 상태 시간")]
     public float invincibleStateTime = 3f;
@@ -69,11 +80,11 @@ public partial class PlayerController : MonoBehaviour
 
     [Header("넉백 면역 상태 시간")]
     public float solidStateTime = 1f;
+
     #endregion
 
     private void Awake()
     {
-        //TODO: 추후 네트워크 접목 시킬 때 수정해야함.
         playerInput = actionManager.actionAssets[0];
     }
 
@@ -113,6 +124,15 @@ public partial class PlayerController : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
+        Debug.Log(nowState);
+
+        pickaxe.transform.position = rightController.transform.position;
+        pickaxe.transform.rotation = rightController.transform.rotation;
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            HitBullet();
+        }
     }
 
     private void FixedUpdate()
@@ -137,6 +157,8 @@ public partial class PlayerController : MonoBehaviour
          Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
          playerModel.transform.rotation = targetRotation;
 
+       
+
         //xr device simulator용 이동 코드
 
         //Vector3 camPos = headCameraPos.transform.position;
@@ -149,7 +171,7 @@ public partial class PlayerController : MonoBehaviour
     /// <summary>
     /// 탄막 접촉 시 플레이어 행동불능 상태 함수
     /// </summary>
-    public void HitBullet()
+    void HitBullet()
     {
         ChangeState(new GroggyState());
     }

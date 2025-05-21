@@ -7,60 +7,38 @@ public class CollectionPool : MonoBehaviour
     // ▼ 스크립터블 오브젝트 담을 리스트
     [SerializeField] List<CollectionData> collectionDatas;
 
-    // ▼ 각 채집물 이름별로 큐를 만들어 오브젝트를 딕셔너리에 저장
-    Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
+    // ▼ 각 채집 데이터별 오브젝트 풀 저장소
+    Dictionary<CollectionData, Queue<GameObject>> pools = new();
 
+    // ▼ 오브젝트 풀 초기화 함수
     public void Initialize()
     {
-        // ▼ 이름 중복 카운트용 딕셔너리
-        Dictionary<string, int> nameCount = new Dictionary<string, int>();
-
-        Queue<GameObject> collectionDataQueue;
-
+        // ▼ 모든 채집 데이터 순회
         foreach (var collectionData in collectionDatas)
         {
-            string baseName = collectionData.collectionName;
+            // ▼ 각 채집 데이터마다 독립적인 오브젝트 큐 생성
+            Queue<GameObject> queue = new();
 
-            // 이름 중복 검사 : 이름이 처음 나온거면 값 0으로 등록
-            if (!nameCount.ContainsKey(baseName))
+            for (int i = 0; i < 10; i++)        // 초기 풀 크기 10개
             {
-                nameCount[baseName] = 0;
-            }
-            else
-            {
-                nameCount[baseName]++;  // 처음 아니라면 숫자 증가
-            }
-
-            string uniqueName = baseName;
-
-            if (nameCount[baseName] > 0)
-            {
-                uniqueName = baseName + "_" + nameCount[baseName];
+                // ▼ 프리팹으로부터 새 오브젝트 생성
+                var obj = Instantiate(collectionData.collectionPrefab, transform);
+                obj.SetActive(false);           // 꺼주고
+                queue.Enqueue(obj);             // 큐에 넣고
             }
 
-            collectionData.collectionName = uniqueName;
-
-            collectionDataQueue = new Queue<GameObject>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var obj = Instantiate(collectionData.collectionPrefab);
-                obj.SetActive(false);
-                obj.transform.parent = this.transform;
-                collectionDataQueue.Enqueue(obj);
-            }
-
-            pools.Add(uniqueName, collectionDataQueue);
+            // ▼ 해당 데이터와 큐를 딕셔너리에 등록
+            pools[collectionData] = queue;
         }
     }
 
     // 풀에서 오브젝트 꺼내는 함수
-    public GameObject GetObject(string collectionName)
+    public GameObject GetObject(CollectionData data)
     {
-        // 풀에 받아온 오브젝트와 같은 이름이 있으면서, 해당 오브젝트가 있다면
-        if (pools.ContainsKey(collectionName) && pools[collectionName].Count > 0)
+        // 해당 데이터의 풀 큐가 존재하고, 큐에 오브젝트가 있다면?
+        if (pools.TryGetValue(data, out var queue) && queue.Count > 0)
         {
-            GameObject obj = pools[collectionName].Dequeue();  // 풀에서 해당 오브젝트 빼와서 담고
+            GameObject obj = queue.Dequeue();  // 큐에서 하나 꺼내고
             obj.SetActive(true);        // 켜주고
             return obj;                 // 그 오브젝트 반환
         }
@@ -68,10 +46,10 @@ public class CollectionPool : MonoBehaviour
     }
     
     // 풀에다가 다시 오브젝트를 반환해서 넣어주는 함수
-    public void ReturnObject(string collectionName, GameObject obj)
+    public void ReturnObject(CollectionData data, GameObject obj)
     {
-        obj.SetActive(false);
-        pools[collectionName].Enqueue(obj);
+        obj.SetActive(false);           // 비활성화 처리
+        pools[data].Enqueue(obj);       // 큐에 다시 넣기
     }
 
     public List<CollectionData> GetCollectionDataList()

@@ -1,30 +1,14 @@
 using UnityEngine;
-using Photon.Pun;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(PhotonView))]
-[RequireComponent(typeof(PhotonTransformView))]
-[RequireComponent(typeof(PhotonAnimatorView))]
-[RequireComponent(typeof(PhotonRigidbodyView))]
-public class TestObject : MonoBehaviourPunCallbacks
+public class TestObject : MonoBehaviour
 {
-    [PunRPC]
-    private void SetActive(bool value)
+    private void OnValidate()
     {
-        gameObject.SetActive(value);
-    }
-
-    public void Initialize()
-    {
-        SetActive(false);
-        if (PhotonNetwork.InRoom == true)
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        if(rectTransform != null)
         {
-            photonView.RPC("SetActive", RpcTarget.OthersBuffered, false);
+            Debug.Log(rectTransform.sizeDelta);
         }
-    }
-
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player player)
-    {
-
     }
 }
