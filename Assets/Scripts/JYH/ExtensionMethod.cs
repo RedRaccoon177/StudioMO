@@ -25,6 +25,14 @@ public static class ExtensionMethod
         }
     }
 
+    public static void Fill(this Image image, float value)
+    {
+        if(image != null)
+        {
+            image.fillAmount = value;
+        }
+    }
+
     public static void SetActive(this TMP_Text tmpText, bool value)
     {
         if (tmpText != null)
