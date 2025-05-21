@@ -36,6 +36,7 @@ public class PlayerCtrlManager : MonoBehaviour
     private void Awake()
     {
         photon = GetComponent<PhotonView>();
+        localPlayerController = localPlayer.GetComponent<Player_Test>();
         inputAsset = actionManager.actionAssets[0];
     }
 
@@ -47,8 +48,9 @@ public class PlayerCtrlManager : MonoBehaviour
             return;
         }
 
-        Camera localCamera = GetComponentInChildren<Camera>();
+        localPlayerController.SetXR(mainXROrigin.Camera,mainXROrigin);
 
+        Camera localCamera = GetComponentInChildren<Camera>();
 
         rightHandInterActionMap = inputAsset.FindActionMap("XRI RightHand Interaction");
         leftHandInterActionMap = inputAsset.FindActionMap("XRI LeftHand Interaction");

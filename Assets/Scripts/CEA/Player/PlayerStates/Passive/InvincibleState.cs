@@ -34,7 +34,7 @@ public class InvincibleState : IPlayerState
     {
         yield return new WaitForSeconds(_player.invincibleStateTime);
 
-        _player.isGroggyAndinvincibleState = false;
+        //_player.isGroggyAndinvincibleState = false;
         _player.ChangeState(new IdleState());
     }
 }

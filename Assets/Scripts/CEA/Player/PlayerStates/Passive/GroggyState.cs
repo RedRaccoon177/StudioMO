@@ -7,7 +7,6 @@ public class GroggyState : IPlayerState
 {
     MonoBehaviour _mono;
     Player_Test _player;
-    PlayerController _player;
     Coroutine _delayCoroutine;
 
     public void EnterState(Player_Test player)
@@ -34,7 +33,7 @@ public class GroggyState : IPlayerState
 
     IEnumerator StartAfterDelay()
     {
-        _player.isGroggyAndinvincibleState = true;
+        //_player.isGroggyAndinvincibleState = true;
 
         yield return new WaitForSeconds(_player.groggyStateTime);
         

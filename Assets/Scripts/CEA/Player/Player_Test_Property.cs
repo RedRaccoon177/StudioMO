@@ -40,7 +40,6 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
         set { moveOn = value; }
     }
 
-
     public bool RightSelectOn
     {
         get { return rightSelectOn; }

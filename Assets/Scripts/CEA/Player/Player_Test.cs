@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using Unity.XR.CoreUtils;
 
 //TODO: 나중에 구현 다 끝나면 클래스명 Player_Test -> Player로 바꿔야함
 [DisallowMultipleComponent]
@@ -18,11 +19,18 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     [Header("왼손"), SerializeField]
     private Transform leftHandTransform;
 
+    [Header("왼손 컨트롤러"), SerializeField]
+    private GameObject leftController;
+
     [Header("오른손"), SerializeField]
     private Transform rightHandTransform;
 
-    [Header("카메라 위치")]
-    private Camera cameraPos;
+    [Header("오른손 컨트롤러"), SerializeField]
+    private GameObject rightController;
+
+    private Camera playerCamera;
+
+    private XROrigin mainXROrigin;
 
     [Space(10)][SerializeField]
     private DynamicMoveProvider moveProvider;
@@ -53,8 +61,6 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     {
         moveSpeed = moveProvider.moveSpeed;
 
-        cameraPos = Camera.main;
-
         //TODO: new IdleState()같이 new들 GC생각해서 추후 다 재사용으로 전환하기
         ChangeState(new IdleState());
     }
@@ -74,9 +80,16 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
 
             currentState.UpdateState(this);
             currentState.UpdateState(this);
-            Vector3 camEuler = cameraPos.transform.eulerAngles;
-            Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
-            headTransform.rotation = targetRotation;
+
+            if (playerCamera != null)
+            {
+                Vector3 camEuler = playerCamera.transform.eulerAngles;
+                Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
+                headTransform.rotation = targetRotation;
+            }
+
+            rightHandTransform.Set(rightController.transform.position,rightController.transform.rotation);
+            leftHandTransform.Set(leftController.transform.position, leftController.transform.rotation);
         }
     }
 
@@ -86,6 +99,7 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
         {
             currentState.FixedUpdateState(this);
 
+            Debug.Log(MoveOn);
             if (MoveOn)
             {
                 playerMove();
@@ -95,16 +109,22 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
 
     public void playerMove() //플레이어 움직임
     {
-        Vector3 camForward = cameraPos.transform.forward;
-        Vector3 camRight = cameraPos.transform.right;
+        Vector3 originForward = mainXROrigin.transform.forward;
+        Vector3 originRight = mainXROrigin.transform.right;
 
-        camForward.y = 0;
-        camRight.y = 0;
-        camForward.Normalize();
-        camRight.Normalize();
+        originForward.y = 0;
+        originRight.y = 0;
+        originForward.Normalize();
+        originRight.Normalize();
 
-        Vector3 moveDirection = camForward * moveInput.y + camRight * moveInput.x;
+        Vector3 moveDirection = originForward * moveInput.y + originRight * moveInput.x;
         transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+    }
+
+    public void SetXR(Camera xrCamera, XROrigin xrOrigin)
+    {
+        playerCamera = xrCamera;
+        mainXROrigin = xrOrigin;
     }
 
     //플레이어가 고개를 돌릴 때 호출되는 함수 
