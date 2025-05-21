@@ -101,6 +101,7 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
             currentState.FixedUpdateState(this);
 
             Debug.Log(MoveOn);
+
             if (MoveOn)
             {
                 playerMove();
@@ -158,6 +159,4 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
             rightHandTransform.Set(position, rotation);
         }
     }
-
-
 }

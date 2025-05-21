@@ -15,7 +15,11 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     //왼쪽 컨트롤러 조이스틱 (이동)
     public void OnMove(Vector2 input)
     {
-        moveOn = input != Vector2.zero;
+        if (input != Vector2.zero)
+        {
+            MoveOn = true;
+        }
+
         moveInput = input;
     }
 
@@ -23,6 +27,7 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     public void OnRightSelect(bool isPressed)
     {
         rightSelectOn = isPressed;
+
         if (!isPressed)
         {
             //pickaxeHitbox.SetActive(false);

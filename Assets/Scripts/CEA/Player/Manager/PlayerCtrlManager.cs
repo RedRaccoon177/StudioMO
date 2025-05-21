@@ -48,10 +48,13 @@ public class PlayerCtrlManager : MonoBehaviour
             return;
         }
 
-        localPlayerController.SetXR(mainXROrigin.Camera,mainXROrigin);
+        localPlayerController.SetXR(mainXROrigin.Camera, mainXROrigin);
 
-        Camera localCamera = GetComponentInChildren<Camera>();
+        SetupInputActions();
+    }
 
+    private void SetupInputActions()
+    {
         rightHandInterActionMap = inputAsset.FindActionMap("XRI RightHand Interaction");
         leftHandInterActionMap = inputAsset.FindActionMap("XRI LeftHand Interaction");
         leftHandlocomotionMap = inputAsset.FindActionMap("XRI LeftHand Locomotion");
@@ -60,25 +63,54 @@ public class PlayerCtrlManager : MonoBehaviour
         leftSelectAction = leftHandInterActionMap.FindAction("Select");
         moveAction = leftHandlocomotionMap.FindAction("Move");
 
-        rightSelectAction.performed += ctx => localPlayerController?.OnRightSelect(true);
-        rightSelectAction.canceled += ctx => localPlayerController?.OnRightSelect(false);
 
-        leftSelectAction.performed += ctx => localPlayerController?.OnLeftSelect(true);
-        leftSelectAction.canceled += ctx => localPlayerController?.OnLeftSelect(false);
+        rightSelectAction.performed += OnRightSelect;
+        rightSelectAction.canceled += OnRightSelect;
 
-        moveAction.performed += ctx => localPlayerController?.OnMove(ctx.ReadValue<Vector2>());
-        moveAction.canceled += ctx => localPlayerController?.OnMove(Vector2.zero);
+        leftSelectAction.performed += OnLeftSelect;
+        leftSelectAction.canceled += OnLeftSelect;
 
-        rightSelectAction.Enable();
-        leftSelectAction.Enable();
-        moveAction.Enable();
-
-        localPlayerController = GetComponentInChildren<Player_Test>();
+        moveAction.performed += OnMove;
+        moveAction.canceled += OnMove;
     }
 
-
-    void Update()
+    private void OnRightSelect(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            localPlayerController.OnRightSelect(true);
+        }
 
+        else if (context.canceled)
+        {
+            localPlayerController.OnRightSelect(false);
+        }
+    }
+
+    private void OnLeftSelect(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            localPlayerController.OnLeftSelect(true);
+        }
+
+        else if (context.canceled)
+        {
+            localPlayerController.OnLeftSelect(false);
+        }
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Vector2 moveInput = context.ReadValue<Vector2>();
+            localPlayerController.OnMove(moveInput);
+        }
+
+        else if (context.canceled)
+        {
+            localPlayerController.OnMove(Vector2.zero);
+        }
     }
 }
