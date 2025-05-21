@@ -24,28 +24,28 @@ public class GuidedBulletSpawner : MonoBehaviour
 
     public void FireGuidedBullet()
     {
-        Bounds bounds = wallCollider.bounds;
-        Vector3 spawnPos = transform.position;
+        Bounds _bounds = wallCollider.bounds;
+        Vector3 _spawnPos = transform.position;
 
-        bool useX = bounds.size.x > bounds.size.z;
+        bool _useX = _bounds.size.x > _bounds.size.z;
 
-        if (useX)
+        if (_useX)
         {
-            float randX = Random.Range(bounds.min.x, bounds.max.x);
-            spawnPos = new Vector3(randX, transform.position.y, transform.position.z);
+            float _randX = Random.Range(_bounds.min.x, _bounds.max.x);
+            _spawnPos = new Vector3(_randX, transform.position.y, transform.position.z);
         }
         else
         {
-            float randZ = Random.Range(bounds.min.z, bounds.max.z);
-            spawnPos = new Vector3(transform.position.x, transform.position.y, randZ);
+            float _randZ = Random.Range(_bounds.min.z, _bounds.max.z);
+            _spawnPos = new Vector3(transform.position.x, transform.position.y, _randZ);
         }
 
-        GuidedBullet bullet = bulletPooling.GetBullet<GuidedBullet>();
-        bullet.transform.position = spawnPos;
+        GuidedBullet _bullet = bulletPooling.GetBullet<GuidedBullet>();
+        _bullet.transform.position = _spawnPos;
 
         // 정확히 플레이어를 향한 직선 방향
-        Vector3 fireDir = (player.transform.position - spawnPos).normalized;
+        Vector3 _fireDir = (player.transform.position - _spawnPos).normalized;
 
-        bullet.Initialize(fireDir);
+        _bullet.Initialize(_fireDir);
     }
 }

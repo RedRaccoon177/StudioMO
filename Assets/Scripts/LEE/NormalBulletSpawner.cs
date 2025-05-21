@@ -26,32 +26,31 @@ public class NormalBulletSpawner : MonoBehaviour
     public bool useAutoFire = true;
     #endregion
 
-
     public void FireNormalBullet()
     {
-        Bounds bounds = wallCollider.bounds;
-        Vector3 spawnPos = transform.position;
+        Bounds _bounds = wallCollider.bounds;
+        Vector3 _spawnPos = transform.position;
 
-        bool useX = bounds.size.x > bounds.size.z;
+        bool _useX = _bounds.size.x > _bounds.size.z;
 
-        if (useX)
+        if (_useX)
         {
-            float randX = Random.Range(bounds.min.x, bounds.max.x);
-            spawnPos = new Vector3(randX, transform.position.y, transform.position.z);
+            float randX = Random.Range(_bounds.min.x, _bounds.max.x);
+            _spawnPos = new Vector3(randX, transform.position.y, transform.position.z);
         }
         else
         {
-            float randZ = Random.Range(bounds.min.z, bounds.max.z);
-            spawnPos = new Vector3(transform.position.x, transform.position.y, randZ);
+            float randZ = Random.Range(_bounds.min.z, _bounds.max.z);
+            _spawnPos = new Vector3(transform.position.x, transform.position.y, randZ);
         }
 
-        NormalBullet bullet = bulletPooling.GetBullet<NormalBullet>();
-        bullet.transform.position = spawnPos;
+        NormalBullet _bullet = bulletPooling.GetBullet<NormalBullet>();
+        _bullet.transform.position = _spawnPos;
 
-        Vector3 fireDir = (mapCenter.transform.position - spawnPos).normalized;
-        float angleOffset = Random.Range(minusAngle, plusAngle);
-        fireDir = Quaternion.AngleAxis(angleOffset, Vector3.up) * fireDir;
+        Vector3 _fireDir = (mapCenter.transform.position - _spawnPos).normalized;
+        float _angleOffset = Random.Range(minusAngle, plusAngle);
+        _fireDir = Quaternion.AngleAxis(_angleOffset, Vector3.up) * _fireDir;
 
-        bullet.Initialize(fireDir.normalized);
+        _bullet.Initialize(_fireDir.normalized);
     }
 }
