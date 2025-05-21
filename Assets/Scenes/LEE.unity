@@ -282,7 +282,7 @@ MonoBehaviour:
   - effectName: VFX_MON001_Explode
     prefab: {fileID: 3334270714622040670, guid: ce1467fdc6485ea4f967f9fd3292bf09,
       type: 3}
-    autoReleaseTime: 0
+    autoReleaseTime: 3
     defaultCapacity: 50
     maxSize: 100
     parent: {fileID: 1325007302}
