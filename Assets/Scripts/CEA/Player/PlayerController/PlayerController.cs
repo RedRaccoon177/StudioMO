@@ -117,13 +117,13 @@ public partial class PlayerController : MonoBehaviour
     public void ChangeState(IPlayerState newState)
     {
         currentState = newState;
-        currentState.EnterState(this);
-        currentState.CheckNowState(this);
+        //currentState.EnterState(this);
+        //currentState.CheckNowState(this);
     }
 
     private void Update()
     {
-        currentState.UpdateState(this);
+        //currentState.UpdateState(this);
         Debug.Log(nowState);
 
         pickaxe.transform.position = rightController.transform.position;
@@ -137,7 +137,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        currentState.FixedUpdateState(this);
+        //currentState.FixedUpdateState(this);
 
         if(moveOn == true)
         {

@@ -6,9 +6,9 @@ using UnityEngine;
 public class InvincibleState : IPlayerState
 {
     MonoBehaviour _mono;
-    PlayerController _player;
+    Player_Test _player;
 
-    public void EnterState(PlayerController player)
+    public void EnterState(Player_Test player)
     {
         _player = player;
 
@@ -21,9 +21,9 @@ public class InvincibleState : IPlayerState
         _mono.StartCoroutine(StartAfterDelay());
     }
 
-    public void FixedUpdateState(PlayerController player) { }
-    public void UpdateState(PlayerController player) { }
-    public void CheckNowState(PlayerController player)
+    public void FixedUpdateState(Player_Test player) { }
+    public void UpdateState(Player_Test player) { }
+    public void CheckNowState(Player_Test player)
     {
         player.NowState = PlayerStateName.Invincible;
     }

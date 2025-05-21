@@ -11,7 +11,7 @@ public partial class PlayerController : MonoBehaviour
     private bool leftSelectOn;
 
     //왼쪽 컨트롤러 조이스틱 (이동)
-    void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         if(context.performed)
         {
@@ -26,7 +26,7 @@ public partial class PlayerController : MonoBehaviour
     }
 
     //오른쪽 컨트롤러 그립 버튼 (select) 
-    void OnRightSelect(InputAction.CallbackContext context)
+    public void OnRightSelect(InputAction.CallbackContext context)
     {
         if(context.performed)
         {
@@ -41,7 +41,7 @@ public partial class PlayerController : MonoBehaviour
     }
 
     //왼쪽 컨트롤러 그립 버튼 (select)
-    void OnLeftSelect(InputAction.CallbackContext context)
+    public void OnLeftSelect(InputAction.CallbackContext context)
     {
         if (context.performed)
         {

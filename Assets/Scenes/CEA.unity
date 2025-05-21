@@ -6441,6 +6441,11 @@ PrefabInstance:
       objectReference: {fileID: 438296566}
     - target: {fileID: 5415203250509283254, guid: 74cc2560530ea2143960f62c1783bc9d,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415203250509283254, guid: 74cc2560530ea2143960f62c1783bc9d,
+        type: 3}
       propertyPath: moveProvider
       value: 
       objectReference: {fileID: 1404588809}

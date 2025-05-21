@@ -28,10 +28,6 @@ public class StageManager : Manager
         base.Update();
         if (player != null)
         {
-            if (Camera.main != null)
-            {
-                player.UpdateMove(Camera.main.transform.position, Camera.main.transform.rotation);
-            }
             if (leftHandTransform != null)
             {
                 player.UpdateLeftHand(leftHandTransform.position, leftHandTransform.rotation);

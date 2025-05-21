@@ -253,7 +253,7 @@ MonoBehaviour:
   rightHandTransform: {fileID: 164148733}
   objectPoolingBullet: {fileID: 0}
   timeLimitImage: {fileID: 0}
-  player: {fileID: 8892414332553252136}
+  player: {fileID: 0}
 --- !u!4 &76013260
 Transform:
   m_ObjectHideFlags: 0
@@ -524,6 +524,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!114 &613324849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9168142743249570444, guid: 895f6f3c2d334633b5800312285058d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1062850404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1e8c997df241c1a67045eeac79b41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &639354814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,8 +1339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainXROrigin: {fileID: 1062850409}
-  player: {fileID: 0}
-  actionManager: {fileID: 0}
+  localPlayer: {fileID: 43583530430838969}
+  actionManager: {fileID: 1668815854}
 --- !u!114 &1476645421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1836,11 +1848,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8849620900630237119, guid: 2faa115f526cfbb40ae698aa255b8084,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8849620900630237119, guid: 2faa115f526cfbb40ae698aa255b8084, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1594546191412479637, guid: 2faa115f526cfbb40ae698aa255b8084,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8892414332553252137}
   m_SourcePrefab: {fileID: 100100000, guid: 2faa115f526cfbb40ae698aa255b8084, type: 3}
+--- !u!1 &43583530430838969 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1594546191412479637, guid: 2faa115f526cfbb40ae698aa255b8084,
+    type: 3}
+  m_PrefabInstance: {fileID: 43583530430838968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &43583530430838970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5730291955205923919, guid: 2faa115f526cfbb40ae698aa255b8084,
+    type: 3}
+  m_PrefabInstance: {fileID: 43583530430838968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &43583530430838971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9022421994880071880, guid: 2faa115f526cfbb40ae698aa255b8084,
+    type: 3}
+  m_PrefabInstance: {fileID: 43583530430838968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &43583530430838972 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7612864520149850281, guid: 2faa115f526cfbb40ae698aa255b8084,
+    type: 3}
+  m_PrefabInstance: {fileID: 43583530430838968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &62512118495354669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1877,18 +1923,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8892414332553252136 stripped
+--- !u!114 &8892414332553252137
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8849620900630237119, guid: 2faa115f526cfbb40ae698aa255b8084,
-    type: 3}
-  m_PrefabInstance: {fileID: 43583530430838968}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 43583530430838969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685cd0b454c11344c84719e00184d975, type: 3}
+  m_Script: {fileID: 11500000, guid: 95b58a5b896a4ee428e82af486935cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerModel: {fileID: 43583530430838969}
+  headTransform: {fileID: 43583530430838972}
+  leftHandTransform: {fileID: 43583530430838971}
+  rightHandTransform: {fileID: 43583530430838970}
+  moveProvider: {fileID: 613324849}
+  groggyStateTime: 30
+  invincibleStateTime: 3
+  knockbackStateTime: 1
+  solidStateTime: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
