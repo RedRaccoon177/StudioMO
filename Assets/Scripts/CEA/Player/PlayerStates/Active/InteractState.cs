@@ -7,7 +7,7 @@ public class InteractState : IPlayerState
 {
     public void EnterState(PlayerController player)
     {
-        player.pickaxeHitbox.gameObject.SetActive(true);
+        player.pickaxeHitbox.SetActive(true);
     }
 
     public void UpdateState(PlayerController player)

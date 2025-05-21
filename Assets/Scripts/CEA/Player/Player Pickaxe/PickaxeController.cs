@@ -7,8 +7,6 @@ public class PickaxeController : MonoBehaviour
 {
     private PlayerController player;
 
-    public GameObject[] hitboxs;
-
     private float normalSuccessGage = 10; //일반 성공 시 게이지 상승량
     private float perfectSuccessGage = 25; //대성공 시 게이지 상승량
 

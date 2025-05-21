@@ -12,9 +12,9 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public partial class PlayerController : MonoBehaviour
 {
     [Header("°î±ªÀÌ È÷Æ®¹Ú½º")]
-    public Collider pickaxeHitbox;
+    public GameObject pickaxeHitbox;
 
-    [Header("ÇÃ·¹ÀÌ¾î °î±ªÀÌ")]
+    [Header("ÇÃ·¹ÀÌ¾î °î±ªÀÌ ¸ðµ¨")]
     [SerializeField]
     private GameObject pickaxe;
 
