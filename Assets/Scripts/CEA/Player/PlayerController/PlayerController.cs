@@ -81,6 +81,8 @@ public partial class PlayerController : MonoBehaviour
     [Header("넉백 면역 상태 시간")]
     public float solidStateTime = 1f;
 
+    public bool isGroggyAndinvincibleState;
+
     #endregion
 
     private void Awake()
@@ -171,7 +173,7 @@ public partial class PlayerController : MonoBehaviour
     /// <summary>
     /// 탄막 접촉 시 플레이어 행동불능 상태 함수
     /// </summary>
-    void HitBullet()
+    public void HitBullet()
     {
         ChangeState(new GroggyState());
     }
