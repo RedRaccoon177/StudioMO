@@ -16,6 +16,6 @@ public class CollectionUICtrl : MonoBehaviour
     // ▼ 채집물 슬라이더 UI 숨김
     public void HideCollectionSlider() => collectionSliderCanvas.enabled = false;
 
-    // ▼ 채집물 슬라이더 ( 0 ~ 1 ) 사이 비율로 값 조절
-    public void SliderValueUpdate(float ratio) => collectionSlider.value = ratio; 
+    // ▼ 채집물 슬라이더 0 ~ 100 값 조절
+    public void SliderValueUpdate(float value) => collectionSlider.value = value; 
 }

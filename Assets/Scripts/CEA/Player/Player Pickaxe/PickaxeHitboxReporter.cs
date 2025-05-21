@@ -25,6 +25,13 @@ public class PickaxeHitboxReporter : MonoBehaviour
         {
             item = other.gameObject.GetComponent<CollectionObject>();  
             controller.ReportHit(hitboxID , item);
+
+            if (!item.IsCollecting)
+            {
+                item.StartCollecting(player.transform);
+            }
+
+            item.TryAddCollectGage();
         }
     }
 }

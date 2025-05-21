@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 6279257356405680755}
+  selfColider: {fileID: 8990291290228029611}
   testCollectionData: {fileID: 0}
   testPools: {fileID: 0}
   isTest: 0

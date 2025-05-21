@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1112730054389950918}
+  selfColider: {fileID: 4280317278077020831}
   testCollectionData: {fileID: 0}
   testPools: {fileID: 0}
   isTest: 0
