@@ -77,6 +77,11 @@ public class PlayerCtrlManager : MonoBehaviour
     }
 
 
+    public void Set(Player player)
+    {
+
+    }
+
     void Update()
     {
 

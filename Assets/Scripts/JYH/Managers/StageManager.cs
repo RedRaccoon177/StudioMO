@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(PlayerCtrlManager))]
 public class StageManager : Manager
 {
     public static readonly string SceneName = "StageScene";
@@ -24,6 +25,22 @@ public class StageManager : Manager
     private TMP_Text goalText;
     [SerializeField, Range(0, int.MaxValue)]
     private uint goalMinValue = 50;
+
+    private bool hasPlayerCtrlManager = false;
+
+    private PlayerCtrlManager playerCtrlManager = null;
+
+    private PlayerCtrlManager getPlayerCtrlManager {
+        get
+        {
+            if(hasPlayerCtrlManager == false)
+            {
+                playerCtrlManager = GetComponent<PlayerCtrlManager>();
+                hasPlayerCtrlManager = true;
+            }
+            return playerCtrlManager;
+        }
+    }
 
     private ObjectPoolingBullet objectPoolingBullet;
 
