@@ -9,17 +9,20 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class CollectionSpawner : MonoBehaviour
 {
     [SerializeField] private CollectionPool poolManager;        // 오브젝트 풀 참조
-    [SerializeField] private BoxCollider spawnArea;             // 채집물을 생성할 박스 범위
 
-    [SerializeField] private int spawnCount = 5;                // 시작 시 종류별 생성 갯수
+    [Header("박스 콜라이더 감지 조절값 범위, 생성 시도 횟수")]
+    [SerializeField] private BoxCollider spawnArea;             // 채집물을 생성할 박스 범위
     [SerializeField] private float overlapRadius = 0.6f;        // 생성 겹침 감지 범위
     [SerializeField] private int maxSpawnAttempts = 20;         // 겹치지 않게 생성하는 시도 횟수
 
+    [Header("채집물 초기 생성 갯수, 자동 생성 주기(초), 최대 생성 수")]
+    [SerializeField] private int spawnCount = 5;                // 시작 시 종류별 생성 갯수
+    [SerializeField] private float spawnInterval = 10f;          // 채집물 자동 생성 주기
+    [SerializeField] private int maxCountCollection = 20;        // 채집물 최대 생성 수 제한
+
+
     // ▼ 현재 맵에 존재중인 채집물 리스트 ( 채집물 갯수 확인 위함 )
     private List<GameObject> activeCollections = new();
-
-    private float spawnInterval = 10f;          // 채집물 자동 생성 주기
-    private int maxCountCollection = 20;        // 채집물 최대 생성 수 제한
 
     private void Start()
     {
@@ -48,7 +51,7 @@ public class CollectionSpawner : MonoBehaviour
                     {
                         obj.transform.position = pos;       // 위치 지정
                         obj.transform.SetParent(poolManager.transform, true);   // 부모 설정
-                        obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager);
+                        obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager, this);
                         activeCollections.Add(obj);         // 활성화 리스트에 등록
                         count++;
                     }                    
@@ -106,7 +109,7 @@ public class CollectionSpawner : MonoBehaviour
 
             obj.transform.position = pos;                               // 위치 지정
             obj.transform.SetParent(poolManager.transform, true);       // 부모 설정
-            obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager); //초기화
+            obj.GetComponent<CollectionObject>().InitializeCollectionObject(data, poolManager, this); //초기화
             activeCollections.Add(obj);     // 활성화 리스트에 등록
         }
     }
