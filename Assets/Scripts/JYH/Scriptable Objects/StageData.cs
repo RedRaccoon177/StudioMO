@@ -59,6 +59,11 @@ public class StageData : ScriptableObject
     [Header("맵"), SerializeField]
     private GameObject mapObject;
 
+    [Header("탄막 테스트 에셋"), SerializeField]
+    private TextAsset bulletTextAsset;
+
+    //
+
     //언어별 음악명 텍스트를 반환하는 메서드
     public string GetMusicText(Translation.Language language)
     {
@@ -81,5 +86,11 @@ public class StageData : ScriptableObject
     public GameObject GetMapObject()
     {
         return mapObject;
+    }
+
+    //탄막 테스트 에셋을 반환하는 메서드
+    public TextAsset GetBulletTextAsset()
+    {
+        return bulletTextAsset;
     }
 }
