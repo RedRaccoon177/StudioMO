@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 캔버스 하위 패널의 영역들을 전체 화면 기준으로 크기를 조절해주는 클래스
+/// </summary>
 [ExecuteAlways]
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Canvas))]
@@ -23,22 +26,6 @@ public class ScaleAdjustor : MonoBehaviour
         }
     }
 
-    private bool hasCanvas = false;
-
-    private Canvas canvas = null;
-
-    private Canvas getCanvas {
-        get
-        {
-            if (hasCanvas == false)
-            {
-                canvas = GetComponent<Canvas>();
-                hasCanvas = true;
-            }
-            return canvas;
-        }
-    }
-
     /// <summary>
     /// 하위 패널을 조정하는 프레임
     /// </summary>
@@ -56,8 +43,11 @@ public class ScaleAdjustor : MonoBehaviour
                 float x = size.x / this.size.x;
                 float y = size.y / this.size.y;
                 Vector3 localScale = rectTransform.localScale;
-                localScale.x = x;
-                localScale.y = y;
+                if(rectTransform.parent != null && rectTransform.parent.localScale == Vector3.one)
+                {
+                    localScale.x = x;
+                    localScale.y = y;
+                }
                 rectTransform.localScale = localScale;
                 float z = rectTransform.position.z;
                 rectTransform.position = new Vector3(position.x + (this.position.x * x), position.y + (this.position.y * y), z);
