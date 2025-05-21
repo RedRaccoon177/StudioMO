@@ -34,7 +34,17 @@ public class GuidedBullet : MonoBehaviour, IBullet
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Structures"))
+        if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponentInParent<PlayerController>();
+
+            if (player.isGroggyAndinvincibleState == false)
+            {
+                player.HitBullet();
+                _guidedBulletPool?.Release(this);
+            }
+        }
+        else if (other.CompareTag("Structures"))
         {
             _guidedBulletPool?.Release(this);
         }

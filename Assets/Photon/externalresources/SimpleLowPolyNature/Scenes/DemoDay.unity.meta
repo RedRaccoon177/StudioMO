@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ExternalResources/INab Studio/Post Processing Assets/Toon Detailer/URP 2022.unitypackage.meta
+guid: ad160bc768049dd44a153aae3594911f
+========
 guid: f9bfd62eec33da548bced2060e0fb618
+>>>>>>>> Develop:Assets/Photon/externalresources/SimpleLowPolyNature/Scenes/DemoDay.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -7,10 +7,12 @@ public class InvincibleState : IPlayerState
 {
     MonoBehaviour _mono;
     PlayerController _player;
+    Coroutine _delayCoroutine;
 
     public void EnterState(PlayerController player)
     {
         _player = player;
+        _mono = player;
 
         //TODO
         //- 애니메이션 실행
@@ -18,7 +20,7 @@ public class InvincibleState : IPlayerState
         //- 이팩트 실행
 
         //- 코루틴을 실행시켜서 30초 동안 참거짓으로 막아두기?
-        _mono.StartCoroutine(StartAfterDelay());
+        _delayCoroutine = _mono.StartCoroutine(StartAfterDelay());
     }
 
     public void FixedUpdateState(PlayerController player) { }
@@ -32,6 +34,7 @@ public class InvincibleState : IPlayerState
     {
         yield return new WaitForSeconds(_player.invincibleStateTime);
 
+        _player.isGroggyAndinvincibleState = false;
         _player.ChangeState(new IdleState());
     }
 }
