@@ -24,6 +24,9 @@ public class NormalBulletSpawner : MonoBehaviour
 
     [Header("BPM 기반 여부 (false 시 CSV로만 발사됨)")]
     public bool useAutoFire = true;
+
+    //이펙트 오브젝트 풀링 매니져
+    public EffectPoolManager effectPoolManager;
     #endregion
 
     public void FireNormalBullet()

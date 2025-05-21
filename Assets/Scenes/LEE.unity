@@ -271,6 +271,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d32a673762c614f90b96a9b1b35a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effects:
+  - effectName: MON002_Indicator
+    prefab: {fileID: 4411616956781530420, guid: 8be5b1b8b98554449a26b32430330ada,
+      type: 3}
+    autoReleaseTime: 0
+    defaultCapacity: 50
+    maxSize: 100
+    parent: {fileID: 1620634498}
+  - effectName: VFX_MON001_Explode
+    prefab: {fileID: 3334270714622040670, guid: ce1467fdc6485ea4f967f9fd3292bf09,
+      type: 3}
+    autoReleaseTime: 0
+    defaultCapacity: 50
+    maxSize: 100
+    parent: {fileID: 1325007302}
 --- !u!4 &566504074
 Transform:
   m_ObjectHideFlags: 0
@@ -283,7 +298,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1620634498}
+  - {fileID: 1325007302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576673074
@@ -614,6 +631,7 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
+  effectPoolManager: {fileID: 0}
 --- !u!114 &675268196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +952,7 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
+  effectPoolManager: {fileID: 0}
 --- !u!114 &947426229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1302,6 +1321,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &1325007301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325007302}
+  m_Layer: 0
+  m_Name: VFX_MON001_Explode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1325007302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325007301}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 566504074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1479783701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1481,7 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
+  effectPoolManager: {fileID: 0}
 --- !u!114 &1479783707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,6 +1514,37 @@ MonoBehaviour:
   player: {fileID: 2134522047}
   wallCollider: {fileID: 1479783703}
   useAutoFire: 1
+--- !u!1 &1620634497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1620634498}
+  m_Layer: 0
+  m_Name: NormalBulletIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1620634498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620634497}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 566504074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667669780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1834,7 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
+  effectPoolManager: {fileID: 0}
 --- !u!114 &1873887096
 MonoBehaviour:
   m_ObjectHideFlags: 0
