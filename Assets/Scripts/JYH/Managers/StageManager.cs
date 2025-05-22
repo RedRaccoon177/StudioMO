@@ -1,24 +1,47 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
+[RequireComponent(typeof(PlayerCtrlManager))]
 public class StageManager : Manager
 {
     public static readonly string SceneName = "StageScene";
 
     [Header(nameof(StageManager))]
     [SerializeField]
-    private Transform leftHandTransform;
+    private TMP_Text timeText;
     [SerializeField]
-    private Transform rightHandTransform;
+    private Image timeImage;
+    private float timeCurrentValue = 0.0f;
+    [SerializeField, Range(0, int.MaxValue)]
+    private float timeMaxValue = 0.0f;
 
     [SerializeField]
+    private TMP_Text gatheringText;
+    [SerializeField]
+    private Image gatheringImage;
+
+    [SerializeField]
+    private TMP_Text goalMinText;
+    private uint goalMinValue = 0;
+
+    private bool hasPlayerCtrlManager = false;
+
+    private PlayerCtrlManager playerCtrlManager = null;
+
+    private PlayerCtrlManager getPlayerCtrlManager {
+        get
+        {
+            if(hasPlayerCtrlManager == false)
+            {
+                playerCtrlManager = GetComponent<PlayerCtrlManager>();
+                hasPlayerCtrlManager = true;
+            }
+            return playerCtrlManager;
+        }
+    }
+
     private ObjectPoolingBullet objectPoolingBullet;
-
-    [Header("배경음악")]
-    [SerializeField]
-    private Image timeLimitImage;
-    private float timeLimitCurrentValue = 0.0f;
-    private float timeLimitMaxValue = 0.0f;
 
     [SerializeField]
     private Player player;
@@ -26,21 +49,15 @@ public class StageManager : Manager
     protected override void Update()
     {
         base.Update();
-        if (player != null)
+        if (timeCurrentValue > 0)
         {
-            if (leftHandTransform != null)
+            timeCurrentValue -= Time.deltaTime;
+            if (timeCurrentValue < 0)
             {
-                player.UpdateLeftHand(leftHandTransform.position, leftHandTransform.rotation);
-            }
-            if (rightHandTransform != null)
-            {
-                player.UpdateRightHand(rightHandTransform.position, rightHandTransform.rotation);
+                timeCurrentValue = 0;   //게임 종료
             }
         }
-        if (timeLimitMaxValue > 0)
-        {
-            timeLimitMaxValue -= Time.deltaTime;
-        }
+        timeImage.Fill(timeMaxValue > 0 ? timeCurrentValue/timeMaxValue : 1);
     }
 
     protected override void Initialize()
@@ -53,10 +70,16 @@ public class StageManager : Manager
             {
                 Instantiate(gameObject, Vector3.zero, Quaternion.identity);
             }
+            goalMinValue = stageData.GetGoalMinValue();
         }
+        timeCurrentValue = timeMaxValue;
+        gatheringText.Set(Translation.Get(Translation.Letter.Goal) + ": " + goalMinValue);
+        gatheringImage.Fill(goalMinValue > 0 ? 0 : 1);
+
     }
 
     protected override void ChangeText()
     {
+
     }
 }

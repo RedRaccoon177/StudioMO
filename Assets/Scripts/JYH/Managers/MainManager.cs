@@ -198,7 +198,7 @@ public class MainManager : Manager
         pvpButton.SetText(Translation.Get(Translation.Letter.PVP), tmpFontAsset);
         storeButton.SetText(Translation.Get(Translation.Letter.Store), tmpFontAsset);
         optionButton.SetText(Translation.Get(Translation.Letter.Option), tmpFontAsset);
-        exitButton.SetText(Translation.Get(Translation.Letter.Exit), tmpFontAsset);
+        exitButton.SetText(Translation.Get(Translation.Letter.ExitGame), tmpFontAsset);
         stageSelectPanel?.ChangeText();
         exitPanel?.ChangeText();
     }

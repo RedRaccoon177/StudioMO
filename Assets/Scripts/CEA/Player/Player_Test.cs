@@ -36,6 +36,7 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     [Space(10)][SerializeField]
     private DynamicMoveProvider moveProvider;
 
+    [Header("움직임 속도"),SerializeField]
     private float moveSpeed;
 
     private Vector2 moveInput;
@@ -101,6 +102,7 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
             currentState.FixedUpdateState(this);
 
             Debug.Log(MoveOn);
+
             if (MoveOn)
             {
                 playerMove();
@@ -158,6 +160,4 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
             rightHandTransform.Set(position, rotation);
         }
     }
-
-
 }
