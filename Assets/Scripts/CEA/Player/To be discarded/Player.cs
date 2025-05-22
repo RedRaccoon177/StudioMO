@@ -125,7 +125,7 @@ public partial class Player : MonoBehaviourPunCallbacks
         Vector3 cameraForward = playerCamera.transform.forward;
         Vector3 cameraRight = playerCamera.transform.right;
 
-        cameraForward.y = 0;
+        cameraForward.y = 0;  
         cameraRight.y = 0;
 
         cameraForward.Normalize();
