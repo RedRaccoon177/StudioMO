@@ -15,9 +15,11 @@ public class InvincibleState : IPlayerState
         _mono = player;
 
         //TODO
-        //- 애니메이션 실행
-        //- 사운드 실행
-        //- 이팩트 실행
+        // - 애니메이션 실행
+        // - 사운드 실행
+        // - 이팩트 실행
+
+        // - 움직임 정지 해제
 
         //- 코루틴을 실행시켜서 30초 동안 참거짓으로 막아두기?
         _delayCoroutine = _mono.StartCoroutine(StartAfterDelay());

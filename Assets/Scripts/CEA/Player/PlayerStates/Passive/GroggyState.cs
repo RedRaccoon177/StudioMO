@@ -21,6 +21,8 @@ public class GroggyState : IPlayerState
         //- 사운드 실행
         //- 이팩트 실행
 
+        //- 움직임 정지 시키기
+
         _delayCoroutine = _mono.StartCoroutine(StartAfterDelay());
     }
 

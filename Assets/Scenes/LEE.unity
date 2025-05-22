@@ -631,7 +631,6 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
-  effectPoolManager: {fileID: 0}
 --- !u!114 &675268196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,7 +997,6 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
-  effectPoolManager: {fileID: 0}
 --- !u!114 &947426229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,7 +1525,6 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
-  effectPoolManager: {fileID: 0}
 --- !u!114 &1479783707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,7 +1683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf84d9baff230fc4bbf3382a064d3b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFile: {fileID: 4900000, guid: 1957c14e16cd742439c41d9a60965886, type: 3}
+  csvFile: {fileID: 4900000, guid: fcc16741c12dbc94c9f37695a18dce19, type: 3}
   patternData: []
 --- !u!4 &1850332163
 Transform:
@@ -1880,7 +1877,6 @@ MonoBehaviour:
   plusAngle: 90
   minusAngle: -90
   useAutoFire: 1
-  effectPoolManager: {fileID: 0}
 --- !u!114 &1873887096
 MonoBehaviour:
   m_ObjectHideFlags: 0
