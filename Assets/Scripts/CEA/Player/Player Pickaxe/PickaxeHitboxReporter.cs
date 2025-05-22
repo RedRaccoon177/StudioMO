@@ -1,42 +1,60 @@
-using Photon.Realtime;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 //곡괭이 하위 히트박스에 붙는 스크립트(광물과 상호작용한 자신에 대한 정보 반환)
 public class PickaxeHitboxReporter : MonoBehaviour
 {
-    public string hitboxID;
+    private Dictionary<Mineral, bool> minerals = new Dictionary<Mineral, bool>();
 
-    private PickaxeController controller;
-
-    PlayerController player;
-
-    void Awake()
-    {
-        player = GetComponentInParent<PlayerController>();
-        controller = GetComponentInParent<PickaxeController>();
-    }
+    private static readonly string ContactTagName = "Interactable";
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable") /*&& player.RightSelectOn*/)
+        if(other.tag == ContactTagName)
         {
-            // ▼ 충돌한 오브젝트에 CollectionObject 스크립트가 있는지 체크
-            CollectionObject item = other.GetComponent<CollectionObject>();
-
-            // ▼ 없으면 return
-            if (item == null) return;
-
-            // ▼ 채집물 채집중 상태가 아니라면
-            if (!item.IsCollecting)
+            Mineral mineral = other.GetComponent<Mineral>();
+            if(mineral != null && minerals.ContainsKey(mineral) == false)
             {
-                // ▼ 채집 슬라이더 표시하고 채집 시작
-                item.StartCollecting(player.transform);
+                minerals.Add(mineral, false);
             }
-
-            controller.ReportHit(hitboxID, item);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == ContactTagName)
+        {
+            Mineral mineral = other.GetComponent<Mineral>();
+            if (mineral != null && minerals.ContainsKey(mineral) == true)
+            {
+                minerals.Remove(mineral);
+            }
+        }
+    }
+
+    public IEnumerable<Mineral> GetMinerals()
+    {
+        List<Mineral> list = new List<Mineral>();
+        Dictionary<Mineral, bool> dictionary = minerals.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        foreach (KeyValuePair<Mineral, bool> keyValuePair in dictionary)
+        {
+            Mineral mineral = keyValuePair.Key;
+            if (keyValuePair.Value == false)
+            {
+                if (mineral.collectable == true)
+                {
+                    list.Add(mineral);
+                    minerals[mineral] = true;
+                }
+            }
+            else
+            {
+#if UNITY_EDITOR
+                Debug.LogWarning(mineral.name + ":채집한 광물을 다시 채집하려면 곡괭이가 광물 콜라이더를 벗어났다가 다시 다가가야 합니다.");
+#endif
+            }
+        }
+        return list;
     }
 }

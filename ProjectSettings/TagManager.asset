@@ -8,7 +8,7 @@ TagManager:
   - Structures
   - OreNode
   - Aura
-  - Mineral
+  - Bullet
   layers:
   - Default
   - TransparentFX

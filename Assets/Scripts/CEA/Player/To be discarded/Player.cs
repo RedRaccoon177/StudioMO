@@ -39,12 +39,16 @@ public partial class Player : MonoBehaviourPunCallbacks
     [Header("무적 지속 시간"), Range(0, int.MaxValue)]
     private float invincibleTime = 3f;
 
-    private bool faintingState = false;
+    public bool faintingState {
+        private set;
+        get;
+    }
+
     private float specialStateTime = 0;
 
     private uint mineral = 0;   //채굴한 광물의 양
 
-    public event Action<uint> mineralReporter;
+    public static event Action<Player, uint> mineralReporter;
 
     public float knockbackStateTime;
     public float groggyStateTime;
@@ -128,7 +132,7 @@ public partial class Player : MonoBehaviourPunCallbacks
     }
 
 #if UNITY_EDITOR
-    [SerializeField]
+    [Header("무적 모드"), SerializeField]
     private bool invincibleMode = false;
 #endif
 
@@ -156,6 +160,6 @@ public partial class Player : MonoBehaviourPunCallbacks
     public void AddMineral(uint value)
     {
         mineral += value;
-        mineralReporter?.Invoke(mineral);
+        mineralReporter?.Invoke(this, mineral);
     }
 }

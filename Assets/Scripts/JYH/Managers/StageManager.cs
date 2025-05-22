@@ -49,6 +49,9 @@ public class StageManager : Manager
     [SerializeField]
     private Vector3 rightHandOffset;
 
+    [Header("곡괭이"), SerializeField]
+    private PickaxeController pickaxe;
+
     [Header("남은 시간")]
     [SerializeField]
     private TMP_Text currentTimeText;                           //현재 시간 텍스트
@@ -110,16 +113,18 @@ public class StageManager : Manager
     {
         base.OnEnable();
         leftInputAction.Set(true, OnLeftSelect, OnLeftSelect);
-        rightInputAction.Set(true, OnRightSelect, OnRightSelect);
+        rightInputAction.Set(true, OnRightSelect);
         moveInputAction.Set(true, OnMoveSelect, OnMoveSelect);
+        Player.mineralReporter += (player, value) => { SetCurrentGathering(value); };
     }
 
     public override void OnDisable()
     {
         base.OnDisable();
         leftInputAction.Set(false, OnLeftSelect, OnLeftSelect);
-        rightInputAction.Set(false, OnRightSelect, OnRightSelect);
+        rightInputAction.Set(false, OnRightSelect);
         moveInputAction.Set(false, OnMoveSelect, OnMoveSelect);
+        Player.mineralReporter -= (player, value) => { SetCurrentGathering(value); };
     }
 
     [SerializeField]
@@ -178,23 +183,24 @@ public class StageManager : Manager
 
     private void OnRightSelect(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if(CanPlaying() == true && player != null && player.faintingState == false && pickaxe != null)
         {
-        }
-        else if (context.canceled)
-        {
+            player.AddMineral(pickaxe.GetMineralCount());
         }
     }
 
     private void OnMoveSelect(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (CanPlaying() == true)
         {
-            player?.UpdateMove(context.ReadValue<Vector2>());
-        }
-        else if (context.canceled)
-        {
-            player?.UpdateMove(Vector2.zero);
+            if (context.performed)
+            {
+                player?.UpdateMove(context.ReadValue<Vector2>());
+            }
+            else if (context.canceled)
+            {
+                player?.UpdateMove(Vector2.zero);
+            }
         }
     }
 
@@ -202,5 +208,10 @@ public class StageManager : Manager
     {
         currentMineralText.Set(value.ToString());
         currentMineralImage.Fill(goalMineralValue > 0 ? (float)value / goalMineralValue : 1);
+    }
+
+    private bool CanPlaying()
+    {
+        return currentTimeValue > 0 /*|| currentTimeValue == limitTimeValue*/;
     }
 }
