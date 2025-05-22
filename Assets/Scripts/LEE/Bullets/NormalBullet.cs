@@ -7,7 +7,6 @@ using UnityEngine.Pool;
 public class NormalBullet : MonoBehaviour, IBullet
 {
     #region 탄막 기본 필드
-
     // 이 탄막을 관리하는 오브젝트 풀
     IObjectPool<NormalBullet> _normalBulletPool;
 
@@ -19,7 +18,6 @@ public class NormalBullet : MonoBehaviour, IBullet
 
     // 인디케이터 오브젝트 (풀링 사용)
     GameObject currentIndicatorInstance;
-
     #endregion
 
     #region 풀 관련

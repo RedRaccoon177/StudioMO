@@ -1,44 +1,37 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-/// <summary>
-/// 유도 탄막(Bullet) 클래스 -> 탄막(인식)
-/// </summary>
 public class GuidedBullet : MonoBehaviour, IBullet
 {
     #region 탄막(인식) 필드
-    // 이 탄막을 관리하는 오브젝트 풀
     IObjectPool<GuidedBullet> _guidedBulletPool;
-
-    // 이동 방향
     Vector3 moveDirection;
-
-    // 이동 속도
     public float speed = 3f;
+    GameObject currentIndicatorInstance;
     #endregion
 
-    /// <summary>
-    /// 풀 매니저로부터 자신을 관리할 풀을 할당
-    /// </summary>
     public void SetPool<T>(IObjectPool<T> pool) where T : Component
     {
         _guidedBulletPool = pool as IObjectPool<GuidedBullet>;
     }
 
-    #region Update, OnTriggerEnter
     void Update()
     {
-        // TODO: 추후 PUN2 고려해서 변경 가능
         transform.position += moveDirection * speed * Time.deltaTime;
+
+        // 인디케이터 위치 갱신
+        if (currentIndicatorInstance != null)
+        {
+            UpdateIndicator();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
-
-            if (player.isGroggyAndinvincibleState == false)
+            var player = other.GetComponentInParent<PlayerController>();
+            if (!player.isGroggyAndinvincibleState)
             {
                 player.HitBullet();
                 _guidedBulletPool?.Release(this);
@@ -49,23 +42,55 @@ public class GuidedBullet : MonoBehaviour, IBullet
             _guidedBulletPool?.Release(this);
         }
     }
-    #endregion
 
-    #region 생성 시 실행될 함수들
-    /// <summary>
-    /// 풀에서 꺼내질 때 호출되는 초기화 함수
-    /// </summary>
-    public void OnSpawn()
+    void OnDisable()
     {
-        // TODO: 생성 이펙트 또는 상태 초기화 처리
+        // 사라짐 이펙트 출력
+        EffectPoolManager.Instance.SpawnEffect("VFX_MON001_Explode", transform.position, Quaternion.identity);
+
+        // 인디케이터 반납
+        if (currentIndicatorInstance != null)
+        {
+            EffectPoolManager.Instance.ReleaseEffect("MON002_Indicator", currentIndicatorInstance);
+            currentIndicatorInstance = null;
+        }
     }
 
-    /// <summary>
-    /// 발사될 때 이동 방향을 설정
-    /// </summary>
+    public void OnSpawn()
+    {
+        // 기존 인디케이터 정리
+        if (currentIndicatorInstance != null)
+        {
+            EffectPoolManager.Instance.ReleaseEffect("MON002_Indicator", currentIndicatorInstance);
+            currentIndicatorInstance = null;
+        }
+
+        // 인디케이터 새로 꺼내서 위치 초기화
+        currentIndicatorInstance = EffectPoolManager.Instance.GetEffect("MON002_Indicator");
+        if (currentIndicatorInstance != null)
+        {
+            currentIndicatorInstance.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
+            UpdateIndicator();
+        }
+    }
+
     public void Initialize(Vector3 direction)
     {
         moveDirection = direction.normalized;
     }
-    #endregion
+
+    void UpdateIndicator()
+    {
+        if (currentIndicatorInstance == null) return;
+
+        var lr = currentIndicatorInstance.GetComponent<LineRenderer>();
+        if (lr != null)
+        {
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, transform.position + moveDirection.normalized * 2f);
+        }
+
+        currentIndicatorInstance.transform.position = transform.position;
+        currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
+    }
 }
