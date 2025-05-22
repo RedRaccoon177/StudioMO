@@ -22,9 +22,8 @@ public class StageManager : Manager
     private Image gatheringImage;
 
     [SerializeField]
-    private TMP_Text goalText;
-    [SerializeField, Range(0, int.MaxValue)]
-    private uint goalMinValue = 50;
+    private TMP_Text goalMinText;
+    private uint goalMinValue = 0;
 
     private bool hasPlayerCtrlManager = false;
 
@@ -71,18 +70,16 @@ public class StageManager : Manager
             {
                 Instantiate(gameObject, Vector3.zero, Quaternion.identity);
             }
+            goalMinValue = stageData.GetGoalMinValue();
         }
         timeCurrentValue = timeMaxValue;
-        SetCurrentGathering(0);
+        gatheringText.Set(Translation.Get(Translation.Letter.Goal) + ": " + goalMinValue);
+        gatheringImage.Fill(goalMinValue > 0 ? 0 : 1);
+
     }
 
     protected override void ChangeText()
     {
 
-    }
-
-    private void SetCurrentGathering(uint value)
-    {
-        gatheringImage.Fill(goalMinValue > 0 ? value / goalMinValue : 1);
     }
 }
