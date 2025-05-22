@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MoveState : IPlayerState
 {
-    public void EnterState(PlayerController player)
+    public void EnterState(Player_Test player)
     {
 
     }
 
-    public void UpdateState(PlayerController player)
+    public void UpdateState(Player_Test player)
     {
         if (player.MoveOn == false)
         {
@@ -24,12 +24,12 @@ public class MoveState : IPlayerState
         }
     }
 
-    public void FixedUpdateState(PlayerController player)
+    public void FixedUpdateState(Player_Test player)
     {
         //MovePlayerModelPosition(player);
     } 
 
-    private void MovePlayerModelPosition(PlayerController player)
+    private void MovePlayerModelPosition(Player_Test player)
     {
         #region move
         //Vector3 camForward = player.HeadCameraPos.transform.forward;
@@ -50,7 +50,7 @@ public class MoveState : IPlayerState
         #endregion
     }
 
-    public void CheckNowState(PlayerController player)
+    public void CheckNowState(Player_Test player)
     {
         player.NowState = PlayerStateName.Move;
     }

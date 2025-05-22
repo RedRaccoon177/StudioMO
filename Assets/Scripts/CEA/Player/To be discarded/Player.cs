@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Photon.Pun;
 
@@ -11,6 +12,10 @@ public class Player : MonoBehaviourPunCallbacks
     private Transform leftHandTransform;
     [Header("오른손"), SerializeField]
     private Transform rightHandTransform;
+
+    private uint mineral = 0;   //채굴한 광물의 양
+
+    public event Action<uint> mineralReporter;
 
     //플레이어가 고개를 돌릴 때 호출되는 함수
     public void UpdateMove(Vector3 position, Quaternion rotation)
@@ -41,5 +46,12 @@ public class Player : MonoBehaviourPunCallbacks
         {
             rightHandTransform.Set(position, rotation);
         }
+    }
+
+    //광물을 획득한 현재 양을 적용시켜주는 함수
+    public void AddMineral(uint value)
+    {
+        mineral += value;
+        mineralReporter?.Invoke(mineral);
     }
 }

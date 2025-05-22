@@ -22,9 +22,9 @@ public class MainManager : Manager
     [SerializeField, Range(0, float.MaxValue)]
     private float pivotMoveTime = 1;
     private bool startKeyDown = false;
-    private static readonly float ObjectHideZoneY = -7.025f;
-    private static readonly Vector3 StartPosition = new Vector3(0, 1.36145f, 0);
-    private static readonly Vector3 EndPosition = new Vector3(0, -9.83855f, 0);
+    private static readonly float ObjectHideZoneY = -12.50436f;
+    private static readonly Vector3 StartPosition = new Vector3(0, 1.36144f, 0);
+    private static readonly Vector3 EndPosition = new Vector3(0, -17.26856f, 0);
 
     [Header("초기 진입창")]
     [SerializeField]
@@ -198,7 +198,7 @@ public class MainManager : Manager
         pvpButton.SetText(Translation.Get(Translation.Letter.PVP), tmpFontAsset);
         storeButton.SetText(Translation.Get(Translation.Letter.Store), tmpFontAsset);
         optionButton.SetText(Translation.Get(Translation.Letter.Option), tmpFontAsset);
-        exitButton.SetText(Translation.Get(Translation.Letter.Exit), tmpFontAsset);
+        exitButton.SetText(Translation.Get(Translation.Letter.ExitGame), tmpFontAsset);
         stageSelectPanel?.ChangeText();
         exitPanel?.ChangeText();
     }

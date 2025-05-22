@@ -21,7 +21,7 @@ public class ExitPanel : Panel
     public override void ChangeText()
     {
         base.ChangeText();
-        noticeText.Set(Translation.Get(Translation.Letter.DoYouWantToQuit), tmpFontAsset);
+        noticeText.Set(Translation.Get(Translation.Letter.Areyousurewanttoexit), tmpFontAsset);
         //exitText.Set(Translation.Get(Translation.Letter.Exit));
         //cancelText.Set(Translation.Get(Translation.Letter.Cancel));
     }

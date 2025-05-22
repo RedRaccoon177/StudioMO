@@ -26,6 +26,11 @@ public class ScaleAdjustor : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
+    [SerializeField]
+    private RectTransform selectedRectTransform = null;
+#endif
+
     /// <summary>
     /// 하위 패널을 조정하는 프레임
     /// </summary>
@@ -84,8 +89,6 @@ public class ScaleAdjustor : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    [SerializeField]
-    private RectTransform selectedRectTransform = null;
 
     [ContextMenu("선택한 렉트 트랜스폼의 절대 위치 확인")]
     private void Log()

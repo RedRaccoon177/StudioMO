@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
+//곡괭이 하위 히트박스에 붙는 스크립트(광물과 상호작용한 자신에 대한 정보 반환)
 public class PickaxeHitboxReporter : MonoBehaviour
 {
     public string hitboxID;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
+//모든 히트박스를 총괄하여 상호작용 가능 물체와 상호작용하는 스크립트
 public class PickaxeController : MonoBehaviour
 {
     private PlayerController player;

@@ -5,22 +5,22 @@ using UnityEngine;
 //넉백 면역 상태
 public class SolidState : IPlayerState
 {
-    public void EnterState(PlayerController player)
+    public void EnterState(Player_Test player)
     {
 
     }
 
-    public void FixedUpdateState(PlayerController player)
+    public void FixedUpdateState(Player_Test player)
     {
 
     }
 
-    public void UpdateState(PlayerController player)
+    public void UpdateState(Player_Test player)
     {
 
     }
 
-    public void CheckNowState(PlayerController player)
+    public void CheckNowState(Player_Test player)
     {
         player.NowState = PlayerStateName.Solid;
     }

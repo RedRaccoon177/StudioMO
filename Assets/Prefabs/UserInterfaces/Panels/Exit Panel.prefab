@@ -543,7 +543,7 @@ RectTransform:
   m_GameObject: {fileID: 6617814012060197188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.004, y: 0.004, z: 0.004}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2734827277919509846}
@@ -619,7 +619,7 @@ Animator:
   m_GameObject: {fileID: 6617814012060197188}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da4df2af14f078241b1a6ff38b62bf81, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3e54b6217880cd44f97e2ded2765079f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -830,7 +830,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC8C\uC784\uC744 \n\uC885\uB8CC\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  m_text: "\uAC8C\uC784\uC744 \n\uC885\uB8CC \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05a655a197b7a9645b10e625b68da686, type: 2}
   m_sharedMaterial: {fileID: -7853904899199214455, guid: 05a655a197b7a9645b10e625b68da686,
