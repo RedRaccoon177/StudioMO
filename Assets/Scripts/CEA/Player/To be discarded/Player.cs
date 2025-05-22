@@ -39,7 +39,14 @@ public partial class Player : MonoBehaviourPunCallbacks
 
     private IPlayerState currentState;
 
-    private PlayerStateName nowState;
+    public PlayerStateName NowState;
+
+    public bool MoveOn;
+
+    public bool RightSelectOn;
+
+    public bool LeftSelectOn;
+
 
 
     [Header("행동불능 상태 시간")]
