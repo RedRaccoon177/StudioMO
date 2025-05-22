@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[RequireComponent(typeof(PlayerCtrlManager))]
 [RequireComponent(typeof(BulletPatternLoader))]
 public class StageManager : Manager
 {
@@ -29,22 +28,6 @@ public class StageManager : Manager
 
     [SerializeField]
     private AudioSource audioSource;
-
-    private bool hasPlayerCtrlManager = false;
-
-    private PlayerCtrlManager playerCtrlManager = null;
-
-    private PlayerCtrlManager getPlayerCtrlManager {
-        get
-        {
-            if(hasPlayerCtrlManager == false)
-            {
-                playerCtrlManager = GetComponent<PlayerCtrlManager>();
-                hasPlayerCtrlManager = true;
-            }
-            return playerCtrlManager;
-        }
-    }
 
     private bool hasBulletPatternLoader = false;
 
