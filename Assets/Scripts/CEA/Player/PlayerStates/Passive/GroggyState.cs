@@ -6,10 +6,10 @@ using UnityEngine;
 public class GroggyState : IPlayerState
 {
     MonoBehaviour _mono;
-    Player_Test _player;
+    Player _player;
     Coroutine _delayCoroutine;
 
-    public void EnterState(Player_Test player)
+    public void EnterState(Player player)
     {
         Debug.Log("그로기 실행됨");
 
@@ -24,9 +24,9 @@ public class GroggyState : IPlayerState
         _delayCoroutine = _mono.StartCoroutine(StartAfterDelay());
     }
 
-    public void UpdateState(Player_Test player) { }
-    public void FixedUpdateState(Player_Test player) { }
-    public void CheckNowState(Player_Test player)
+    public void UpdateState(Player player) { }
+    public void FixedUpdateState(Player player) { }
+    public void CheckNowState(Player player)
     {
         player.NowState = PlayerStateName.Groggy;
     }

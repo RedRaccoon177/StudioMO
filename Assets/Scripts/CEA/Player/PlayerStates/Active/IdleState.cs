@@ -5,12 +5,12 @@ using UnityEngine;
 //평상 시 상태
 public class IdleState : IPlayerState
 {
-    public void EnterState(Player_Test player)
+    public void EnterState(Player player)
     {
 
     }
 
-    public void UpdateState(Player_Test player)
+    public void UpdateState(Player player)
     {
         if(player.MoveOn == true)
         {
@@ -32,12 +32,12 @@ public class IdleState : IPlayerState
         
     }
 
-    public void FixedUpdateState(Player_Test player)
+    public void FixedUpdateState(Player player)
     {
 
     }
 
-    public void CheckNowState(Player_Test player)
+    public void CheckNowState(Player player)
     {
         player.NowState = PlayerStateName.Idle;
     }

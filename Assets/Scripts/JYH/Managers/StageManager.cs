@@ -24,7 +24,11 @@ public class StageManager : Manager
 
     [SerializeField]
     private TMP_Text goalMinText;
+    [SerializeField]
     private uint goalMinValue = 0;
+
+    [SerializeField]
+    private AudioSource audioSource;
 
     private bool hasPlayerCtrlManager = false;
 
@@ -70,16 +74,24 @@ public class StageManager : Manager
             if (timeCurrentValue < 0)
             {
                 timeCurrentValue = 0;   //게임 종료
+                if(xrOrigin != null && xrOrigin.CameraFloorOffsetObject != null)
+                {
+                    fixedPosition = xrOrigin.CameraFloorOffsetObject.transform.position;
+                }
             }
         }
         timeText.Set(timeCurrentValue.ToString());
         timeImage.Fill(timeMaxValue > 0 ? timeCurrentValue/timeMaxValue : 1);
     }
 
+    [SerializeField]
+    private StageData test;
+
     protected override void Initialize()
     {
-        StageData stageData = StageData.current;
-        if(stageData != null)
+        StageData stageData = test;
+        //StageData stageData = StageData.current;
+        if (stageData != null)
         {
             GameObject gameObject = stageData.GetMapObject();
             if(gameObject != null)
@@ -88,7 +100,17 @@ public class StageManager : Manager
             }
             goalMinValue = stageData.GetGoalMinValue();
             TextAsset bulletTextAsset = stageData.GetBulletTextAsset();
-            //getBulletPatternLoader.Set(bulletTextAsset);
+            getBulletPatternLoader.SetCSVData(bulletTextAsset);
+            if (audioSource != null)
+            {
+                AudioClip audioClip = stageData.GetAudioClip();
+                if (audioClip != null)
+                {
+                    audioSource.clip = audioClip;
+                    timeMaxValue = audioClip.length;
+                    audioSource.Play();
+                }
+            }
         }
         timeCurrentValue = timeMaxValue;
         SetCurrentGathering(0);

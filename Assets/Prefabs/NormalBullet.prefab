@@ -119,3 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  indicatorPrefab: {fileID: 4411616956781530420, guid: 8be5b1b8b98554449a26b32430330ada,
+    type: 3}

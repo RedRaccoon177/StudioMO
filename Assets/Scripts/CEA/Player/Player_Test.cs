@@ -59,7 +59,14 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     public float solidStateTime = 1f;
     #endregion
 
-    public void Start()
+    private void Awake()
+    {
+        PlayerCtrlManager manager = FindObjectOfType<PlayerCtrlManager>();
+        //manager.Set(this);
+        Debug.Log(manager.ToString());
+    }
+
+    private void Start()
     {
         moveSpeed = moveProvider.moveSpeed;
 
@@ -70,8 +77,8 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     public void ChangeState(IPlayerState newState)
     {
         currentState = newState;
-        currentState.EnterState(this);
-        currentState.CheckNowState(this);
+        //currentState.EnterState(this);
+        //currentState.CheckNowState(this);
     }
 
     public void Update()
@@ -80,8 +87,8 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
         {
             Debug.Log(nowState);
 
-            currentState.UpdateState(this);
-            currentState.UpdateState(this);
+            //currentState.UpdateState(this);
+            //currentState.UpdateState(this);
 
             if (playerCamera != null)
             {
@@ -99,14 +106,16 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     {
         if(photonView.IsMine)
         {
-            currentState.FixedUpdateState(this);
+            //currentState.FixedUpdateState(this);
 
-            Debug.Log(MoveOn);
+            //Debug.Log(MoveOn);
 
-            if (MoveOn)
+            //if (MoveOn)
             {
                 playerMove();
             }
+
+            playerModel.transform.position = transform.position;
         }
     }
 

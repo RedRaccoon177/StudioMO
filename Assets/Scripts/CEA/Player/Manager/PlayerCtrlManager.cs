@@ -31,29 +31,14 @@ public class PlayerCtrlManager : MonoBehaviour
     private InputAction moveAction;
     #endregion
 
-    private Player_Test localPlayerController;
+    private Player localPlayerController;
 
     private void Awake()
     {
-        return;
         photon = GetComponent<PhotonView>();
-        localPlayerController = localPlayer.GetComponent<Player_Test>();
         inputAsset = actionManager.actionAssets[0];
     }
 
-
-    private void Start()
-    {
-        return;
-        if (!photon.IsMine)
-        {
-            return;
-        }
-
-        localPlayerController.SetXR(mainXROrigin.Camera, mainXROrigin);
-
-        SetupInputActions();
-    }
 
     private void SetupInputActions()
     {
@@ -104,13 +89,14 @@ public class PlayerCtrlManager : MonoBehaviour
 
     public void Set(Player player)
     {
+        localPlayer = player.gameObject;
+        localPlayerController = player;
 
+        localPlayerController.SetXR(mainXROrigin.Camera, mainXROrigin);
+
+        SetupInputActions();
     }
 
-    void Update()
-    { 
-
-    }
     private void OnMove(InputAction.CallbackContext context)
     {
         if (context.performed)
