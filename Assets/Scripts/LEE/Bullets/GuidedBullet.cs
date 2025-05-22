@@ -62,7 +62,7 @@ public class GuidedBullet : MonoBehaviour, IBullet
             var player = other.GetComponentInParent<Player>();
             if (player)
             {
-                //player.Hit();
+                player.Hit();
                 _guidedBulletPool?.Release(this);
             }
         }
