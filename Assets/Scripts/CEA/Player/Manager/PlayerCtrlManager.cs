@@ -106,7 +106,9 @@ public class PlayerCtrlManager : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
+
+    }
     private void OnMove(InputAction.CallbackContext context)
     {
         if (context.performed)
