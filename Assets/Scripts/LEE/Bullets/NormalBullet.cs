@@ -6,8 +6,8 @@ using UnityEngine.Pool;
 /// </summary>
 public class NormalBullet : MonoBehaviour, IBullet
 {
-    #region 탄막 기본 필드
-    // 이 탄막을 관리하는 오브젝트 풀
+    #region 탄막(비인식) 필드
+    // 탄막을 관리하는 오브젝트 풀
     IObjectPool<NormalBullet> _normalBulletPool;
 
     // 이동 방향
@@ -20,8 +20,7 @@ public class NormalBullet : MonoBehaviour, IBullet
     GameObject currentIndicatorInstance;
     #endregion
 
-    #region 풀 관련
-
+    #region 오브젝트 풀 관련
     // 오브젝트 풀에서 꺼낼 때 호출됨
     public void SetPool<T>(IObjectPool<T> pool) where T : Component
     {
@@ -57,24 +56,17 @@ public class NormalBullet : MonoBehaviour, IBullet
     #region Update & 충돌 처리
     void Update()
     {
-        // 탄막 이동
-        transform.position += moveDirection * speed * Time.deltaTime;
-
-        // 인디케이터 위치 갱신
-        if (currentIndicatorInstance != null)
-        {
-            UpdateIndicator();
-        }
+        BulletUpdate();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            var player = other.GetComponentInParent<PlayerController>();
-            if (!player.isGroggyAndinvincibleState)
+            var player = other.GetComponentInParent<Player>();
+            if (player)
             {
-                player.HitBullet();
+                //player.Hit();
                 _normalBulletPool?.Release(this);
             }
         }
@@ -99,8 +91,23 @@ public class NormalBullet : MonoBehaviour, IBullet
     }
     #endregion
 
-    #region 인디케이터 관련
-    // 인디케이터 위치 및 회전 갱신
+    #region 실시간 행동 함수들
+    /// <summary>
+    /// Bullet 실시간 업데이트 필요한 함수
+    /// </summary>
+    void BulletUpdate()
+    {
+        // 탄막 이동
+        transform.position += moveDirection * speed * Time.deltaTime;
+
+        // 인디케이터 위치 갱신
+        if (currentIndicatorInstance != null)
+        {
+            UpdateIndicator();
+        }
+    }
+
+    // Indicator VFX 위치 및 회전 갱신
     void UpdateIndicator()
     {
         if (currentIndicatorInstance == null) return;
@@ -120,6 +127,5 @@ public class NormalBullet : MonoBehaviour, IBullet
             currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
         }
     }
-
     #endregion
 }
