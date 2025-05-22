@@ -5,12 +5,12 @@ using UnityEngine;
 //상호작용 상태
 public class InteractState : IPlayerState
 {
-    public void EnterState(Player_Test player)
+    public void EnterState(Player player)
     {
         //player.pickaxeHitbox.SetActive(true);
     }
 
-    public void UpdateState(Player_Test player)
+    public void UpdateState(Player player)
     {
         if(player.RightSelectOn == false)
         {
@@ -18,12 +18,12 @@ public class InteractState : IPlayerState
         }
     }
 
-    public void FixedUpdateState(Player_Test player)
+    public void FixedUpdateState(Player player)
     {
 
     }
 
-    public void CheckNowState(Player_Test player)
+    public void CheckNowState(Player player)
     {
         player.NowState = PlayerStateName.Interact;
     }

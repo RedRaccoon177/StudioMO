@@ -1,23 +1,148 @@
 using System;
 using UnityEngine;
 using Photon.Pun;
+using Unity.XR.CoreUtils;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using ExitGames.Client.Photon.StructWrapping;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(PhotonView))]
-public class Player : MonoBehaviourPunCallbacks
+public partial class Player : MonoBehaviourPunCallbacks
 {
+    [Header("플레이어 모델링")]
+    [SerializeField]
+    private GameObject playerModel;
+
     [Header("머리"), SerializeField]
     private Transform headTransform;
+
     [Header("왼손"), SerializeField]
     private Transform leftHandTransform;
+
+    [Header("왼손 컨트롤러"), SerializeField]
+    private GameObject leftController;
+
     [Header("오른손"), SerializeField]
     private Transform rightHandTransform;
+
+    [Header("오른손 컨트롤러"), SerializeField]
+    private GameObject rightController;
+
+    private Camera playerCamera;
+
+    private XROrigin mainXROrigin;
+
+    [Space(10)]
+    [SerializeField]
+    private DynamicMoveProvider moveProvider;
+
+    [Header("움직임 속도"), SerializeField]
+    private float moveSpeed;
+
+    private Vector2 moveInput;
+
+    private IPlayerState currentState;
+
+    private PlayerStateName nowState;
+
+
+    [Header("행동불능 상태 시간")]
+    public float groggyStateTime = 30f;
+
+    [Header("무적 상태 시간")]
+    public float invincibleStateTime = 3f;
+
+    [Header("넉백 상태 시간")]
+    public float knockbackStateTime = 1f;
+
+    [Header("넉백 면역 상태 시간")]
+    public float solidStateTime = 1f;
 
     private uint mineral = 0;   //채굴한 광물의 양
 
     public event Action<uint> mineralReporter;
 
-    //플레이어가 고개를 돌릴 때 호출되는 함수
+    private void Awake()
+    {
+        PlayerCtrlManager manager = FindObjectOfType<PlayerCtrlManager>();
+        manager.Set(this);
+    }
+
+    private void Start()
+    {
+        moveSpeed = moveProvider.moveSpeed;
+
+        //TODO: new IdleState()같이 new들 GC생각해서 추후 다 재사용으로 전환하기
+        ChangeState(new IdleState());
+    }
+
+    public void ChangeState(IPlayerState newState)
+    {
+        currentState = newState;
+        currentState.EnterState(this);
+        currentState.CheckNowState(this);
+    }
+
+    public void Update()
+    {
+        if (photonView.IsMine)
+        {
+            Debug.Log(nowState);
+
+            currentState.UpdateState(this);
+            currentState.UpdateState(this);
+
+            if (playerCamera != null)
+            {
+                Vector3 camEuler = playerCamera.transform.eulerAngles;
+                Quaternion targetRotation = Quaternion.Euler(0, camEuler.y, 0);
+                headTransform.rotation = targetRotation;
+            }
+
+            rightHandTransform.Set(rightController.transform.position, rightController.transform.rotation);
+            leftHandTransform.Set(leftController.transform.position, leftController.transform.rotation);
+        }
+    }
+
+    public void FixedUpdate()
+    {
+        if (photonView.IsMine)
+        {
+            currentState.FixedUpdateState(this);
+
+            Debug.Log(MoveOn);
+
+            if (MoveOn)
+            {
+                playerMove();
+            }
+
+            playerModel.transform.position = transform.position;
+        }
+    }
+
+    public void playerMove() //플레이어 움직임
+    {
+        Vector3 originForward = playerCamera.transform.forward;
+        Vector3 originRight = playerCamera.transform.right;
+
+        originForward.y = 0;
+        originRight.y = 0;
+
+        originForward.Normalize();
+        originRight.Normalize();
+
+        Vector3 moveDirection = originForward * moveInput.y + originRight * moveInput.x;
+        transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+    }
+
+    public void SetXR(Camera xrCamera, XROrigin xrOrigin)
+    {
+        playerCamera = xrCamera;
+        mainXROrigin = xrOrigin;
+    }
+
+    //플레이어가 고개를 돌릴 때 호출되는 함수 
     public void UpdateMove(Vector3 position, Quaternion rotation)
     {
         if (photonView.IsMine == true)
@@ -47,6 +172,7 @@ public class Player : MonoBehaviourPunCallbacks
             rightHandTransform.Set(position, rotation);
         }
     }
+
 
     //광물을 획득한 현재 양을 적용시켜주는 함수
     public void AddMineral(uint value)

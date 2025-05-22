@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Player_Test : MonoBehaviourPunCallbacks
+public partial class Player : MonoBehaviourPunCallbacks
 {
 //프로퍼티 모음 스크립트
 

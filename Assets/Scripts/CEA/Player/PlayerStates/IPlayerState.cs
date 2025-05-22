@@ -4,10 +4,10 @@ using UnityEngine;
 
 public interface IPlayerState
 {
-    public void EnterState(Player_Test player);
-    public void UpdateState(Player_Test player);
-    public void FixedUpdateState(Player_Test player);
-    public void CheckNowState(Player_Test player);
+    public void EnterState(Player player);
+    public void UpdateState(Player player);
+    public void FixedUpdateState(Player player);
+    public void CheckNowState(Player player);
 }
 
 public enum PlayerStateName
