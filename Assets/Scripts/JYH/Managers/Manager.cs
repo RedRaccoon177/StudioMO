@@ -18,7 +18,7 @@ public abstract class Manager : MonoBehaviourPunCallbacks
 
     [Header(nameof(Manager))]
     [SerializeField]
-    private XROrigin xrOrigin;                      //XR 오리진을 사용하기 위한 변수
+    protected XROrigin xrOrigin;                    //XR 오리진을 사용하기 위한 변수
     protected Vector3? fixedPosition;               //위치 고정을 하기 위한 변수
 
     private static readonly string LanguageTag = "Language";
