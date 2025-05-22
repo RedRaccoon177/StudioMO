@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 //컨트롤러를 통해 입력받는 값, 입력 여부를 매핑하는 메서드를 모아놓은 스크립트입니다.
 [RequireComponent(typeof(PhotonView))]
-public partial class Player_Test : MonoBehaviourPunCallbacks
+public partial class Player : MonoBehaviourPunCallbacks
 {
     private bool moveOn;
     private bool rightSelectOn;

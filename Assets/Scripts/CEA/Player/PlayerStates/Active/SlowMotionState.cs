@@ -5,17 +5,17 @@ using UnityEngine;
 //특수능력 상태
 public class SlowMotionState : IPlayerState
 {
-    public void EnterState(Player_Test player)
+    public void EnterState(Player player)
     {
         SlowMotionOn();
     }
 
-    public void FixedUpdateState(Player_Test player)
+    public void FixedUpdateState(Player player)
     {
 
     }
 
-    public void UpdateState(Player_Test player)
+    public void UpdateState(Player player)
     {
         if(player.LeftSelectOn == false)
         {
@@ -34,7 +34,7 @@ public class SlowMotionState : IPlayerState
         Time.timeScale = 1.0f;
     }
 
-    public void CheckNowState(Player_Test player)
+    public void CheckNowState(Player player)
     {
         player.NowState = PlayerStateName.SlowMotion;
     }
