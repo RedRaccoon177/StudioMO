@@ -117,23 +117,26 @@ public partial class Player : MonoBehaviourPunCallbacks
                 playerMove();
             }
 
-            playerModel.transform.position = transform.position;
         }
     }
 
     public void playerMove() //플레이어 움직임
     {
-        Vector3 originForward = playerCamera.transform.forward;
-        Vector3 originRight = playerCamera.transform.right;
+        Vector3 cameraForward = playerCamera.transform.forward;
+        Vector3 cameraRight = playerCamera.transform.right;
 
-        originForward.y = 0;
-        originRight.y = 0;
+        cameraForward.y = 0;
+        cameraRight.y = 0;
 
-        originForward.Normalize();
-        originRight.Normalize();
+        cameraForward.Normalize();
+        cameraRight.Normalize();
 
-        Vector3 moveDirection = originForward * moveInput.y + originRight * moveInput.x;
-        transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+        Vector3 moveDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
+
+        Vector3 moveDelta = moveDirection * moveSpeed * Time.deltaTime;
+
+        mainXROrigin.transform.position += moveDelta;
+        playerModel.transform.position = mainXROrigin.transform.position;
     }
 
     public void SetXR(Camera xrCamera, XROrigin xrOrigin)
