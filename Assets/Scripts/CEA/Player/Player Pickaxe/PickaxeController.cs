@@ -16,6 +16,11 @@ public class PickaxeController : MonoBehaviour
 
     private float timerB = 0f;
 
+    private void Awake()
+    {
+        player = GetComponentInParent<PlayerController>();
+    }
+
     private void Update()
     {
         if (waitForB)
@@ -56,6 +61,7 @@ public class PickaxeController : MonoBehaviour
                 if(waitForB && (hitA || hitC)) //시간이 0.3초를 넘지 않았으며 a 또는 c에 닿았을 경우
                 {
                     Debug.Log("대성공");
+                    item.TryAddCollectGage(perfectSuccessGage);
                 }
 
                 ResetFlags();

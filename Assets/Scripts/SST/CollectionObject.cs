@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,18 +45,17 @@ public class CollectionObject : MonoBehaviour
     }
 
     // ▼ 채집물 슬라이더 값 증가 시도하는 함수 - 실제 게이지 누적하고 쿨타임 처리
-    public void TryAddCollectGage()
+    public void TryAddCollectGage(float value)
     {
         // ▼ 이미 채집이 완료 되었거나, 쿨타임 중이거나, 채집 상태가 아니라면 무시
         if (isCollected || isCoolTime || !isCollecting) return;
 
         isCoolTime = true;                  // 쿨타임 시작
 
-        AddCollectGauge(gagePerHit);        // 지정된 퍼센트만큼 게이지 누적
-
         selfColider.enabled = false;        // 콜라이더 잠깐 꺼서 중복 히트 방지
 
-        StartCoroutine(CoolTimeRoutine());  // 쿨타임 후 콜라이더 다시 활성화
+        // ▼ 게이지 증가 및 채집 완료 판단은 코루틴에서 하도록 바꿈
+        StartCoroutine(TryCollectGageCoroutine(value));
     }
 
     // 외부에서 강제로 채집 게이지를 채워 테스트할 수 있는 함수
@@ -89,10 +89,18 @@ public class CollectionObject : MonoBehaviour
         spawner.RemoveFromActiveList(this.gameObject);
     }
 
-    // 채집물 콜라이더 꺼졌다 / 켜졌다하는 쿨타임을 위한 코루틴
-    IEnumerator CoolTimeRoutine()
+    // 게이지 증가 및 채집 완료 판단은 코루틴에서
+    IEnumerator TryCollectGageCoroutine(float value)
     {
-        yield return new WaitForSeconds(coolTime);      // 정해진 시간 대기
+        AddCollectGauge(value);                         // 여기서 게이지 증가 및 채집 완료 여부 체크
+
+        // ▼ 채집 완료됬다면, 오브젝트 풀에 반환되고 비활성화되므로, 코루틴 종료
+        if (isCollected)
+        {
+            yield break;
+        }
+
+        yield return new WaitForSeconds(coolTime);      // 쿨타임 대기
         isCoolTime = false;                             // 쿨타임 해제
         selfColider.enabled = true;                     // 콜라이더 다시 활성화
     }    

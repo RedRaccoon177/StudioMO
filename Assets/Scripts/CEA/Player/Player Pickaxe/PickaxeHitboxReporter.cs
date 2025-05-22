@@ -1,6 +1,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class PickaxeHitboxReporter : MonoBehaviour
@@ -9,11 +10,9 @@ public class PickaxeHitboxReporter : MonoBehaviour
 
     private PickaxeController controller;
 
-    private CollectionObject item;
-
     PlayerController player;
 
-    void Start()
+    void Awake()
     {
         player = GetComponentInParent<PlayerController>();
         controller = GetComponentInParent<PickaxeController>();
@@ -23,15 +22,20 @@ public class PickaxeHitboxReporter : MonoBehaviour
     {
         if (other.CompareTag("Interactable") && player.RightSelectOn)
         {
-            item = other.gameObject.GetComponent<CollectionObject>();  
-            controller.ReportHit(hitboxID , item);
+            // ▼ 충돌한 오브젝트에 CollectionObject 스크립트가 있는지 체크
+            CollectionObject item = other.GetComponent<CollectionObject>();
 
+            // ▼ 없으면 return
+            if (item == null) return;
+
+            // ▼ 채집물 채집중 상태가 아니라면
             if (!item.IsCollecting)
             {
+                // ▼ 채집 슬라이더 표시하고 채집 시작
                 item.StartCollecting(player.transform);
             }
 
-            item.TryAddCollectGage();
+            controller.ReportHit(hitboxID, item);
         }
     }
 }

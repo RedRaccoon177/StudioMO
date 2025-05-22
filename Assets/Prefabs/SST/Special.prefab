@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 1112730054389950918}
   m_Layer: 7
   m_Name: Special
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,11 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcea5e2153ffa374f917c622214f8691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 1112730054389950918}
   selfColider: {fileID: 4280317278077020831}
-  testCollectionData: {fileID: 0}
-  testPools: {fileID: 0}
-  isTest: 0
+  ui: {fileID: 1112730054389950918}
 --- !u!65 &4280317278077020831
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -422,7 +419,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
