@@ -88,7 +88,7 @@ public class StageManager : Manager
             }
             goalMinValue = stageData.GetGoalMinValue();
             TextAsset bulletTextAsset = stageData.GetBulletTextAsset();
-            //getBulletPatternLoader.Set(bulletTextAsset);
+            getBulletPatternLoader.SetCSVData(bulletTextAsset);
         }
         timeCurrentValue = timeMaxValue;
         SetCurrentGathering(0);
