@@ -62,7 +62,8 @@ public class StageData : ScriptableObject
     [Header("탄막 테스트 에셋"), SerializeField]
     private TextAsset bulletTextAsset;
 
-    //
+    [Header("목표 채취량"), SerializeField]
+    private uint goalMinValue = 50;
 
     //언어별 음악명 텍스트를 반환하는 메서드
     public string GetMusicText(Translation.Language language)
@@ -92,5 +93,11 @@ public class StageData : ScriptableObject
     public TextAsset GetBulletTextAsset()
     {
         return bulletTextAsset;
+    }
+
+    //목표 채취량을 반환하는 메서드
+    public uint GetGoalMinValue()
+    {
+        return goalMinValue;
     }
 }
