@@ -27,7 +27,7 @@ public class InvincibleState : IPlayerState
     public void UpdateState(Player player) { }
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Invincible;
+        //player.NowState = PlayerStateName.Invincible;
     }
 
     IEnumerator StartAfterDelay()

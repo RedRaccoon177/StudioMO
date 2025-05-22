@@ -12,10 +12,10 @@ public class InteractState : IPlayerState
 
     public void UpdateState(Player player)
     {
-        if(player.RightSelectOn == false)
-        {
-            player.ChangeState(new IdleState());
-        }
+        //if(player.RightSelectOn == false)
+        //{
+        //    player.ChangeState(new IdleState());
+        //}
     }
 
     public void FixedUpdateState(Player player)
@@ -25,7 +25,7 @@ public class InteractState : IPlayerState
 
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Interact;
+        //player.NowState = PlayerStateName.Interact;
     }
 
 }

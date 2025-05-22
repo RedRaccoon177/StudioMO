@@ -11,17 +11,17 @@ public class MoveState : IPlayerState
 
     public void UpdateState(Player player)
     {
-        if (player.MoveOn == false)
-        {
-            player.ChangeState(new IdleState());
-            return;
-        }
+        //if (player.MoveOn == false)
+        //{
+        //    player.ChangeState(new IdleState());
+        //    return;
+        //}
 
-        if(player.RightSelectOn == true)
-        {
-            player.ChangeState(new InteractState());
-            return;
-        }
+        //if(player.RightSelectOn == true)
+        //{
+        //    player.ChangeState(new InteractState());
+        //    return;
+        //}
     }
 
     public void FixedUpdateState(Player player)
@@ -52,6 +52,6 @@ public class MoveState : IPlayerState
 
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Move;
+       // player.NowState = PlayerStateName.Move;
     }
 }

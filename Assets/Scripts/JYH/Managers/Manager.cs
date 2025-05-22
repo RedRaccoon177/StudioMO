@@ -16,9 +16,11 @@ public abstract class Manager : MonoBehaviourPunCallbacks
 {
     protected static Manager instance = null;       //각 씬 안에 단독으로 존재하기 위한 싱글톤 변수
 
+    protected static readonly Vector3 CameraOffsetPosition = new Vector3(0, 1.36144f, 0);
+
     [Header(nameof(Manager))]
     [SerializeField]
-    protected XROrigin xrOrigin;                    //XR 오리진을 사용하기 위한 변수
+    private XROrigin xrOrigin;                      //XR 오리진을 사용하기 위한 변수
     protected Vector3? fixedPosition;               //위치 고정을 하기 위한 변수
 
     private static readonly string LanguageTag = "Language";

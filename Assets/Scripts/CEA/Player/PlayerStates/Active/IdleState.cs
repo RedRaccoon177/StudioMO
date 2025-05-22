@@ -12,23 +12,23 @@ public class IdleState : IPlayerState
 
     public void UpdateState(Player player)
     {
-        if(player.MoveOn == true)
-        {
-            player.ChangeState(new MoveState());
-            return;
-        }
+        //if(player.MoveOn == true)
+        //{
+        //    player.ChangeState(new MoveState());
+        //    return;
+        //}
 
-        if(player.RightSelectOn == true)
-        {
-            player.ChangeState(new InteractState());
-            return;
-        }
+        //if(player.RightSelectOn == true)
+        //{
+        //    player.ChangeState(new InteractState());
+        //    return;
+        //}
 
-        if (player.LeftSelectOn == true)
-        {
-            player.ChangeState(new SlowMotionState());
-            return;
-        }
+        //if (player.LeftSelectOn == true)
+        //{
+        //    player.ChangeState(new SlowMotionState());
+        //    return;
+        //}
         
     }
 
@@ -39,6 +39,6 @@ public class IdleState : IPlayerState
 
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Idle;
+        //player.NowState = PlayerStateName.Idle;
     }
 }

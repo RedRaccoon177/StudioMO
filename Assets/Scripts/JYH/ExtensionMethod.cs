@@ -196,4 +196,23 @@ public static class ExtensionMethod
             }
         }
     }
+
+    public static void Set(this InputActionReference inputActionReference, bool value, Action<InputAction.CallbackContext> performed, Action<InputAction.CallbackContext> canceled)
+    {
+        if (inputActionReference != null && inputActionReference.action != null)
+        {
+            if (value == true)
+            {
+                inputActionReference.action.performed += performed;
+                inputActionReference.action.canceled += canceled;
+                inputActionReference.action.Enable();
+            }
+            else
+            {
+                inputActionReference.action.performed -= performed;
+                inputActionReference.action.canceled -= canceled;
+                inputActionReference.action.Disable();
+            }
+        }
+    }
 }

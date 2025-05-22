@@ -17,11 +17,11 @@ public class SlowMotionState : IPlayerState
 
     public void UpdateState(Player player)
     {
-        if(player.LeftSelectOn == false)
-        {
-            SlowMotionOff();
-            player.ChangeState(new IdleState());
-        }
+        //if(player.LeftSelectOn == false)
+        //{
+        //    SlowMotionOff();
+        //    player.ChangeState(new IdleState());
+        //}
     }
 
     private void SlowMotionOn()
@@ -36,6 +36,6 @@ public class SlowMotionState : IPlayerState
 
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.SlowMotion;
+       // player.NowState = PlayerStateName.SlowMotion;
     }
 }

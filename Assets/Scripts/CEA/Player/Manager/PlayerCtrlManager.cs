@@ -26,8 +26,11 @@ public class PlayerCtrlManager : MonoBehaviour
     private InputActionMap leftHandInterActionMap;
     private InputActionMap leftHandlocomotionMap;
 
+    [SerializeField]
     private InputAction rightSelectAction;
+    [SerializeField]
     private InputAction leftSelectAction;
+    [SerializeField]
     private InputAction moveAction;
     #endregion
 
@@ -63,28 +66,28 @@ public class PlayerCtrlManager : MonoBehaviour
 
     private void OnRightSelect(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            localPlayerController.OnRightSelect(true);
-        }
+        //if (context.performed)
+        //{
+        //    localPlayerController.OnRightSelect(true);
+        //}
 
-        else if (context.canceled)
-        {
-            localPlayerController.OnRightSelect(false);
-        }
+        //else if (context.canceled)
+        //{
+        //    localPlayerController.OnRightSelect(false);
+        //}
     }
 
     private void OnLeftSelect(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            localPlayerController.OnLeftSelect(true);
-        }
+        //if (context.performed)
+        //{
+        //    localPlayerController.OnLeftSelect(true);
+        //}
 
-        else if (context.canceled)
-        {
-            localPlayerController.OnLeftSelect(false);
-        }
+        //else if (context.canceled)
+        //{
+        //    localPlayerController.OnLeftSelect(false);
+        //}
     }
 
     public void Set(Player player)
@@ -92,22 +95,22 @@ public class PlayerCtrlManager : MonoBehaviour
         localPlayer = player.gameObject;
         localPlayerController = player;
 
-        localPlayerController.SetXR(mainXROrigin.Camera, mainXROrigin);
+       // localPlayerController.SetXR(mainXROrigin.Camera, mainXROrigin);
 
         SetupInputActions();
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            Vector2 moveInput = context.ReadValue<Vector2>();
-            localPlayerController.OnMove(moveInput);
-        }
+        //if (context.performed)
+        //{
+        //    Vector2 moveInput = context.ReadValue<Vector2>();
+        //    localPlayerController.OnMove(moveInput);
+        //}
 
-        else if (context.canceled)
-        {
-            localPlayerController.OnMove(Vector2.zero);
-        }
+        //else if (context.canceled)
+        //{
+        //    localPlayerController.OnMove(Vector2.zero);
+        //}
     }
 }
