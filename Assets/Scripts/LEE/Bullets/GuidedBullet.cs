@@ -91,6 +91,12 @@ public class GuidedBullet : MonoBehaviour, IBullet
         }
 
         currentIndicatorInstance.transform.position = transform.position;
-        currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
+
+        // 방향 벡터가 0이 아닌 경우에만 회전 계산
+        if (moveDirection != Vector3.zero)
+        {
+            currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
+        }
     }
+
 }

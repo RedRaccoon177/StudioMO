@@ -109,11 +109,17 @@ public class NormalBullet : MonoBehaviour, IBullet
         if (lr != null)
         {
             lr.SetPosition(0, transform.position);
-            lr.SetPosition(1, transform.position + moveDirection.normalized * 2f); // 인디케이터 길이 고정
+            lr.SetPosition(1, transform.position + moveDirection.normalized * 2f);
         }
 
         currentIndicatorInstance.transform.position = transform.position;
-        currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
+
+        // 방향 벡터가 0이 아닌 경우에만 회전 계산
+        if (moveDirection != Vector3.zero)
+        {
+            currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
+        }
     }
+
     #endregion
 }
