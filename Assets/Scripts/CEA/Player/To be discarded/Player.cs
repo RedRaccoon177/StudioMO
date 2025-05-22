@@ -127,9 +127,20 @@ public partial class Player : MonoBehaviourPunCallbacks
         }
     }
 
+#if UNITY_EDITOR
+    [SerializeField]
+    private bool invincibleMode = false;
+#endif
+
     //탄막에 맞으면 발동하는 함수
     public void Hit()
     {
+#if UNITY_EDITOR
+        if (invincibleMode == true)
+        {
+            return;
+        }
+#endif
         if (photonView.IsMine == true && faintingState == false && specialStateTime == 0)
         {
             _direction = Vector3.zero;
