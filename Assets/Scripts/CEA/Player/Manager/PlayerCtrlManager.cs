@@ -35,6 +35,7 @@ public class PlayerCtrlManager : MonoBehaviour
 
     private void Awake()
     {
+        return;
         photon = GetComponent<PhotonView>();
         localPlayerController = localPlayer.GetComponent<Player_Test>();
         inputAsset = actionManager.actionAssets[0];
@@ -43,6 +44,7 @@ public class PlayerCtrlManager : MonoBehaviour
 
     private void Start()
     {
+        return;
         if (!photon.IsMine)
         {
             return;

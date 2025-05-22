@@ -85,8 +85,8 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         }
         if (this == instance)
         {
-            ChangeText((Translation.Language)PlayerPrefs.GetInt(LanguageTag));
             Initialize();
+            ChangeText((Translation.Language)PlayerPrefs.GetInt(LanguageTag));
             if (deviceSimulator != null)
             {
 #if UNITY_EDITOR
