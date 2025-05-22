@@ -66,7 +66,7 @@ public class NormalBullet : MonoBehaviour, IBullet
             var player = other.GetComponentInParent<Player>();
             if (player)
             {
-                //player.Hit();
+                player.Hit();
                 _normalBulletPool?.Release(this);
             }
         }

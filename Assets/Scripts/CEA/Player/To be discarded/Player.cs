@@ -34,10 +34,13 @@ public partial class Player : MonoBehaviourPunCallbacks
 
     [Header("이동 속도"), SerializeField, Range(1, int.MaxValue)]
     private float moveSpeed = 10;
-    [Header("행동불능 상태 시간"), Range(0, int.MaxValue)]
+    [Header("기절 지속 시간"), Range(0, int.MaxValue)]
     private float faintingTime = 30f;
-    [Header("무적 상태 시간"), Range(0, int.MaxValue)]
+    [Header("무적 지속 시간"), Range(0, int.MaxValue)]
     private float invincibleTime = 3f;
+
+    private bool faintingState = false;
+    private float specialStateTime = 0;
 
     private uint mineral = 0;   //채굴한 광물의 양
 
@@ -55,10 +58,36 @@ public partial class Player : MonoBehaviourPunCallbacks
     {
     }
 
+    private void Update()
+    {
+        if(photonView.IsMine == true && specialStateTime > 0)
+        {
+            specialStateTime -= Time.deltaTime;
+            if (specialStateTime <= 0)
+            {
+                if(faintingState == true)
+                {
+#if UNITY_EDITOR
+                    Debug.Log("무적 상태");
+#endif
+                    faintingState = false;
+                    specialStateTime = invincibleTime;
+                }
+                else
+                {
+                    specialStateTime = 0;
+                }
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
-        Vector3 position = getRigidbody.position + _direction.normalized * moveSpeed * Time.fixedDeltaTime;
-        getRigidbody.MovePosition(position);
+        if (photonView.IsMine == true)
+        {
+            Vector3 position = getRigidbody.position + _direction.normalized * moveSpeed * Time.fixedDeltaTime;
+            getRigidbody.MovePosition(position);
+        }
     }
 
     //플레이어의 고개를 돌리는 메서드
@@ -91,10 +120,24 @@ public partial class Player : MonoBehaviourPunCallbacks
     //플레이어의 이동을 담당하는 메서드
     public void UpdateMove(Vector2 input)
     {
-        if (photonView.IsMine == true && headTransform != null)
+        if (photonView.IsMine == true && headTransform != null && faintingState == false)
         {
             _direction = headTransform.right * input.x + headTransform.forward * input.y;
             _direction.y = 0;
+        }
+    }
+
+    //탄막에 맞으면 발동하는 함수
+    public void Hit()
+    {
+        if (photonView.IsMine == true && faintingState == false && specialStateTime == 0)
+        {
+            _direction = Vector3.zero;
+            faintingState = true;
+            specialStateTime = faintingTime;
+#if UNITY_EDITOR
+            Debug.Log("기절함");
+#endif
         }
     }
 
@@ -103,11 +146,5 @@ public partial class Player : MonoBehaviourPunCallbacks
     {
         mineral += value;
         mineralReporter?.Invoke(mineral);
-    }
-
-    //
-    public void Hit()
-    {
-
     }
 }

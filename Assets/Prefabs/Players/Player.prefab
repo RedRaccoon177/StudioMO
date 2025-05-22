@@ -871,7 +871,7 @@ GameObject:
   - component: {fileID: 334654099765923911}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -931,14 +931,13 @@ MonoBehaviour:
   leftHandTransform: {fileID: 9022421994880071880}
   rightHandTransform: {fileID: 5730291955205923919}
   moveSpeed: 10
+  knockbackStateTime: 1
+  groggyStateTime: 30
+  invincibleStateTime: 3
   NowState: 0
   MoveOn: 0
   RightSelectOn: 0
   LeftSelectOn: 0
-  groggyStateTime: 30
-  invincibleStateTime: 3
-  knockbackStateTime: 1
-  solidStateTime: 1
 --- !u!135 &7146657361740520592
 SphereCollider:
   m_ObjectHideFlags: 0
