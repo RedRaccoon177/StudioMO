@@ -16,6 +16,7 @@ public class InteractState : IPlayerState
         {
             player.ChangeState(new IdleState());
         }
+
     }
 
     public void FixedUpdateState(Player player)

@@ -22,6 +22,12 @@ public class MoveState : IPlayerState
             player.ChangeState(new InteractState());
             return;
         }
+
+        if(player.LeftSelectOn == true)
+        {
+            player.ChangeState(new SlowMotionState());
+            return;
+        }
     }
 
     public void FixedUpdateState(Player player)
