@@ -22,6 +22,7 @@ public class SlowMotionState : IPlayerState
             SlowMotionOff();
             player.ChangeState(new IdleState());
         }
+
     }
 
     private void SlowMotionOn()
