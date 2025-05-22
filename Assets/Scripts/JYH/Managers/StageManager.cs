@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(PlayerCtrlManager))]
+[RequireComponent(typeof(BulletPatternLoader))]
 public class StageManager : Manager
 {
     public static readonly string SceneName = "StageScene";
@@ -41,7 +42,21 @@ public class StageManager : Manager
         }
     }
 
-    private ObjectPoolingBullet objectPoolingBullet;
+    private bool hasBulletPatternLoader = false;
+
+    private BulletPatternLoader bulletPatternLoader = null;
+
+    private BulletPatternLoader getBulletPatternLoader {
+        get
+        {
+            if (hasBulletPatternLoader == false)
+            {
+                bulletPatternLoader = GetComponent<BulletPatternLoader>();
+                hasBulletPatternLoader = true;
+            }
+            return bulletPatternLoader;
+        }
+    }   
 
     [SerializeField]
     private Player player;
@@ -57,6 +72,7 @@ public class StageManager : Manager
                 timeCurrentValue = 0;   //게임 종료
             }
         }
+        timeText.Set(timeCurrentValue.ToString());
         timeImage.Fill(timeMaxValue > 0 ? timeCurrentValue/timeMaxValue : 1);
     }
 
@@ -71,15 +87,21 @@ public class StageManager : Manager
                 Instantiate(gameObject, Vector3.zero, Quaternion.identity);
             }
             goalMinValue = stageData.GetGoalMinValue();
+            TextAsset bulletTextAsset = stageData.GetBulletTextAsset();
+            //getBulletPatternLoader.Set(bulletTextAsset);
         }
         timeCurrentValue = timeMaxValue;
-        gatheringText.Set(Translation.Get(Translation.Letter.Goal) + ": " + goalMinValue);
-        gatheringImage.Fill(goalMinValue > 0 ? 0 : 1);
-
+        SetCurrentGathering(0);
     }
 
     protected override void ChangeText()
     {
+        goalMinText.Set(Translation.Get(Translation.Letter.Goal) + ": " + goalMinValue);
+    }
 
+    private void SetCurrentGathering(uint value)
+    {
+        gatheringText.Set(value.ToString());
+        gatheringImage.Fill(goalMinValue > 0 ? (float)value / goalMinValue : 1);
     }
 }

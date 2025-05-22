@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 76013260}
   - component: {fileID: 76013259}
   - component: {fileID: 76013261}
+  - component: {fileID: 76013262}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -170,9 +171,8 @@ MonoBehaviour:
   timeImage: {fileID: 619658539870932635}
   timeMaxValue: 10
   gatheringText: {fileID: 6833544846211639367}
-  gatheringImage: {fileID: 282638528902235973}
-  goalText: {fileID: 3634757258254655415}
-  goalMinValue: 50
+  gatheringImage: {fileID: 6774864919484820108}
+  goalMinText: {fileID: 3634757258254655415}
   player: {fileID: 840186461}
 --- !u!4 &76013260
 Transform:
@@ -206,6 +206,20 @@ MonoBehaviour:
   mainXROrigin: {fileID: 1062850409}
   localPlayer: {fileID: 0}
   actionManager: {fileID: 1668815854}
+--- !u!114 &76013262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76013258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf84d9baff230fc4bbf3382a064d3b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFile: {fileID: 0}
+  patternData: []
 --- !u!4 &164148733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9014170783705847996, guid: 895f6f3c2d334633b5800312285058d2,
@@ -1700,7 +1714,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBAA9\uD45C: 99999"
+  m_text: "\uBAA9\uD45C: 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05a655a197b7a9645b10e625b68da686, type: 2}
   m_sharedMaterial: {fileID: -7853904899199214455, guid: 05a655a197b7a9645b10e625b68da686,
@@ -2245,7 +2259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99999
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05a655a197b7a9645b10e625b68da686, type: 2}
   m_sharedMaterial: {fileID: -7853904899199214455, guid: 05a655a197b7a9645b10e625b68da686,
