@@ -68,11 +68,30 @@ public class StageManager : Manager
     [SerializeField]
     private uint goalMineralValue = 0;                          //목표 광물 값
 
-    protected override void Update()
+    private void Update()
     {
         if (player != null)
         {
-            if(Camera.main != null)
+            fixedPosition = player.transform.position + CameraOffsetPosition;
+        }
+        if (currentTimeValue > 0)
+        {
+            currentTimeValue -= Time.deltaTime;
+            if (currentTimeValue < 0)
+            {
+                currentTimeValue = 0;   //게임 종료
+            }
+        }
+        currentTimeText.Set(currentTimeValue.ToString());
+        currentTimeImage.Fill(limitTimeValue > 0 ? currentTimeValue/limitTimeValue : 1);
+    }
+
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
+        if (player != null)
+        {
+            if (Camera.main != null)
             {
                 player.UpdateHead(Camera.main.transform.rotation);
             }
@@ -84,19 +103,7 @@ public class StageManager : Manager
             {
                 player.UpdateRightHand(rightHandTransform.position + rightHandOffset, rightHandTransform.rotation);
             }
-            fixedPosition = player.transform.position + CameraOffsetPosition;
         }
-        base.Update();
-        if (currentTimeValue > 0)
-        {
-            currentTimeValue -= Time.deltaTime;
-            if (currentTimeValue < 0)
-            {
-                currentTimeValue = 0;   //게임 종료
-            }
-        }
-        currentTimeText.Set(currentTimeValue.ToString());
-        currentTimeImage.Fill(limitTimeValue > 0 ? currentTimeValue/limitTimeValue : 1);
     }
 
     public override void OnEnable()

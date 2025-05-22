@@ -27,56 +27,39 @@ public partial class Player : MonoBehaviourPunCallbacks
 
     [Header("머리"), SerializeField]
     private Transform headTransform;
-
     [Header("왼손"), SerializeField]
     private Transform leftHandTransform;
-
     [Header("오른손"), SerializeField]
     private Transform rightHandTransform;
 
-    [Header("움직임 속도"), SerializeField, Range(0, int.MaxValue)]
-    private float moveSpeed;
-
-    private IPlayerState currentState;
-
-    public PlayerStateName NowState;
-
-    public bool MoveOn;
-
-    public bool RightSelectOn;
-
-    public bool LeftSelectOn;
-
-
-
-    [Header("행동불능 상태 시간")]
-    public float groggyStateTime = 30f;
-
-    [Header("무적 상태 시간")]
-    public float invincibleStateTime = 3f;
-
-    [Header("넉백 상태 시간")]
-    public float knockbackStateTime = 1f;
-
-    [Header("넉백 면역 상태 시간")]
-    public float solidStateTime = 1f;
+    [Header("이동 속도"), SerializeField, Range(1, int.MaxValue)]
+    private float moveSpeed = 10;
+    [Header("행동불능 상태 시간"), Range(0, int.MaxValue)]
+    private float faintingTime = 30f;
+    [Header("무적 상태 시간"), Range(0, int.MaxValue)]
+    private float invincibleTime = 3f;
 
     private uint mineral = 0;   //채굴한 광물의 양
 
     public event Action<uint> mineralReporter;
 
+    public float knockbackStateTime;
+    public float groggyStateTime;
+    public float invincibleStateTime = 3f;
+    public PlayerStateName NowState;
+    public bool MoveOn;
+    public bool RightSelectOn;
+    public bool LeftSelectOn;
+
     public void ChangeState(IPlayerState newState)
     {
-        currentState = newState;
-        currentState.EnterState(this);
-        currentState.CheckNowState(this);
     }
 
-    //private void Update()
-    //{
-    //    transform.position += _direction * Time.deltaTime * moveSpeed;
-    //    //getRigidbody.velocity = _direction * Time.deltaTime * moveSpeed;
-    //}
+    private void FixedUpdate()
+    {
+        Vector3 position = getRigidbody.position + _direction.normalized * moveSpeed * Time.fixedDeltaTime;
+        getRigidbody.MovePosition(position);
+    }
 
     //플레이어의 고개를 돌리는 메서드
     public void UpdateHead(Quaternion rotation)
@@ -90,18 +73,18 @@ public partial class Player : MonoBehaviourPunCallbacks
     //플레이어의 왼손을 움직이는 메서드
     public void UpdateLeftHand(Vector3 position, Quaternion rotation)
     {
-        if (photonView.IsMine == true)
+        if (photonView.IsMine == true && leftHandTransform)
         {
-            leftHandTransform.Set(position, rotation);
+            leftHandTransform.SetPositionAndRotation(position, rotation);
         }
     }
 
     //플레이어의 오른손을 움직이는 메서드
     public void UpdateRightHand(Vector3 position, Quaternion rotation)
     {
-        if (photonView.IsMine == true)
+        if (photonView.IsMine == true && rightHandTransform != null)
         {
-            rightHandTransform.Set(position, rotation);
+            rightHandTransform.SetPositionAndRotation(position, rotation);
         }
     }
 
@@ -112,7 +95,6 @@ public partial class Player : MonoBehaviourPunCallbacks
         {
             _direction = headTransform.right * input.x + headTransform.forward * input.y;
             _direction.y = 0;
-            transform.position += _direction * Time.deltaTime * moveSpeed;
         }
     }
 
@@ -121,5 +103,11 @@ public partial class Player : MonoBehaviourPunCallbacks
     {
         mineral += value;
         mineralReporter?.Invoke(mineral);
+    }
+
+    //
+    public void Hit()
+    {
+
     }
 }

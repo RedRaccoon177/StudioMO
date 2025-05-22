@@ -86,9 +86,8 @@ public class MainManager : Manager
     }
 #endif
 
-    protected override void Update()
+    protected override void LateUpdate()
     {
-        base.Update();
         if(startKeyDown == true && Input.anyKeyDown)
         {
             startKeyDown = false;
@@ -102,6 +101,7 @@ public class MainManager : Manager
                   }
               });
         }
+        base.LateUpdate();
     }
 
     protected override void Initialize()

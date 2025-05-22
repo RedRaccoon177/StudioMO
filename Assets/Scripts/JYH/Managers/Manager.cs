@@ -129,7 +129,7 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         ChangeText();
     }
 
-    protected virtual void Update()
+    protected virtual void LateUpdate()
     {
         if (fixedPosition != null)
         {
