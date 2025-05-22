@@ -4,26 +4,55 @@ using UnityEngine.Pool;
 public class GuidedBullet : MonoBehaviour, IBullet
 {
     #region 탄막(인식) 필드
+    // 탄막을 관리하는 오브젝트 풀
     IObjectPool<GuidedBullet> _guidedBulletPool;
+
+    // 이동 방향
     Vector3 moveDirection;
+    
+    // 이동 속도
     public float speed = 3f;
+    
+    // 인디케이터 오브젝트 (풀링 사용)
     GameObject currentIndicatorInstance;
     #endregion
 
+    #region 오브젝트 풀 관련
     public void SetPool<T>(IObjectPool<T> pool) where T : Component
     {
         _guidedBulletPool = pool as IObjectPool<GuidedBullet>;
     }
 
-    void Update()
+    // 풀에서 꺼내질 때 호출됨 (초기화)
+    public void OnSpawn()
     {
-        transform.position += moveDirection * speed * Time.deltaTime;
-
-        // 인디케이터 위치 갱신
+        // 기존 인디케이터 정리
         if (currentIndicatorInstance != null)
         {
+            EffectPoolManager.Instance.ReleaseEffect("MON002_Indicator", currentIndicatorInstance);
+            currentIndicatorInstance = null;
+        }
+
+        // 인디케이터 새로 꺼내서 위치 초기화
+        currentIndicatorInstance = EffectPoolManager.Instance.GetEffect("MON002_Indicator");
+        if (currentIndicatorInstance != null)
+        {
+            currentIndicatorInstance.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             UpdateIndicator();
         }
+    }
+
+    // 발사 시 방향 설정
+    public void Initialize(Vector3 direction)
+    {
+        moveDirection = direction.normalized;
+    }
+    #endregion
+
+    #region Update & 충돌 처리
+    void Update()
+    {
+        BulletUpdate();
     }
 
     void OnTriggerEnter(Collider other)
@@ -55,30 +84,22 @@ public class GuidedBullet : MonoBehaviour, IBullet
             currentIndicatorInstance = null;
         }
     }
+    #endregion
 
-    public void OnSpawn()
+    #region 실시간 행동 함수들
+    // 탄막 업데이트 부분
+    void BulletUpdate()
     {
-        // 기존 인디케이터 정리
-        if (currentIndicatorInstance != null)
-        {
-            EffectPoolManager.Instance.ReleaseEffect("MON002_Indicator", currentIndicatorInstance);
-            currentIndicatorInstance = null;
-        }
+        transform.position += moveDirection * speed * Time.deltaTime;
 
-        // 인디케이터 새로 꺼내서 위치 초기화
-        currentIndicatorInstance = EffectPoolManager.Instance.GetEffect("MON002_Indicator");
+        // 인디케이터 위치 갱신
         if (currentIndicatorInstance != null)
         {
-            currentIndicatorInstance.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             UpdateIndicator();
         }
     }
 
-    public void Initialize(Vector3 direction)
-    {
-        moveDirection = direction.normalized;
-    }
-
+    // Indicator VFX 위치 및 회전 갱신
     void UpdateIndicator()
     {
         if (currentIndicatorInstance == null) return;
@@ -98,5 +119,5 @@ public class GuidedBullet : MonoBehaviour, IBullet
             currentIndicatorInstance.transform.rotation = Quaternion.LookRotation(moveDirection);
         }
     }
-
+    #endregion
 }
