@@ -59,10 +59,10 @@ public class GuidedBullet : MonoBehaviour, IBullet
     {
         if (other.CompareTag("Player"))
         {
-            var player = other.GetComponentInParent<PlayerController>();
-            if (!player.isGroggyAndinvincibleState)
+            var player = other.GetComponentInParent<Player>();
+            if (player)
             {
-                player.HitBullet();
+                //player.Hit();
                 _guidedBulletPool?.Release(this);
             }
         }
