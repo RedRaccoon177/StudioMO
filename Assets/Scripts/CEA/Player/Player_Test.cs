@@ -36,6 +36,7 @@ public partial class Player_Test : MonoBehaviourPunCallbacks
     [Space(10)][SerializeField]
     private DynamicMoveProvider moveProvider;
 
+    [Header("움직임 속도"),SerializeField]
     private float moveSpeed;
 
     private Vector2 moveInput;

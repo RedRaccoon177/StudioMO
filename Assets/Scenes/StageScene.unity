@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -926,7 +926,7 @@ PrefabInstance:
     - target: {fileID: 3127728408163665756, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
@@ -1904,12 +1904,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 43583530430838968}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &43583530430838972 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7612864520149850281, guid: 2faa115f526cfbb40ae698aa255b8084,
-    type: 3}
-  m_PrefabInstance: {fileID: 43583530430838968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &62512118495354669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1959,16 +1953,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 43583530430838969}
-  headTransform: {fileID: 43583530430838972}
+  headTransform: {fileID: 8892414332553252140}
   leftHandTransform: {fileID: 43583530430838971}
   leftController: {fileID: 1267997821}
   rightHandTransform: {fileID: 43583530430838970}
   rightController: {fileID: 242441503}
   moveProvider: {fileID: 613324849}
+  moveSpeed: 0
   groggyStateTime: 30
   invincibleStateTime: 3
   knockbackStateTime: 1
   solidStateTime: 1
+--- !u!4 &8892414332553252140 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4858495541729984985, guid: 2faa115f526cfbb40ae698aa255b8084,
+    type: 3}
+  m_PrefabInstance: {fileID: 43583530430838968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
