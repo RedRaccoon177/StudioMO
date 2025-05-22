@@ -21,7 +21,7 @@ public class PickaxeHitboxReporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable") && player.RightSelectOn)
+        if (other.CompareTag("Interactable") /*&& player.RightSelectOn*/)
         {
             // ▼ 충돌한 오브젝트에 CollectionObject 스크립트가 있는지 체크
             CollectionObject item = other.GetComponent<CollectionObject>();

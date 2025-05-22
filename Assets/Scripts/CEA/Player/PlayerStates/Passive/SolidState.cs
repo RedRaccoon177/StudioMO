@@ -22,6 +22,6 @@ public class SolidState : IPlayerState
 
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Solid;
+       // player.NowState = PlayerStateName.Solid;
     }
 }

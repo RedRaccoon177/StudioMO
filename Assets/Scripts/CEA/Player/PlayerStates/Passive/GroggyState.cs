@@ -28,7 +28,7 @@ public class GroggyState : IPlayerState
     public void FixedUpdateState(Player player) { }
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Groggy;
+        //player.NowState = PlayerStateName.Groggy;
     }
 
     IEnumerator StartAfterDelay()

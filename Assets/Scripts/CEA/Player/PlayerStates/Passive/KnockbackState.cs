@@ -28,7 +28,7 @@ public class KnockBackState : IPlayerState
 
     public void CheckNowState(Player player)
     {
-        player.NowState = PlayerStateName.Knockback;
+        //player.NowState = PlayerStateName.Knockback;
     }
 
     IEnumerator StartAfterDelay()
