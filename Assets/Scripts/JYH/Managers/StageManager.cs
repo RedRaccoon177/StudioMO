@@ -84,10 +84,14 @@ public class StageManager : Manager
         timeImage.Fill(timeMaxValue > 0 ? timeCurrentValue/timeMaxValue : 1);
     }
 
+    [SerializeField]
+    private StageData test;
+
     protected override void Initialize()
     {
-        StageData stageData = StageData.current;
-        if(stageData != null)
+        StageData stageData = test;
+        //StageData stageData = StageData.current;
+        if (stageData != null)
         {
             GameObject gameObject = stageData.GetMapObject();
             if(gameObject != null)
@@ -96,7 +100,7 @@ public class StageManager : Manager
             }
             goalMinValue = stageData.GetGoalMinValue();
             TextAsset bulletTextAsset = stageData.GetBulletTextAsset();
-            //getBulletPatternLoader.Set(bulletTextAsset);
+            getBulletPatternLoader.SetCSVData(bulletTextAsset);
             if (audioSource != null)
             {
                 AudioClip audioClip = stageData.GetAudioClip();
