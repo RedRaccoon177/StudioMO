@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using ExitGames.Client.Photon;
 
 /// <summary>
 /// BulletPatternLoader는 CSV 파일에서 탄막 패턴 데이터를 읽어와서
@@ -13,14 +14,23 @@ public class BulletPatternLoader : MonoBehaviour
     [Tooltip("Resources 폴더 내에 있는 CSV 파일 (TextAsset 형식)")]
     public TextAsset csvFile; // 유니티 인스펙터에서 연결할 수 있는 CSV 텍스트 파일
 
-
     [Header("파싱된 탄막 패턴 데이터 리스트")]
     [Tooltip("BulletSpawnData 구조로 파싱된 탄막 타이밍 정보")]
     public List<BulletSpawnData> patternData = new List<BulletSpawnData>();   // 최종적으로 게임에 사용할 데이터 리스트
 
-    void Awake()
+    /// <summary>
+    /// CSV 파일을 파싱하는 함수
+    /// </summary>
+    /// <param name="bulletCSVfile"></param>
+    public void SetCSVData(TextAsset bulletCSVfile)
     {
-        // 게임 시작 시 CSV를 파싱하여 patternData에 담음
+        if (bulletCSVfile == null)
+        {
+            Debug.LogError("파싱 오류");
+            return;
+        }
+
+        csvFile = bulletCSVfile;
         patternData = ParseCSV(csvFile.text);
     }
 
