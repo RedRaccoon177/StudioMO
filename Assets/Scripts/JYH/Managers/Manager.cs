@@ -43,13 +43,7 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         private set;
     }
 
-    [SerializeField]
-    private XRDeviceSimulator deviceSimulator;      //XR 디바이스 시뮬레이터를 사용하기 위한 변수
-
 #if UNITY_EDITOR
-
-    [SerializeField]
-    private bool deviceSimulatorEnabled = true;    //디바이스 시뮬레이터를 사용하기 위한 변수
 
     [Header("언어 변경"), SerializeField]
     private Translation.Language language = Translation.Language.Korean;
@@ -89,18 +83,6 @@ public abstract class Manager : MonoBehaviourPunCallbacks
         {
             Initialize();
             ChangeText((Translation.Language)PlayerPrefs.GetInt(LanguageTag));
-            if (deviceSimulator != null)
-            {
-#if UNITY_EDITOR
-                int childCount = deviceSimulator.transform.childCount;
-                for (int i = 0; i < childCount; i++)
-                {
-                    deviceSimulator.transform.GetChild(i).gameObject.SetActive(deviceSimulatorEnabled);
-                }
-#else
-                Destroy(deviceSimulator.gameObject);
-#endif
-            }
         }
     }
 

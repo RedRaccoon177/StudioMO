@@ -54,18 +54,18 @@ public class StageManager : Manager
 
     [Header("남은 시간")]
     [SerializeField]
-    private TMP_Text currentTimeText;                           //현재 시간 텍스트
-    [SerializeField]
     private Image currentTimeImage;                             //현재 시간 슬라이드바 이미지
+    [SerializeField]
+    private TMP_Text currentTimeText;                           //현재 시간 텍스트
     private float currentTimeValue = 0.0f;                      //현재 시간 값
     [SerializeField, Range(0, int.MaxValue)]
     private float limitTimeValue = 0.0f;                        //제한 시간 값
 
     [Header("광물 획득 정보")]
     [SerializeField]
-    private TMP_Text currentMineralText;                        //현재 광물 텍스트
-    [SerializeField]
     private Image currentMineralImage;                          //현재 광물 슬라이드바 이미지
+    [SerializeField]
+    private TMP_Text currentMineralText;                        //현재 광물 텍스트
     [SerializeField]
     private TMP_Text goalMineralText;                           //목표 광물 텍스트
     [SerializeField]

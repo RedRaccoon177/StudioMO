@@ -50,18 +50,6 @@ public partial class Player : MonoBehaviourPunCallbacks
 
     public static event Action<Player, uint> mineralReporter;
 
-    public float knockbackStateTime;
-    public float groggyStateTime;
-    public float invincibleStateTime = 3f;
-    public PlayerStateName NowState;
-    public bool MoveOn;
-    public bool RightSelectOn;
-    public bool LeftSelectOn;
-
-    public void ChangeState(IPlayerState newState)
-    {
-    }
-
     private void Update()
     {
         if(photonView.IsMine == true && specialStateTime > 0)
