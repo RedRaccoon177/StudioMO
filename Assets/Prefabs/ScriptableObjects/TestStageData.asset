@@ -24,5 +24,5 @@ MonoBehaviour:
     japanese: "\u3134\u3141\u3147\u314E"
   audioClip: {fileID: 8300000, guid: 5b71b1eb38e96ad438a59fc2770f2614, type: 3}
   mapObject: {fileID: 0}
-  bulletTextAsset: {fileID: 4900000, guid: fcc16741c12dbc94c9f37695a18dce19, type: 3}
+  bulletTextAsset: {fileID: 4900000, guid: 1957c14e16cd742439c41d9a60965886, type: 3}
   goalMinValue: 50
