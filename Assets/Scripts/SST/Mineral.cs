@@ -40,6 +40,9 @@ public class Mineral : MonoBehaviourPunCallbacks
     [SerializeField, Range(0, int.MaxValue)]
     private float progressFadeTime = 0.8f; // 게이지가 잠깐 나타났다가 사라지는 시간
 
+    [Header("미네랄 조각들"), SerializeField] 
+    MeshRenderer[] pieceOfMinerals;
+
     // ▼ 현재 채집 가능한 상태인지 외부에서 확인할 수 있는 읽기 전용 속성
     public bool collectable
     {
@@ -48,6 +51,9 @@ public class Mineral : MonoBehaviourPunCallbacks
             return currentValue > 0; // 광물이 1개 이상 남아있어야 채집 가능
         }
     }
+
+    private BoxCollider coll;
+    
 
     // ▼ 채광 게이지 증가량 상수들 (기본 공격 / 크리티컬 히트 / 완료 한계값)
     private static readonly float ProgressMissValue = 25f;      // 일반 공격 시 게이지 증가량
@@ -58,11 +64,18 @@ public class Mineral : MonoBehaviourPunCallbacks
     private void Awake()
     {
         currentValue = maxValue;
+        coll = GetComponent<BoxCollider>();
     }
 
     // ▼ 매 프레임마다 실행되는 업데이트 함수
     private void Update()
     {
+        // 로직 테스트 용
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetMineral(false);
+        }
+
         // 이 오브젝트가 나의 것일 때만 실행 (PhotonView 소유자만)
         if (photonView.IsMine && remainingTime > 0)
         {
@@ -72,6 +85,7 @@ public class Mineral : MonoBehaviourPunCallbacks
                 // 충전 완료 시 → 다시 채집 가능 상태로
                 remainingTime = 0;
                 currentValue = maxValue;
+                MineralPieceUpdate();
             }
         }
     }
@@ -119,6 +133,15 @@ public class Mineral : MonoBehaviourPunCallbacks
         SetActiveCanvas(false);                   // 다시 숨김
     }
 
+    // 현재 상태를 기준으로 미네랄 조각에 반영한다
+    private void MineralPieceUpdate()
+    {
+        for (int i = 0; i < pieceOfMinerals.Length; i++)
+        {
+            pieceOfMinerals[i].enabled = i < currentValue;
+        }
+    }
+
     // ▼ 플레이어가 채집을 시도했을 때 실제로 자원을 얻는 로직
     public uint GetMineral(bool perfectHit)
     {
@@ -137,6 +160,7 @@ public class Mineral : MonoBehaviourPunCallbacks
             {
                 progressValue = 0; // 게이지 초기화
                 currentValue -= 1; // 광물 1개 소모
+                MineralPieceUpdate();
 
                 // 광물 다 떨어졌을 경우
                 if (currentValue == 0)
@@ -148,6 +172,7 @@ public class Mineral : MonoBehaviourPunCallbacks
                     else
                     {
                         currentValue = maxValue; // 충전 시간 없으면 즉시 복구
+                        MineralPieceUpdate();
                     }
                 }
 
