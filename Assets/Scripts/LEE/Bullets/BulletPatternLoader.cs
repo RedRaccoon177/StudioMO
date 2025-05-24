@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using ExitGames.Client.Photon;
+using Unity.VisualScripting;
 
 /// <summary>
 /// BulletPatternLoader는 CSV 파일에서 탄막 패턴 데이터를 읽어와서
@@ -21,13 +22,12 @@ public class BulletPatternLoader : MonoBehaviour
     /// <summary>
     /// CSV 파일을 파싱하는 함수
     /// </summary>
-    /// <param name="bulletCSVfile"></param>
+    /// <param name="bulletCSVfile">탄막의 생성 패턴 CSV파일</param>
     public void SetCSVData(TextAsset bulletCSVfile)
     {
         if (bulletCSVfile == null)
         {
             Debug.LogError("파싱 오류");
-
             return;
         }
 
@@ -40,6 +40,11 @@ public class BulletPatternLoader : MonoBehaviour
     /// </summary>
     List<BulletSpawnData> ParseCSV(string csv)
     {
+        //Split() :()안에 있는 것을 기준으로 배열로 분리 
+        //Trim() : 문자열의 앞뒤에 개행문자(\r, \n)등을 제거함
+        //Replace(oldValue, newValue) : oldValue를 다른 newValue로 바꿈
+        //ToLower() : 대문자를 소문자로 변환
+
         // 줄 단위로 잘라서 각 라인을 배열로 만듦
         var lines = csv.Split('\n');
 
